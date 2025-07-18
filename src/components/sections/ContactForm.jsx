@@ -225,7 +225,7 @@ const ContactForm = () => {
               <div className="ml-4">
                 <h4 className="font-medium text-gray-100">Phone & Email</h4>
                 <div className="mt-2 space-y-1">
-                  <p className="text-gray-400">09412190338</p>
+                  <p className="text-gray-400">9997070599, 7060439854</p>
                   <p className="text-gray-400">niyatigroup1@gmail.com</p>
                 </div>
                 <div className="mt-3 flex space-x-4">
