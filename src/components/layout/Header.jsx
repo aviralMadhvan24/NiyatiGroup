@@ -40,7 +40,7 @@ const Header = () => {
   const toggleDropdown = idx =>
     setDropdownOpen(dropdownOpen === idx ? null : idx);
 
-  // Our page‑wide gradient
+  // Our page-wide gradient
   const pageBg = 'bg-gradient-to-br from-red-700/20 via-red-800/30 to-black/70';
 
   return (
@@ -81,7 +81,7 @@ const Header = () => {
         ))}
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <NavLink to="/" onClick={() => window.scrollTo(0, 0)}>
@@ -95,12 +95,10 @@ const Header = () => {
                 className="bg-gray-900/50 border border-gray-800 w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center shadow-md"
                 whileHover={{ scale: 1.05 }}
               >
-               
-                  <img src="/logo3.png" alt="" />
-              
+                <img src="/logo3.png" alt="Niyati Group Logo" className="w-8 h-8 md:w-10 md:h-10" />
               </motion.div>
               <motion.span
-                className="ml-3 text-white font-bold text-lg md:text-2xl"
+                className="ml-3 text-white font-bold text-lg md:text-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
@@ -111,76 +109,75 @@ const Header = () => {
           </NavLink>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center space-x-8">
-         {navLinks.map((link, idx) => (
-  <div
-    key={link.name}
-    className="relative group"
-    onMouseEnter={() => link.subLinks && toggleDropdown(idx)}
-    onMouseLeave={() => link.subLinks && toggleDropdown(null)}
-  >
-    <div className="flex items-center space-x-1 cursor-pointer">
-      <NavLink
-        to={link.path}
-        className={({ isActive }) =>
-          `px-3 py-2 text-base font-medium transition-colors ${
-            isActive ? 'text-white' : 'text-gray-300 hover:text-white'
-          }`
-        }
-      >
-        {link.name}
-      </NavLink>
-      {link.subLinks && (
-        <motion.svg
-          className={`w-4 h-4 text-gray-300 mt-1 ${
-            dropdownOpen === idx ? 'rotate-180' : ''
-          } transition-transform duration-200`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </motion.svg>
-      )}
-    </div>
+          <nav className="hidden lg:flex items-center space-x-6">
+            {navLinks.map((link, idx) => (
+              <div
+                key={link.name}
+                className="relative group"
+                onMouseEnter={() => link.subLinks && toggleDropdown(idx)}
+                onMouseLeave={() => link.subLinks && toggleDropdown(null)}
+              >
+                <div className="flex items-center space-x-1 cursor-pointer">
+                  <NavLink
+                    to={link.path}
+                    className={({ isActive }) =>
+                      `px-3 py-2 text-sm font-medium transition-colors ${
+                        isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                      }`
+                    }
+                  >
+                    {link.name}
+                  </NavLink>
+                  {link.subLinks && (
+                    <motion.svg
+                      className={`w-4 h-4 text-gray-300 ${
+                        dropdownOpen === idx ? 'rotate-180' : ''
+                      } transition-transform duration-200`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </motion.svg>
+                  )}
+                </div>
 
-    {link.subLinks && dropdownOpen === idx && (
-      <motion.div
-        className="absolute left-0 mt-2 w-52 bg-gray-900 rounded-lg shadow-lg z-50"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 10 }}
-      >
-        {link.subLinks.map(sl => (
-          <NavLink
-            key={sl.name}
-            to={sl.path}
-            className={({ isActive }) =>
-              `block px-4 py-2 text-sm transition ${
-                isActive
-                  ? 'bg-gray-800 text-white'
-                  : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-              }`
-            }
-          >
-            {sl.name}
-          </NavLink>
-        ))}
-      </motion.div>
-    )}
-  </div>
-))}
-
+                {link.subLinks && dropdownOpen === idx && (
+                  <motion.div
+                    className="absolute left-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-lg z-50"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                  >
+                    {link.subLinks.map(sl => (
+                      <NavLink
+                        key={sl.name}
+                        to={sl.path}
+                        className={({ isActive }) =>
+                          `block px-4 py-2 text-sm transition ${
+                            isActive
+                              ? 'bg-gray-800 text-white'
+                              : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                          }`
+                        }
+                      >
+                        {sl.name}
+                      </NavLink>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
+            ))}
 
             <motion.div whileHover={{ scale: 1.05 }}>
               <NavLink
                 to="/contact"
-                className="px-5 py-2 bg-red-600 hover:bg-red-800 text-white font-medium rounded-lg transition"
+                className="px-4 py-2 bg-red-600 hover:bg-red-800 text-white text-sm font-medium rounded-lg transition"
               >
                 Get Started
               </NavLink>

@@ -19,15 +19,15 @@ const About = () => {
             initial={{
               x: Math.random() * 100,
               y: Math.random() * 100,
-              width: Math.random() * 10 + 2,
-              height: Math.random() * 10 + 2,
+              width: Math.random() * 8 + 2,
+              height: Math.random() * 8 + 2,
             }}
             animate={{
-              y: [null, Math.random() * 50 - 25],
-              x: [null, Math.random() * 50 - 25],
+              y: [null, Math.random() * 40 - 20],
+              x: [null, Math.random() * 40 - 20],
             }}
             transition={{
-              duration: Math.random() * 10 + 10,
+              duration: Math.random() * 8 + 8,
               repeat: Infinity,
               repeatType: 'reverse',
               ease: 'easeInOut',
@@ -36,30 +36,30 @@ const About = () => {
         ))}
       </div>
 
-      <div className="relative z-10 pt-24 pb-20">
+      <div className="relative z-10 pt-20 pb-16">
         {/* Header Section */}
-        <section className="container mx-auto px-4 md:px-6 py-12">
+        <section className="container mx-auto px-4 sm:px-6 py-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16 max-w-3xl mx-auto"
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 max-w-3xl mx-auto"
           >
             <motion.div
-              className="inline-flex items-center px-4 py-2 mb-6 font-medium rounded-full text-white bg-gray-800/80 border border-gray-700 backdrop-blur-sm"
+              className="inline-flex items-center px-3 py-1.5 mb-4 text-sm font-medium rounded-full text-white bg-gray-800/80 border border-gray-700 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <span className="relative flex h-3 w-3 mr-2">
+              <span className="relative flex h-2.5 w-2.5 mr-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-500 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-indigo-500" />
               </span>
               About NiyatiGroup
             </motion.div>
 
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-100 leading-tight mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-100 leading-tight mb-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -68,7 +68,7 @@ const About = () => {
             </motion.h1>
 
             <motion.p
-              className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
+              className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
@@ -79,58 +79,55 @@ const About = () => {
         </section>
 
         {/* About Details Section */}
-        <section className="container mx-auto px-4 md:px-6 py-16">
+        <section className="container mx-auto px-4 sm:px-6 py-12">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 md:p-12 shadow-2xl"
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 md:p-8 shadow-lg"
           >
             <AboutSection />
           </motion.div>
         </section>
 
         {/* Core Values Section */}
-        <section className="container mx-auto px-4 md:px-6 py-16">
+        <section className="container mx-auto px-4 sm:px-6 py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 md:p-12"
+            transition={{ duration: 0.6 }}
+            className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 md:p-8"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-6 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-100 mb-6 text-center">
               Our Core <span className="text-primary">Values</span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
                   title: 'Integrity',
-                  description:
-                    'We uphold the highest standards of honesty and ethics in all our dealings with clients and authorities.',
+                  description: 'We uphold the highest standards of honesty and ethics in all our dealings with clients and authorities.',
                 },
                 {
                   title: 'Expertise',
-                  description:
-                    'Our team of certified professionals brings deep knowledge and continuous learning to provide accurate solutions.',
+                  description: 'Our team of certified professionals brings deep knowledge and continuous learning to provide accurate solutions.',
                 },
                 {
                   title: 'Client Focus',
-                  description:
-                    'We prioritize your financial well-being and tailor our services to your specific needs and goals.',
+                  description: 'We prioritize your financial well-being and tailor our services to your specific needs and goals.',
                 },
               ].map((value, idx) => (
                 <motion.div
                   key={value.title}
-                  className="bg-gray-800/50 p-8 rounded-xl shadow-lg"
+                  className="bg-gray-800/50 p-6 rounded-lg shadow-md"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 0.5 }}
+                  transition={{ delay: idx * 0.1, duration: 0.4 }}
                 >
-                  <div className="text-5xl font-bold text-primary mb-4">0{idx + 1}</div>
-                  <h3 className="text-xl font-semibold text-gray-100 mb-3">{value.title}</h3>
-                  <p className="text-gray-300">{value.description}</p>
+                  <div className="text-4xl font-bold text-primary mb-3">0{idx + 1}</div>
+                  <h3 className="text-lg font-semibold text-gray-100 mb-2">{value.title}</h3>
+                  <p className="text-gray-300 text-sm">{value.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -138,24 +135,24 @@ const About = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="container mx-auto px-4 md:px-6 py-16">
+        <section className="container mx-auto px-4 sm:px-6 py-12">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="bg-gradient-to-r from-indigo-600/20 to-blue-600/20 border border-gray-800 rounded-2xl p-12 text-center"
+            transition={{ duration: 0.6 }}
+            className="bg-gradient-to-r from-indigo-600/20 to-blue-600/20 border border-gray-800 rounded-xl p-8 text-center"
           >
-            <h2 className="text-3xl font-bold text-gray-100 mb-6">Ready to Partner with Us?</h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-8">
+            <h2 className="text-2xl font-bold text-gray-100 mb-4">Ready to Partner with Us?</h2>
+            <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-6">
               Whether you need expert tax solutions or strategic recruitment services, NiyatiGroup is here to help drive your success.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-3">
               <Link to="/contact">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-8 py-3.5 bg-gray-600 hover:bg-red-800 text-white rounded-lg font-medium shadow-lg transition-colors"
+                  className="px-6 py-2.5 bg-gray-600 hover:bg-red-800 text-white rounded-lg font-medium shadow-md transition-colors text-sm"
                 >
                   Contact Us
                 </motion.button>
@@ -164,7 +161,7 @@ const About = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-8 py-3.5 bg-red-600 hover:bg-red-800 text-white rounded-lg font-medium shadow-lg transition-colors"
+                  className="px-6 py-2.5 bg-red-600 hover:bg-red-800 text-white rounded-lg font-medium shadow-md transition-colors text-sm"
                 >
                   Explore Recruitment
                 </motion.button>

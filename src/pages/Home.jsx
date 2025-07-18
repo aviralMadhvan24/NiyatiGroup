@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <div className="relative bg-gradient-to-br from-red-700 via-red-800 to-black text-gray-300 min-h-screen overflow-hidden">
-      
+
       {/* Background Grid Overlay */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">
@@ -17,7 +17,7 @@ const Home = () => {
 
       {/* Hero Section */}
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4 sm:px-6">
-        <section className="container mx-auto py-20">
+        <section className="max-w-screen-xl mx-auto py-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -66,69 +66,66 @@ const Home = () => {
 
             {/* RIGHT: Image */}
             <motion.div
-              className="w-full lg:w-2/5"
+              className="w-full max-w-sm"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              
-               
-                  <img src="/logo3.png" alt="" />
-                
-              
+              <img src="/logo3.png" alt="Niyati Group Logo" className="w-full h-auto" />
             </motion.div>
           </motion.div>
         </section>
-      
-
       </div>
-        {/* Office Locations Section */}
-<section className="relative z-10 bg-red-900 text-gray-200 py-16 px-4 sm:px-6">
-  <div className="container mx-auto max-w-7xl space-y-12">
 
-    <h2 className="text-3xl sm:text-4xl font-semibold text-center text-white mb-12">
-      Our Office Locations
-    </h2>
+      {/* Office Locations Section */}
+      <section className="relative z-10 bg-red-900 text-gray-200 py-20 px-4 sm:px-6">
+        <div className="max-w-screen-xl mx-auto space-y-12">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-center text-white mb-12">
+            Our Office Locations
+          </h2>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-      {/* Office 1 */}
-      <div className="space-y-4">
-        <h3 className="text-xl font-semibold text-white">Head Office - Bareilly</h3>
-        <p className="text-gray-400">
-          Rajni Niwas, 616, Ganesh Nagar, Bareilly, Uttar Pradesh 243001
-        </p>
-        <div className="w-full h-64 rounded-lg overflow-hidden shadow-lg">
-         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3511.4097404534127!2d79.39968057600883!3d28.34645939701308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a001ad1ccdb735%3A0xe77d309c2ea8cc23!2sNiyati%20Tax%20%26%20Financial%20Services!5e0!3m2!1sen!2sin!4v1752819512806!5m2!1sen!2sin" 
-         width="600" 
-         height="450" 
-         style={{border: 0}} 
-         allowfullscreen="" 
-         loading="lazy" 
-         referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {/* Office 1 */}
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold text-white">Head Office - Bareilly</h3>
+              <p className="text-gray-400">
+                Rajni Niwas, 616, Ganesh Nagar, Bareilly, Uttar Pradesh 243001
+              </p>
+              <div className="w-full h-64 rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3511.4097404534127!2d79.39968057600883!3d28.34645939701308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a001ad1ccdb735%3A0xe77d309c2ea8cc23!2sNiyati%20Tax%20%26%20Financial%20Services!5e0!3m2!1sen!2sin!4v1752819512806!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+
+            {/* Office 2 */}
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold text-white">Branch Office - Delhi NCR</h3>
+              <p className="text-gray-400">
+                Degree College Road, Khatima, Naugawa Thago, Uttarakhand 262308
+              </p>
+              <div className="w-full h-64 rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d898683.7242003867!2d78.84490385571326!3d28.374467189673965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a051c9d994cd31%3A0xaeef5c9ab93ffca7!2sNiyati%20Tax%20%26%20Financial%20Services%2C%20Khatima!5e0!3m2!1sen!2sin!4v1752819508759!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Office 2 */}
-      <div className="space-y-4">
-        <h3 className="text-xl font-semibold text-white">Branch Office - Delhi NCR</h3>
-        <p className="text-gray-400">
-          Degree College Road, Khatima, Naugawa Thago, Uttarakhand 262308
-        </p>
-        <div className="w-full h-64 rounded-lg overflow-hidden shadow-lg">
-         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d898683.7242003867!2d78.84490385571326!3d28.374467189673965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a051c9d994cd31%3A0xaeef5c9ab93ffca7!2sNiyati%20Tax%20%26%20Financial%20Services%2C%20Khatima!5e0!3m2!1sen!2sin!4v1752819508759!5m2!1sen!2sin" 
-         width="600" 
-         height="450" 
-        style={{ border: 0 }}
-         allowfullscreen="" 
-         loading="lazy" 
-         referrerpolicy="no-referrer-when-downgrade">
-
-         </iframe>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
     </div>
   );
 };
