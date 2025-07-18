@@ -10,6 +10,7 @@ import Upload from './pages/Upload';
 import Services from './pages/Services';
 import LoanServices from './pages/LoanServices';
 import Tax from './pages/Tax';
+import TaxCalculator from './pages/TaxCalculator.jsx';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/tax" element={<Tax />} />
+          <Route path="/calculator" element={<TaxCalculator />} />
         </Routes>
       </Layout>
     </Router>
