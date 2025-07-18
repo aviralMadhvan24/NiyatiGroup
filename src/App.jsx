@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
-import Services from './pages/RecruitmentServices';
+import RecruitmentServices from './pages/RecruitmentServices';
 import Faq from './pages/Faq';
 import Contact from './pages/Contact';
 import Upload from './pages/Upload';
-
-import RecruitmentServices from './pages/RecruitmentServices';
+import Services from './pages/Services';
+import LoanServices from './pages/LoanServices';
+import Tax from './pages/Tax';
 
 function App() {
   return (
@@ -19,9 +20,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/recruitment" element={<RecruitmentServices />} />
+          <Route path="/loans" element={<LoanServices />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/tax" element={<Tax />} />
         </Routes>
       </Layout>
     </Router>

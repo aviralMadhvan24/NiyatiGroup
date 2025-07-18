@@ -178,14 +178,14 @@ const ContactForm = () => {
               </div>
               <div className="ml-4">
                 <h4 className="font-medium text-gray-100">Our Office</h4>
-                <p className="mt-2 text-gray-400">123 Business Avenue, Financial District</p>
-                <p className="text-gray-400">Mumbai, Maharashtra 400001</p>
-                <button className="mt-3 text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center">
+                <p className="mt-2 text-gray-400">Rajni Niwas, 616, Ganesh Nagar</p>
+                <p className="text-gray-400">, Bareilly, Uttar Pradesh 243001</p>
+                <a  target='_blank' href='https://www.google.com/maps/place/Niyati+Tax+%26+Financial+Services/@28.3464594,79.3996806,17z/data=!3m1!4b1!4m6!3m5!1s0x39a001ad1ccdb735:0xe77d309c2ea8cc23!8m2!3d28.3464547!4d79.4022555!16s%2Fg%2F11fl45w23d!5m2!1e4!1e2?entry=ttu&g_ep=EgoyMDI1MDcxNS4xIKXMDSoASAFQAw%3D%3D' className="mt-3 text-primary hover:text-primary/80 transition-colors text-sm font-medium text-indigo-400 flex items-center">
                   View on map
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
-                </button>
+                </a>
               </div>
             </motion.div>
             
@@ -205,16 +205,24 @@ const ContactForm = () => {
               <div className="ml-4">
                 <h4 className="font-medium text-gray-100">Phone & Email</h4>
                 <div className="mt-2 space-y-1">
-                  <p className="text-gray-400">+91 98765 43210</p>
-                  <p className="text-gray-400">info@taxexperts.com</p>
+                  <p className="text-gray-400">09412190338</p>
+                  <p className="text-gray-400">niyatigroup1@gmail.com</p>
                 </div>
                 <div className="mt-3 flex space-x-4">
-                  <button className="text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center">
-                    Call now
-                  </button>
-                  <button className="text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center">
-                    Email us
-                  </button>
+                  <a
+                  target='_blank'
+  href="tel:09412190338"
+  className="text-indigo-400 text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center"
+>
+  Call now
+</a>
+                  <a
+                  target='_blank'
+  href="mailto:niyatigroup1@gmail.com"
+  className="text-indigo-400 text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center"
+>
+  Email us
+</a>
                 </div>
               </div>
             </motion.div>
@@ -236,13 +244,18 @@ const ContactForm = () => {
               <div className="ml-4">
                 <h4 className="font-medium text-gray-100">Business Hours</h4>
                 <div className="mt-2 space-y-1">
-                  <p className="text-gray-400">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                  <p className="text-gray-400">Saturday: 10:00 AM - 2:00 PM</p>
-                  <p className="text-gray-400">Sunday: Closed</p>
+                  <p className="text-gray-400">Monday - Saturday: 9:30 AM - 9:00 PM</p>
+                  
+                  <p className="text-gray-400">Sunday: 9:00 AM - 9:00 PM</p>
                 </div>
-                <button className="mt-3 text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center">
-                  Book an appointment
-                </button>
+              <a
+  href="https://wa.me/919412190338?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment."
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-indigo-400 text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center"
+>
+  Book an appointment
+</a>
               </div>
             </motion.div>
           </div>

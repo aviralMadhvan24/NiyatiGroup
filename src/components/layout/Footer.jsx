@@ -131,7 +131,7 @@ const socials = ['twitter', 'facebook', 'linkedin', 'instagram'];
                      { name: 'Home', path: '/' },
                      { name: 'About Us', path: '/about' },
                      { name: 'Services', path: '/services' },
-                     { name: 'Careers', path: '/careers' },
+                    
                      { name: 'Contact', path: '/contact' }
                    ].map((link, index) => (
                      <motion.li
@@ -183,7 +183,7 @@ const socials = ['twitter', 'facebook', 'linkedin', 'instagram'];
                          <circle cx="12" cy="10" r="3"></circle>
                        </svg>
                      </div>
-                     <p className="text-gray-400">123 Corporate Tower,<br />Mumbai, MH 400001</p>
+                     <p className="text-gray-400">Rajni Niwas, 616, Ganesh Nagar,<br />Bareilly, Uttar Pradesh, 243001</p>
                    </div>
                    
                    <div className="flex items-start">
@@ -210,6 +210,12 @@ const socials = ['twitter', 'facebook', 'linkedin', 'instagram'];
                    <motion.button
                      whileHover={{ scale: 1.03 }}
                      whileTap={{ scale: 0.98 }}
+                     onClick={() =>
+    window.open(
+      "https://wa.me/+919997070599?text=Hi%2C%20I%20would%20like%20to%20request%20a%20consultation.",
+      "_blank"
+    )
+  }
                      className="w-full px-6 py-3 bg-red-600 hover:bg-red-800 rounded-lg cursor-pointer text-white font-medium transition-colors"
                    >
                      Request Consultation

@@ -13,15 +13,15 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               About <span className="text-primary">Niyati Group</span>
             </h2>
-            
-            <p className="text-gray-600 mb-4">
+
+            <p className="text-gray-400 mb-4">
               Founded in 2010, TaxExperts has been providing comprehensive tax consultancy services to individuals and businesses across India. Our team of certified professionals brings expertise in all areas of taxation.
             </p>
-            
-            <p className="text-gray-600 mb-8">
+
+            <p className="text-gray-400 mb-8">
               We pride ourselves on delivering personalized solutions that help our clients navigate complex tax regulations, maximize savings, and achieve financial peace of mind.
             </p>
             
@@ -34,14 +34,14 @@ const AboutSection = () => {
               ].map((item, index) => (
                 <motion.div 
                   key={index}
-                  className="bg-white p-5 rounded-xl shadow-sm border border-gray-100"
+                  className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 text-red-500"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 + 0.4, duration: 0.5 }}
                 >
                   <h3 className="text-2xl font-bold text-primary">{item.title}</h3>
-                  <p className="text-gray-600 mt-1">{item.desc}</p>
+                  <p className="text-violet-600 mt-1">{item.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -52,14 +52,23 @@ const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+           
           >
-            <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-96" />
+            <img 
+              src="/MainAboutPic.jpg" 
+              alt="About Niyati Group" 
+              className="w-full h-auto rounded-xl shadow-lg"
+            />
+            <p className="mt-4 text-shadow-red-800 text-3xl font-semibold text-center text-white">
+  Mr. Nitish Saxena, Founder & CEO
+</p>
+
           </motion.div>
         </div>
         
         <div className="mt-24">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-16"
+            className="text-3xl md:text-4xl font-bold text-white text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

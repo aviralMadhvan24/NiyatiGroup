@@ -26,11 +26,11 @@ const Header = () => {
     { name: 'About', path: '/about' },
     {
       name: 'Services',
-      path: '/recruitment',
+      path: '/services',
       subLinks: [
-        { name: 'Consulting', path: '/services/consulting' },
-        { name: 'Development', path: '/services/development' },
-        { name: 'Support', path: '/services/support' },
+        { name: 'Job Recruitment', path: '/recruitment' },
+        { name: 'Taxes', path: '/services/development' },
+        { name: 'Loan', path: '/services/support' },
       ],
     },
     { name: 'FAQ', path: '/faq' },
@@ -112,72 +112,70 @@ const Header = () => {
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {navLinks.map((link, idx) => (
-              <div
-                key={link.name}
-                className="relative"
-                onMouseEnter={() => link.subLinks && toggleDropdown(idx)}
-                onMouseLeave={() => link.subLinks && toggleDropdown(null)}
-              >
-                <NavLink
-                  to={link.path}
-                  className={({ isActive }) =>
-                    `px-3 py-2 text-base font-medium transition-colors ${
-                      isActive
-                        ? 'text-white'
-                        : 'text-gray-300 hover:text-white'
-                    }`
-                  }
-                >
-                  <div className="flex items-center">
-                    {link.name}
-                    {link.subLinks && (
-                      <motion.svg
-                        className={`ml-1 w-4 h-4 text-gray-300 ${
-                          dropdownOpen === idx ? 'rotate-180' : ''
-                        } transition-transform duration-200`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </motion.svg>
-                    )}
-                  </div>
-                </NavLink>
+         {navLinks.map((link, idx) => (
+  <div
+    key={link.name}
+    className="relative group"
+    onMouseEnter={() => link.subLinks && toggleDropdown(idx)}
+    onMouseLeave={() => link.subLinks && toggleDropdown(null)}
+  >
+    <div className="flex items-center space-x-1 cursor-pointer">
+      <NavLink
+        to={link.path}
+        className={({ isActive }) =>
+          `px-3 py-2 text-base font-medium transition-colors ${
+            isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+          }`
+        }
+      >
+        {link.name}
+      </NavLink>
+      {link.subLinks && (
+        <motion.svg
+          className={`w-4 h-4 text-gray-300 mt-1 ${
+            dropdownOpen === idx ? 'rotate-180' : ''
+          } transition-transform duration-200`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </motion.svg>
+      )}
+    </div>
 
-                {/* Dropdown */}
-                {link.subLinks && dropdownOpen === idx && (
-                  <motion.div
-                    className="absolute mt-2 w-48 bg-gray-900 rounded-lg shadow-lg"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                  >
-                    {link.subLinks.map(sl => (
-                      <NavLink
-                        key={sl.name}
-                        to={sl.path}
-                        className={({ isActive }) =>
-                          `block px-4 py-2 text-sm ${
-                            isActive
-                              ? 'bg-gray-800 text-white'
-                              : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-                          }`
-                        }
-                      >
-                        {sl.name}
-                      </NavLink>
-                    ))}
-                  </motion.div>
-                )}
-              </div>
-            ))}
+    {link.subLinks && dropdownOpen === idx && (
+      <motion.div
+        className="absolute left-0 mt-2 w-52 bg-gray-900 rounded-lg shadow-lg z-50"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 10 }}
+      >
+        {link.subLinks.map(sl => (
+          <NavLink
+            key={sl.name}
+            to={sl.path}
+            className={({ isActive }) =>
+              `block px-4 py-2 text-sm transition ${
+                isActive
+                  ? 'bg-gray-800 text-white'
+                  : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+              }`
+            }
+          >
+            {sl.name}
+          </NavLink>
+        ))}
+      </motion.div>
+    )}
+  </div>
+))}
+
 
             <motion.div whileHover={{ scale: 1.05 }}>
               <NavLink
