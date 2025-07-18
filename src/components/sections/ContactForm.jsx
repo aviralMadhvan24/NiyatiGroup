@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const ContactForm = () => {
+  const [qrOpen, setQrOpen] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -288,20 +290,56 @@ const ContactForm = () => {
           >
             <h4 className="font-medium text-gray-100 mb-4">Make Payment via UPI</h4>
             <div className="flex items-center">
-              <div className="bg-white p-2 border border-gray-700 rounded-lg">
-                <div className="bg-gray-200 border-2 border-dashed border-gray-400 rounded-lg w-24 h-24 flex items-center justify-center">
-                  <span className="text-gray-500 text-xs">QR Code</span>
-                </div>
-              </div>
-              <div className="ml-4">
-                <p className="text-gray-400 text-sm">
-                  Scan this QR code using any UPI app to make payments for our services
-                </p>
-                <button className="mt-2 text-primary hover:text-primary/80 transition-colors text-sm font-medium">
-                  View payment options
-                </button>
-              </div>
-            </div>
+              <div
+                className="bg-white p-2 border border-gray-700 rounded-lg cursor-pointer hover:shadow-lg transition"
+                onClick={() => setQrOpen(true)}
+              >
+          {/* small QR preview */}
+          <img
+            src="/logo3.png"
+            alt="UPI QR"
+            className="w-24 h-24 object-contain"
+          />
+        </div>
+        <div className="ml-4">
+          <p className="text-gray-400 text-sm">
+            Scan this QR code using any UPI app to make payments.
+          </p>
+        </div>
+
+
+      {/* Modal Overlay */}
+      {qrOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+          onClick={() => setQrOpen(false)}  // clicking backdrop closes
+        >
+          <motion.div
+            className="relative bg-white p-4 rounded-lg"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            onClick={e => e.stopPropagation()}  // prevent backdrop close
+          >
+            {/* close button */}
+            <button
+              className="cursor-pointer absolute top-2 right-2 text-gray-600 hover:text-gray-900"
+              onClick={() => setQrOpen(false)}
+            >
+              ✕
+            </button>
+
+            {/* large QR image */}
+            <img
+              src="/logo3.png"
+              alt="UPI QR Large"
+              className="max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl"
+            />
+          </motion.div>
+        </div>
+      )}
+    </div>
+           
           </motion.div>
 
           <motion.div 

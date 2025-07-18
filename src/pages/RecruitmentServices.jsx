@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 const RecruitmentServices = () => {
    const gradientBg = 'bg-gradient-to-br from-red-700 via-red-800 to-black';
   const services = [
-    { id: 1, title: 'Permanent Staffing', description: 'End-to-end recruitment for permanent roles across industries, aligning talent with company culture.', whatsappLink: 'https://wa.me/919876543210?text=Hi%20NiyatiGroup,%20I%20am%20interested%20in%20Permanent%20Staffing' },
-    { id: 2, title: 'Contract Staffing', description: 'Flexible staffing solutions for project-based needs, scaling workforce seamlessly.', whatsappLink: 'https://wa.me/919876543210?text=Hi%20NiyatiGroup,%20I%20need%20Contract%20Staffing%20services' },
-    { id: 3, title: 'Executive Search', description: 'Headhunting senior-level and C-suite talent to drive leadership excellence.', whatsappLink: 'https://wa.me/919876543210?text=Hi%20NiyatiGroup,%20I%20want%20Executive%20Search%20services' },
-    { id: 4, title: 'Bulk Hiring', description: 'Efficient large-scale recruitment for startups and new divisions.', whatsappLink: 'https://wa.me/919876543210?text=Hi%20NiyatiGroup,%20I%20require%20Bulk%20Hiring' }
+    { id: 1, title: 'Permanent Staffing', description: 'End-to-end recruitment for permanent roles across industries, aligning talent with company culture.', whatsappLink: 'https://wa.me/919997070599?text=Hi%20NiyatiGroup,%20I%20am%20interested%20in%20Permanent%20Staffing' },
+    { id: 2, title: 'Contract Staffing', description: 'Flexible staffing solutions for project-based needs, scaling workforce seamlessly.', whatsappLink: 'https://wa.me/919997070599?text=Hi%20NiyatiGroup,%20I%20need%20Contract%20Staffing%20services' },
+    { id: 3, title: 'Executive Search', description: 'Headhunting senior-level and C-suite talent to drive leadership excellence.', whatsappLink: 'https://wa.me/919997070599?text=Hi%20NiyatiGroup,%20I%20want%20Executive%20Search%20services' },
+    { id: 4, title: 'Bulk Hiring', description: 'Efficient large-scale recruitment for startups and new divisions.', whatsappLink: 'https://wa.me/919997070599?text=Hi%20NiyatiGroup,%20I%20require%20Bulk%20Hiring' }
   ];
 
   const specializations = [
@@ -165,8 +165,8 @@ const RecruitmentServices = () => {
             <motion.h2 initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-4xl font-bold text-gray-100 mb-4">Ready to Build Your <span className="text-red-500">Dream Team</span>?</motion.h2>
             <motion.p initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.2, duration:0.5 }} className="text-gray-400 mb-8">Let our experts connect you with top talent today.</motion.p>
             <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.4, duration:0.5 }} className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/recruitment/contact"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium shadow-lg">Get Started</motion.button></Link>
-              <a href="tel:+919876543210"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border border-gray-700 backdrop-blur-sm">Call Our Experts</motion.button></a>
+              <Link to="/contact"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium shadow-lg">Get Started</motion.button></Link>
+              <a href="tel:+919997070599"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border border-gray-700 backdrop-blur-sm">Call Our Experts</motion.button></a>
             </motion.div>
           </div>
         </section>

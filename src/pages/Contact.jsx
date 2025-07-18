@@ -68,7 +68,7 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.25, duration: 0.5 }}
+            
             className="bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-2xl"
           >
             <ContactForm />

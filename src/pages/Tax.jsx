@@ -9,25 +9,25 @@ const Tax = () => {
       id: 1, 
       title: 'Income Tax Filing', 
       description: 'Comprehensive tax return preparation and filing for individuals and businesses.', 
-      whatsappLink: 'https://wa.me/919412190338?text=Hi%20NiyatiGroup,%20I%20need%20help%20with%20Income%20Tax%20Filing' 
+      whatsappLink: 'https://wa.me/919997070599?text=Hi%20NiyatiGroup,%20I%20need%20help%20with%20Income%20Tax%20Filing' 
     },
     { 
       id: 2, 
       title: 'GST Services', 
       description: 'End-to-end GST registration, returns filing, and compliance solutions.', 
-      whatsappLink: 'https://wa.me/919412190338?text=Hi%20NiyatiGroup,%20I%20need%20GST%20Services' 
+      whatsappLink: 'https://wa.me/919997070599?text=Hi%20NiyatiGroup,%20I%20need%20GST%20Services' 
     },
     { 
       id: 3, 
       title: 'Tax Planning', 
       description: 'Strategic tax optimization to minimize liabilities and maximize savings.', 
-      whatsappLink: 'https://wa.me/919412190338?text=Hi%20NiyatiGroup,%20I%20need%20Tax%20Planning%20services' 
+      whatsappLink: 'https://wa.me/919997070599?text=Hi%20NiyatiGroup,%20I%20need%20Tax%20Planning%20services' 
     },
     { 
       id: 4, 
       title: 'Company Registration', 
       description: 'Complete business incorporation services for all entity types.', 
-      whatsappLink: 'https://wa.me/919412190338?text=Hi%20NiyatiGroup,%20I%20want%20to%20register%20a%20company' 
+      whatsappLink: 'https://wa.me/919997070599?text=Hi%20NiyatiGroup,%20I%20want%20to%20register%20a%20company' 
     }
   ];
 
@@ -197,8 +197,8 @@ const Tax = () => {
             <motion.h2 initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-4xl font-bold text-gray-100 mb-4">Ready to Optimize Your <span className="text-red-500">Tax Strategy</span>?</motion.h2>
             <motion.p initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.2, duration:0.5 }} className="text-gray-400 mb-8">Let our experts handle your tax needs with precision and care.</motion.p>
             <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.4, duration:0.5 }} className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/tax/contact"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium shadow-lg">Get Started</motion.button></Link>
-              <a href="tel:+919412190338"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border border-gray-700 backdrop-blur-sm">Call Our Experts</motion.button></a>
+              <Link to="/contact"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-red-600 hover:bg-red-800 cursor-pointer rounded-lg text-white font-medium shadow-lg">Get Started</motion.button></Link>
+              <a href="tel:+919997070599"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border cursor-pointer border-gray-700 backdrop-blur-sm">Call Our Experts</motion.button></a>
             </motion.div>
           </div>
         </section>

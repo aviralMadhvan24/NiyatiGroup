@@ -122,7 +122,7 @@ const LoanServices = () => {
                   </div>
                   <h3 className="text-xl font-semibold text-gray-100 mb-2">{loan.title}</h3>
                   <p className="text-gray-400 flex-grow">{loan.description}</p>
-                  <a href={loan.whatsappLink} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center text-red-600 hover:text-red-800">Get More Details</a>
+                  <a href={loan.whatsappLink} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center text-red-600 hover:text-red-800">Get Started on WhatsApp</a>
                 </motion.div>
               ))}
             </div>
@@ -210,8 +210,8 @@ const LoanServices = () => {
             <motion.h2 initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-4xl font-bold text-gray-100 mb-4">Ready to Secure Your <span className="text-red-500">Financing</span>?</motion.h2>
             <motion.p initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.2, duration:0.5 }} className="text-gray-400 mb-8">Let our financial experts guide you to the best loan solution.</motion.p>
             <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.4, duration:0.5 }} className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/loans/apply"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium shadow-lg">Apply Now</motion.button></Link>
-              <a href="tel:+919876543210"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border border-gray-700 backdrop-blur-sm">Call Our Experts</motion.button></a>
+              <Link to="/loans/apply"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium shadow-lg">Apply Now</motion.button></Link>
+              <a href="tel:+919997070599"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border border-gray-700 backdrop-blur-sm">Call Our Experts</motion.button></a>
             </motion.div>
           </div>
         </section>

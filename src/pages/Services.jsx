@@ -300,7 +300,7 @@ const Services = () => {
                   Contact Us
                 </motion.button>
               </Link>
-              <a href="tel:+919876543210">
+              <a href="tel:+919997070599" className="flex-1">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
