@@ -18,7 +18,7 @@ const AboutSection = () => {
             </h2>
 
             <p className="text-gray-400 mb-4">
-              Founded in 2010, TaxExperts has been providing comprehensive tax consultancy services to individuals and businesses across India. Our team of certified professionals brings expertise in all areas of taxation.
+              Founded in 2019, Niyati Group has been providing comprehensive tax consultancy services to individuals and businesses across India. Our team of certified professionals brings expertise in all areas of taxation.
             </p>
 
             <p className="text-gray-400 mb-8">

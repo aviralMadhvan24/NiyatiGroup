@@ -17,16 +17,33 @@ const ContactForm = () => {
     }));
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Form submission logic would go here
-    alert('Thank you for your message! We will contact you soon.');
-    setFormData({
-      name: '',
-      email: '',
-      service: '',
-      message: ''
-    });
+    
+    try {
+      const response = await fetch("https://formspree.io/f/xjkokeey", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (response.ok) {
+        alert('Thank you for your message! We will contact you soon.');
+        setFormData({
+          name: '',
+          email: '',
+          service: '',
+          message: ''
+        });
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      alert('There was an error submitting your form. Please try again later.');
+      console.error('Form submission error:', error);
+    }
   };
 
   return (
@@ -51,6 +68,9 @@ const ContactForm = () => {
           <p className="text-gray-400 mb-8">Fill out the form and our team will get back to you within 24 hours.</p>
           
           <form onSubmit={handleSubmit} className="space-y-6">
+            <input type="hidden" name="_subject" value="New Contact Form Submission" />
+            <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you" />
+            
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -104,7 +124,7 @@ const ContactForm = () => {
                 <option value="">Select a service</option>
                 <option value="itr" className="bg-gray-900">Income Tax Return Filing</option>
                 <option value="gst" className="bg-gray-900">GST Registration & Filing</option>
-                <option value="tds" className="bg-gray-900">TDS Compliance</option>
+                
                 <option value="audit" className="bg-gray-900">Tax Audit</option>
                 <option value="other" className="bg-gray-900">Other Services</option>
               </select>

@@ -6,6 +6,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
   const location = useLocation();
 
   // Detect scroll to shrink header
@@ -29,16 +30,29 @@ const Header = () => {
       path: '/services',
       subLinks: [
         { name: 'Job Recruitment', path: '/recruitment' },
-        { name: 'Taxes', path: '/services/development' },
-        { name: 'Loan', path: '/services/support' },
+        { name: 'Taxes', path: '/tax' },
+        { name: 'Loan Assistance', path: '/loans' },
       ],
     },
     { name: 'FAQ', path: '/faq' },
     { name: 'Contact', path: '/contact' },
   ];
 
-  const toggleDropdown = idx =>
+  const handleMouseEnter = (idx) => {
+    clearTimeout(hoverTimeout);
+    setDropdownOpen(idx);
+  };
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setDropdownOpen(null);
+    }, 300); // 300ms delay before closing
+    setHoverTimeout(timeout);
+  };
+
+  const toggleDropdown = (idx) => {
     setDropdownOpen(dropdownOpen === idx ? null : idx);
+  };
 
   // Our page-wide gradient
   const pageBg = 'bg-gradient-to-br from-red-700/20 via-red-800/30 to-black/70';
@@ -113,9 +127,9 @@ const Header = () => {
             {navLinks.map((link, idx) => (
               <div
                 key={link.name}
-                className="relative group"
-                onMouseEnter={() => link.subLinks && toggleDropdown(idx)}
-                onMouseLeave={() => link.subLinks && toggleDropdown(null)}
+                className="relative"
+                onMouseEnter={() => link.subLinks && handleMouseEnter(idx)}
+                onMouseLeave={() => link.subLinks && handleMouseLeave()}
               >
                 <div className="flex items-center space-x-1 cursor-pointer">
                   <NavLink
@@ -149,10 +163,12 @@ const Header = () => {
 
                 {link.subLinks && dropdownOpen === idx && (
                   <motion.div
-                    className="absolute left-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-lg z-50"
+                    className="absolute left-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-lg z-50 border border-gray-800"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
+                    onMouseEnter={() => handleMouseEnter(idx)}
+                    onMouseLeave={handleMouseLeave}
                   >
                     {link.subLinks.map(sl => (
                       <NavLink

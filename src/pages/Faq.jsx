@@ -85,7 +85,7 @@ const Faq = () => {
                     Our experts are here to help with any queries you have.
                   </p>
                   <motion.a
-                    href="https://wa.me/919876543210"
+                    href="https://wa.me/+919997070599"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="inline-flex items-center px-6 py-3 bg-red-600 text-white rounded-full font-medium"
