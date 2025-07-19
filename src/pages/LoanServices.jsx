@@ -91,7 +91,7 @@ const LoanServices = () => {
             <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.8 }} className="max-w-3xl mx-auto">
               <motion.div className="inline-flex items-center px-4 py-2 mb-6 font-medium rounded-full bg-gray-800/80 border border-gray-700 backdrop-blur-sm text-white" initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2 }}>
                 <span className="relative flex h-3 w-3 mr-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span><span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span></span>
-                Financial Solutions Since 2010
+                Financial Solutions Since 2019
               </motion.div>
               <motion.h1 className="text-5xl font-bold text-gray-100 mb-4" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.4 }}>Loan <span className="text-red-500">Services</span></motion.h1>
               <motion.p className="text-xl text-gray-400 mb-8" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.6 }}>
