@@ -131,13 +131,13 @@ applySlab(300000, 0.05, '₹3,00,001–₹7,00,000');
         <p className="flex items-start">
           <ArrowRight className="h-3 w-3 mr-1 mt-0.5 flex-shrink-0" />
           <span>
-            <strong>Old Regime:</strong> Allows deductions (80C up to ₹1.5L) + ₹50,000 standard deduction for salaried
+            <strong>Old Regime:</strong>  ₹50,000 standard deduction for salaried + Allows deductions (80C up to ₹1.5L) + other deductions
           </span>
         </p>
         <p className="flex items-start">
           <ArrowRight className="h-3 w-3 mr-1 mt-0.5 flex-shrink-0" />
           <span>
-            <strong>New Regime:</strong> No deductions except ₹75,000 standard deduction for salaried
+            <strong>New Regime:</strong> = ₹75,000 standard deduction for salaried + other deductions
           </span>
         </p>
         <button 
@@ -249,21 +249,13 @@ applySlab(300000, 0.05, '₹3,00,001–₹7,00,000');
               </div>
 
               <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="salaried"
-                  checked={isSalaried}
-                  onChange={(e) => setIsSalaried(e.target.checked)}
-                  className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-700 rounded"
-                />
-                <label htmlFor="salaried" className="ml-2 text-gray-300">
-                  Salaried Individual (Standard Deduction: {regime === 'old' ? '₹50,000' : '₹75,000'})
-                </label>
+               
+             
               </div>
 
               {regime === 'old' && (
                 <div>
-                  <label className="block text-gray-300 mb-2">Investments (₹) <span className="text-gray-500 text-sm">(80C, max ₹1.5L)</span></label>
+                  <label className="block text-gray-300 mb-2">Deductions (₹)</label>
                   <input
                     type="number"
                     value={investment}
