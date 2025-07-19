@@ -205,16 +205,7 @@ const LoanServices = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 md:py-24 bg-gradient-to-br bg-red-950/50 text-center">
-          <div className="container mx-auto px-4 md:px-6">
-            <motion.h2 initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-4xl font-bold text-gray-100 mb-4">Ready to Secure Your <span className="text-red-500">Financing</span>?</motion.h2>
-            <motion.p initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.2, duration:0.5 }} className="text-gray-400 mb-8">Let our financial experts guide you to the best loan solution.</motion.p>
-            <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.4, duration:0.5 }} className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/loans/apply"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium shadow-lg">Apply Now</motion.button></Link>
-              <a href="tel:+919997070599"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border border-gray-700 backdrop-blur-sm">Call Our Experts</motion.button></a>
-            </motion.div>
-          </div>
-        </section>
+       
       </div>
     </div>
   );

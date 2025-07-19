@@ -62,7 +62,7 @@ const RecruitmentServices = () => {
                 Connecting exceptional talent with leading organizations.
               </motion.p>
               <motion.div className="flex flex-col sm:flex-row justify-center gap-4" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.8 }}>
-                <Link to="/recruitment/jobs"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium shadow-lg">Browse Positions</motion.button></Link>
+                <Link to="/recruitment/apply"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium shadow-lg">Apply for Jobs</motion.button></Link>
                 <Link to="/recruitment/contact"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border border-gray-700 backdrop-blur-sm">Partner With Us</motion.button></Link>
               </motion.div>
             </motion.div>

@@ -235,6 +235,21 @@ const Footer = () => {
           </p>
           <p className="mt-1 text-xs text-gray-600">
             Transforming organizations through strategic talent acquisition
+          </p><p className="mt-4 text-xs text-gray-400 flex items-center justify-center space-x-1">
+            <span>Made by</span>
+            <a 
+              href="https://www.click2biz.in" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center hover:text-red-400 transition-colors"
+            >
+              <img 
+                src="/logo.png" 
+                alt="Click2Biz Logo" 
+                className="h-4 w-auto inline-block mr-1" 
+              />
+              <span>Team Click2Biz</span>
+            </a>
           </p>
         </motion.div>
       </div>

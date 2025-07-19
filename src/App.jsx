@@ -12,7 +12,7 @@ import LoanServices from './pages/LoanServices';
 import Tax from './pages/Tax';
 import TaxCalculator from './pages/TaxCalculator.jsx';
 import EMICalculator from './pages/EMICalculator.jsx';
-
+import ApplyForm from './pages/ApplyForm.jsx';
 function App() {
   return (
     <Router>
@@ -30,6 +30,7 @@ function App() {
           <Route path="/tax" element={<Tax />} />
           <Route path="/calculator" element={<TaxCalculator />} />
           <Route path="/loans/calculate" element={<EMICalculator />} />
+          <Route path="/recruitment/apply" element={<ApplyForm />} />
         </Routes>
       </Layout>
     </Router>
