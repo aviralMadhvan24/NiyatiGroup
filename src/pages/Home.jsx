@@ -106,9 +106,9 @@ const Home = () => {
 
             {/* Office 2 */}
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-white">Branch Office - Khatima, Naugawa Thago, Uttarakhand </h3>
+              <h3 className="text-xl font-semibold text-white">Branch Office - Khatima, Uttarakhand </h3>
               <p className="text-gray-400">
-                Degree College Road, Khatima, Uttarakhand 262308
+                Degree College Road, Khatima, Naugawa Thago, Uttarakhand 262308
               </p>
               <div className="w-full h-64 rounded-lg overflow-hidden shadow-lg">
                 <iframe
