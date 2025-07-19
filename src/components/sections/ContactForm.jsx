@@ -296,7 +296,7 @@ const ContactForm = () => {
               >
           {/* small QR preview */}
           <img
-            src="/logo3.png"
+            src="/upi.jpg"
             alt="UPI QR"
             className="w-24 h-24 object-contain"
           />
@@ -331,7 +331,7 @@ const ContactForm = () => {
 
             {/* large QR image */}
             <img
-              src="/logo3.png"
+              src="/upi.jpg"
               alt="UPI QR Large"
               className="max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl"
             />

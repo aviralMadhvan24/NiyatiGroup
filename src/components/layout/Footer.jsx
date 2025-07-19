@@ -84,7 +84,7 @@ const Footer = () => {
           >
             <h3 className="text-base font-bold text-gray-100">Our Services</h3>
             <ul className="space-y-2">
-              {['Permanent Staffing', 'Contract Staffing', 'Executive Search', 'IT Recruitment', 'HR Consulting'].map((service, index) => (
+              {["Income Tax","GST", 'Permanent Staffing', 'Contract Staffing', 'Executive Search', 'IT Recruitment', "Business Loans","Personal Loans","Home Loans"].map((service, index) => (
                 <motion.li
                   key={index}
                   initial={{ opacity: 0, x: -10 }}
@@ -201,7 +201,8 @@ const Footer = () => {
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                   </svg>
                 </div>
-                <a href="tel:+919876543210" className="text-sm text-gray-400 hover:text-blue-400 transition-colors">+91 9997070 599</a>
+                <a href="tel:+919997070599" className="text-sm text-gray-400 hover:text-blue-400 transition-colors">+91 9997070599,   </a>
+              <a href="tel:+917060439854" className="text-sm text-gray-400 hover:text-blue-400 transition-colors">+91 7060439854 </a>
               </div>
             </address>
 

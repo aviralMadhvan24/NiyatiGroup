@@ -77,15 +77,7 @@ const AboutSection = () => {
             Meet Our <span className="text-primary">Expert</span> Team
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamData.map((member, index) => (
-              <TeamCard 
-                key={member.id} 
-                member={member} 
-                index={index}
-              />
-            ))}
-          </div>
+          
         </div>
       </div>
     </section>
