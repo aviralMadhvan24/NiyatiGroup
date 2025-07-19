@@ -50,9 +50,9 @@ const Footer = () => {
                 Niyati<span className="text-red-500">Group</span>
               </span>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Connecting exceptional talent with leading organizations through innovative recruitment solutions.
-            </p>
+            <p className="mt-2 text-xs text-gray-400">
+          Offering <strong>Tax Consultancy</strong>, <strong>Loan Services</strong> &amp; <strong>Recruitment Solutions</strong>
+        </p>
             <div className="flex space-x-3">
               {socials.map((social, index) => {
                 const Icon = IconMap[social];
@@ -233,9 +233,11 @@ const Footer = () => {
           <p className="text-sm text-gray-500">
             © {currentYear} Niyati Group. All rights reserved.
           </p>
-          <p className="mt-1 text-xs text-gray-600">
-            Transforming organizations through strategic talent acquisition
-          </p><p className="mt-4 text-xs text-gray-400 flex items-center justify-center space-x-1">
+         <p className="mt-1 text-xs text-gray-600">
+          Transforming organizations through strategic talent acquisition
+        </p>
+        {/* New services line */}
+       <p className="mt-4 text-xs text-gray-400 flex items-center justify-center space-x-1">
             <span>Made by</span>
             <a 
               href="https://www.click2biz.in" 

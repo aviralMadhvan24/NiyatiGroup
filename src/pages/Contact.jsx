@@ -31,12 +31,7 @@ const Contact = () => {
               y: [null, Math.random() * 50 - 25],
               x: [null, Math.random() * 50 - 25],
             }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            }}
+          
           />
         ))}
       </motion.div>

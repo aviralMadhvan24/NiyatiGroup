@@ -31,7 +31,7 @@ const Services = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
               </span>
-              Trusted Business Solutions Since 2010
+              Trusted Business Solutions Since 2019
             </motion.div>
 
             <motion.h1 
@@ -221,7 +221,7 @@ const Services = () => {
               <div>
                 <h2 className="text-3xl font-bold text-gray-100 mb-6">About Niyati Group</h2>
                 <p className="text-gray-400 mb-6">
-                  Founded in 2010, Niyati Group has grown to become a trusted name in professional services with three specialized divisions catering to distinct business needs.
+                  Founded in 2019, Niyati Group has grown to become a trusted name in professional services with three specialized divisions catering to distinct business needs.
                 </p>
                 <p className="text-gray-400 mb-6">
                   Our mission is to deliver exceptional value through expertise, integrity, and personalized service across all our offerings.
@@ -289,7 +289,7 @@ const Services = () => {
             <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
               Whether you need tax expertise, recruitment solutions, or financial services, our team is ready to assist you.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-2">
               <Link to="/contact">
                 <motion.button
 
@@ -300,7 +300,7 @@ const Services = () => {
                   Contact Us
                 </motion.button>
               </Link>
-              <a href="tel:+919997070599" className="flex-1">
+              <a href="tel:+919997070599" target="_blank" rel="noopener noreferrer">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
