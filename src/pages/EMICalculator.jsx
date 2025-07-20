@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -16,33 +16,68 @@ const EMICalculator = () => {
   const [tenure, setTenure] = useState('');
   const [emiResult, setEmiResult] = useState(null);
   const [showAmortization, setShowAmortization] = useState(false);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
   const { min, max } = RATE_LIMITS[loanType];
   const rate = parseFloat(interestRate);
   const rateValid = rate >= min && rate <= max;
 
-  const calculateEMI = () => {
-    if (!rateValid) return;
-    const p = parseFloat(principal);
-    const r = rate / 12 / 100;
-    const n = parseFloat(tenure) * 12;
+ const calculateEMI = () => {
+  if (!rateValid) return;
+  const p = parseFloat(principal);
+  const r = rate / 12 / 100;
+  const n = parseFloat(tenure) * 12;
 
-    const emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
-    const totalPayment = emi * n;
-    const totalInterest = totalPayment - p;
+  const emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+  const totalPayment = emi * n;
+  const totalInterest = totalPayment - p;
 
-    // Generate amortization schedule
-    let balance = p;
-    const amortization = [];
-    for (let i = 1; i <= n; i++) {
-      const interest = balance * r;
-      const principalPaid = emi - interest;
-      balance -= principalPaid;
-      amortization.push({ month: i, payment: emi, principal: principalPaid, interest, balance: balance > 0 ? balance : 0 });
-    }
+  // Generate amortization schedule
+  let balance = p;
+  const amortization = [];
+  for (let i = 1; i <= n; i++) {
+    const interest = balance * r;
+    const principalPaid = emi - interest;
+    balance -= principalPaid;
+    amortization.push({ month: i, payment: emi, principal: principalPaid, interest, balance: balance > 0 ? balance : 0 });
+  }
 
-    setEmiResult({ emi, totalPayment, totalInterest, amortization });
-  };
+  const result = { emi, totalPayment, totalInterest, amortization };
+  setEmiResult(result);
+  
+  // Submit data with the newly calculated values
+  if (!submitted) {
+    submitFormData(result);
+  }
+};
+
+const submitFormData = async (result) => {
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('phone', phone);
+  formData.append('loan_type', loanType);
+  formData.append('loan_amount', principal);
+  formData.append('interest_rate', interestRate);
+  formData.append('tenure', tenure);
+  formData.append('emi', result.emi.toFixed(2));
+  formData.append('total_interest', result.totalInterest.toFixed(2));
+  formData.append('total_payment', result.totalPayment.toFixed(2));
+
+  try {
+    await fetch('https://formspree.io/f/meozelgj', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    setSubmitted(true);
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+};
 
   const resetCalculator = () => {
     setLoanType('personal');
@@ -51,6 +86,7 @@ const EMICalculator = () => {
     setTenure('');
     setEmiResult(null);
     setShowAmortization(false);
+    setSubmitted(false);
   };
 
   return (
@@ -69,6 +105,31 @@ const EMICalculator = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left Column - Inputs */}
             <div className="space-y-6">
+              {/* Hidden Contact Form */}
+              <div className="space-y-4 border-b border-gray-700 pb-4">
+                <h3 className="text-lg font-medium text-gray-300">Contact Information</h3>
+                <div>
+                  <label className="block text-gray-300 mb-2">Your Name</label>
+                  <input 
+                    type="text" 
+                    value={name} 
+                    onChange={e => setName(e.target.value)} 
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-red-500" 
+                    placeholder="Enter your name" 
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-300 mb-2">Phone Number</label>
+                  <input 
+                    type="tel" 
+                    value={phone} 
+                    onChange={e => setPhone(e.target.value)} 
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-red-500" 
+                    placeholder="Enter your phone number" 
+                  />
+                </div>
+              </div>
+
               <div>
                 <label className="block text-gray-300 mb-2">Loan Type</label>
                 <select value={loanType} onChange={e => setLoanType(e.target.value)} className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-red-500">
@@ -96,7 +157,7 @@ const EMICalculator = () => {
               </div>
 
               <div className="flex space-x-4 pt-2">
-                <motion.button onClick={calculateEMI} disabled={!principal || !interestRate || !tenure || !rateValid} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className={`px-6 py-3 rounded-lg font-medium ${(principal && interestRate && tenure && rateValid) ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-700 cursor-not-allowed'} text-white transition flex-1`}>Calculate EMI</motion.button>
+                <motion.button onClick={calculateEMI} disabled={!principal || !interestRate || !tenure || !rateValid || !name || !phone} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className={`px-6 py-3 rounded-lg font-medium ${(principal && interestRate && tenure && rateValid && name && phone) ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-700 cursor-not-allowed'} text-white transition flex-1`}>Calculate EMI</motion.button>
                 <motion.button onClick={resetCalculator} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium text-white transition flex-1">Reset</motion.button>
               </div>
             </div>
@@ -113,41 +174,41 @@ const EMICalculator = () => {
                     <div className="flex justify-between border-t border-gray-700 pt-3"><span className="text-gray-300 font-medium">Principal Amount:</span><span className="text-red-400 font-bold">₹{parseFloat(principal).toLocaleString('en-IN')}</span></div>
                   </div>
                   <button onClick={() => setShowAmortization(!showAmortization)} className="w-full mt-4 text-red-400 hover:text-red-300 text-sm text-center">{showAmortization ? 'Hide Amortization Schedule' : 'Show Amortization Schedule'}</button>
-                {showAmortization && (
-  <motion.div 
-    initial={{ opacity: 0, height: 0 }} 
-    animate={{ opacity: 1, height: 'auto' }} 
-    transition={{ duration: 0.3 }} 
-    className="overflow-hidden mt-4"
-  >
-    <div className="max-h-60 overflow-auto">
-      <div className="min-w-full inline-block align-middle">
-        <table className="min-w-full divide-y divide-gray-700 text-sm">
-          <thead>
-            <tr className="border-b border-gray-700">
-              <th className="sticky top-0 z-10 px-2 py-2 text-left text-gray-400 bg-gray-800">Month</th>
-              <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Payment</th>
-              <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Principal</th>
-              <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Interest</th>
-              <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Balance</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-800">
-            {emiResult.amortization.slice(0, 60).map((row, i) => (
-              <tr key={i}>
-                <td className="px-2 py-2 whitespace-nowrap text-gray-300">{row.month}</td>
-                <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.payment.toFixed(2)}</td>
-                <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.principal.toFixed(2)}</td>
-                <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.interest.toFixed(2)}</td>
-                <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.balance.toFixed(2)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </motion.div>
-)}
+                  {showAmortization && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }} 
+                      animate={{ opacity: 1, height: 'auto' }} 
+                      transition={{ duration: 0.3 }} 
+                      className="overflow-hidden mt-4"
+                    >
+                      <div className="max-h-60 overflow-auto">
+                        <div className="min-w-full inline-block align-middle">
+                          <table className="min-w-full divide-y divide-gray-700 text-sm">
+                            <thead>
+                              <tr className="border-b border-gray-700">
+                                <th className="sticky top-0 z-10 px-2 py-2 text-left text-gray-400 bg-gray-800">Month</th>
+                                <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Payment</th>
+                                <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Principal</th>
+                                <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Interest</th>
+                                <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Balance</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-800">
+                              {emiResult.amortization.slice(0, 60).map((row, i) => (
+                                <tr key={i}>
+                                  <td className="px-2 py-2 whitespace-nowrap text-gray-300">{row.month}</td>
+                                  <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.payment.toFixed(2)}</td>
+                                  <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.principal.toFixed(2)}</td>
+                                  <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.interest.toFixed(2)}</td>
+                                  <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.balance.toFixed(2)}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
                 </div>
               ) : (
                 <div className="text-center text-gray-500">
@@ -161,8 +222,17 @@ const EMICalculator = () => {
           </div>
 
           {/* Disclaimer & CTA */}
-          <div className="mt-8">
-            {/* Existing CTA code unchanged */}
+          <div className="mt-8 text-center text-sm text-gray-400">
+            <p>By using this calculator, you agree to our terms of service. Our representatives may contact you regarding your loan inquiry.</p>
+            {submitted && (
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="mt-2 text-green-400"
+              >
+                Thank you! Your details have been submitted successfully.
+              </motion.p>
+            )}
           </div>
         </motion.div>
       </div>
