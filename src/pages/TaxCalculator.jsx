@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Calculator, BookOpen, MessageCircle } from 'lucide-react';
 
 const TaxCalculator = () => {
-  return (
+ return (
     <motion.div className="relative bg-gradient-to-br from-red-700 via-red-800 to-black text-gray-300 min-h-screen overflow-hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       {/* Background grid overlay */}
       <div className="absolute inset-0 overflow-hidden">
@@ -21,14 +21,35 @@ const TaxCalculator = () => {
           </div>
           
           {/* Embedding ClearTax calculator */}
-          <div className="w-full mb-8">
-    <iframe
-  src="https://cleartax.in/paytax/taxcalculator/embed"
-  title="ClearTax Income Tax Calculator"
-  width="100%"
-  height="650"
-  style={{ border: 'none', borderRadius: '8px', backgroundColor: '#1f2937' }}
-/>
+          <div className="w-full mb-8 relative" style={{ height: '800px' }}>
+            {/* Overlay div with heading */}
+            <div 
+              className="absolute top-0 left-0 right-0 h-40 bg-gray-900/70 border-t border-l border-r border-gray-800 rounded-t-lg z-20 flex items-center justify-center"
+              style={{ 
+                pointerEvents: 'none',
+                backdropFilter: 'blur(8px)'
+              }}
+            >
+              <div className="text-center px-4">
+                <h3 className="text-xl font-bold text-white mb-1">Interactive Tax Calculator</h3>
+             
+              </div>
+            </div>
+            
+            {/* ClearTax iframe */}
+            <iframe
+              src="https://cleartax.in/paytax/taxcalculator/embed"
+              title="ClearTax Income Tax Calculator"
+              width="100%"
+              height="650"
+              className="absolute top-0 left-0 w-full h-full"
+              style={{ 
+                border: 'none', 
+                borderRadius: '8px', 
+                backgroundColor: '#1f2937',
+                zIndex: 10
+              }}
+            />
           </div>
           
           {/* Learn & WhatsApp */}
