@@ -50,6 +50,11 @@ const TaxCalculator = () => {
                 zIndex: 10
               }}
             />
+            <div className="absolute bottom-4 left-0 right-0 text-center z-20">
+  <p className="text-sm font-bold text-gray-300">
+    <strong>**TERMS AND CONDITIONS APPLIED**</strong>
+  </p>
+</div>
           </div>
           
           {/* Learn & WhatsApp */}

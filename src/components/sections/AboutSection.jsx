@@ -67,15 +67,7 @@ const AboutSection = () => {
         </div>
         
         <div className="mt-24">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-white text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Meet Our <span className="text-primary">Expert</span> Team
-          </motion.h2>
+        
           
           
         </div>

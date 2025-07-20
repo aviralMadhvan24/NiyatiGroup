@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const RATE_LIMITS = {
-  personal:    { min: 12,  max: 28 },   // Personal Loan: 12%–28%
-  business:    { min: 12,  max: 28 },   // Business Loan: 12%–28%
-  home:        { min: 9.5, max: 18 },   // Home Loan:    9.5%–18%
-  lap:         { min: 9.5, max: 18 }    // Loan Against Property: 9.5%–18%
+  personal:    { min: 10,  max: 28 },   // Personal Loan: 12%–28%
+  business:    { min: 10,  max: 28 },   // Business Loan: 12%–28%
+  home:        { min: 7, max: 18 },   // Home Loan:    9.5%–18%
+  lap:         { min: 8, max: 18 }    // Loan Against Property: 9.5%–18%
 };
 
 const EMICalculator = () => {
@@ -137,6 +137,7 @@ const submitFormData = async (result) => {
                   <option value="business">Business Loan</option>
                   <option value="home">Home Loan</option>
                   <option value="lap">Loan Against Property</option>
+               
                 </select>
               </div>
 
@@ -149,18 +150,23 @@ const submitFormData = async (result) => {
                 <label className="block text-gray-300 mb-2">Interest Rate (% p.a.) <span className="text-gray-400">(Range: {min}% - {max}%)</span></label>
                 <input type="number" step="0.01" value={interestRate} onChange={e => setInterestRate(e.target.value)} min={min} max={max} className={`w-full px-4 py-3 bg-gray-800 border ${rateValid ? 'border-gray-700' : 'border-red-500'} rounded-lg text-white focus:ring-2 focus:ring-red-500`} placeholder="Enter interest rate" />
                 {!rateValid && interestRate !== '' && (<p className="mt-1 text-xs text-red-400">Please enter a rate between {min}% and {max}%</p>)}
+             
               </div>
 
               <div>
                 <label className="block text-gray-300 mb-2">Loan Tenure (Years)</label>
                 <input type="number" value={tenure} onChange={e => setTenure(e.target.value)} className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-red-500" placeholder="Enter loan tenure" />
+              
               </div>
 
               <div className="flex space-x-4 pt-2">
                 <motion.button onClick={calculateEMI} disabled={!principal || !interestRate || !tenure || !rateValid || !name || !phone} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className={`px-6 py-3 rounded-lg font-medium ${(principal && interestRate && tenure && rateValid && name && phone) ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-700 cursor-not-allowed'} text-white transition flex-1`}>Calculate EMI</motion.button>
+                
                 <motion.button onClick={resetCalculator} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium text-white transition flex-1">Reset</motion.button>
+            
               </div>
             </div>
+
 
             {/* Right Column - Results or Placeholder */}
             <div className="bg-gray-800/30 border border-gray-700 rounded-lg p-6 flex items-center justify-center">
@@ -173,6 +179,9 @@ const submitFormData = async (result) => {
                     <div className="flex justify-between"><span className="text-gray-400">Total Payment:</span><span className="text-white">₹{emiResult.totalPayment.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span></div>
                     <div className="flex justify-between border-t border-gray-700 pt-3"><span className="text-gray-300 font-medium">Principal Amount:</span><span className="text-red-400 font-bold">₹{parseFloat(principal).toLocaleString('en-IN')}</span></div>
                   </div>
+                  <p className="text-center text-xs text-gray-500 mt-4 font-bold">
+  **TERMS AND CONDITIONS APPLIED**
+</p>
                   <button onClick={() => setShowAmortization(!showAmortization)} className="w-full mt-4 text-red-400 hover:text-red-300 text-sm text-center">{showAmortization ? 'Hide Amortization Schedule' : 'Show Amortization Schedule'}</button>
                   {showAmortization && (
                     <motion.div 

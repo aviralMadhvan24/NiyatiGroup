@@ -29,9 +29,9 @@ const Header = () => {
       name: 'Services',
       path: '/services',
       subLinks: [
-        { name: 'Job Recruitment', path: '/recruitment' },
         { name: 'Taxes', path: '/tax' },
         { name: 'Loan Assistance', path: '/loans' },
+        { name: 'Job Recruitment', path: '/recruitment' },
       ],
     },
     { name: 'FAQ', path: '/faq' },
