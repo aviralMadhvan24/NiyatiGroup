@@ -113,24 +113,41 @@ const EMICalculator = () => {
                     <div className="flex justify-between border-t border-gray-700 pt-3"><span className="text-gray-300 font-medium">Principal Amount:</span><span className="text-red-400 font-bold">₹{parseFloat(principal).toLocaleString('en-IN')}</span></div>
                   </div>
                   <button onClick={() => setShowAmortization(!showAmortization)} className="w-full mt-4 text-red-400 hover:text-red-300 text-sm text-center">{showAmortization ? 'Hide Amortization Schedule' : 'Show Amortization Schedule'}</button>
-                  {showAmortization && (
-                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} transition={{ duration: 0.3 }} className="overflow-hidden mt-4">
-                      <div className="max-h-60 overflow-y-auto">
-                        <table className="w-full text-sm">
-                          <thead>
-                            <tr className="border-b border-gray-700">
-                              <th className="text-left py-2 text-gray-400">Month</th><th className="text-right py-2 text-gray-400">Payment</th><th className="text-right py-2 text-gray-400">Principal</th><th className="text-right py-2 text-gray-400">Interest</th><th className="text-right py-2 text-gray-400">Balance</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {emiResult.amortization.slice(0, 60).map((row, i) => (
-                              <tr key={i} className="border-b border-gray-800"><td className="py-2 text-gray-300">{row.month}</td><td className="py-2 text-right text-gray-300">₹{row.payment.toFixed(2)}</td><td className="py-2 text-right text-gray-300">₹{row.principal.toFixed(2)}</td><td className="py-2 text-right text-gray-300">₹{row.interest.toFixed(2)}</td><td className="py-2 text-right text-gray-300">₹{row.balance.toFixed(2)}</td></tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    </motion.div>
-                  )}
+                {showAmortization && (
+  <motion.div 
+    initial={{ opacity: 0, height: 0 }} 
+    animate={{ opacity: 1, height: 'auto' }} 
+    transition={{ duration: 0.3 }} 
+    className="overflow-hidden mt-4"
+  >
+    <div className="max-h-60 overflow-auto">
+      <div className="min-w-full inline-block align-middle">
+        <table className="min-w-full divide-y divide-gray-700 text-sm">
+          <thead>
+            <tr className="border-b border-gray-700">
+              <th className="sticky top-0 z-10 px-2 py-2 text-left text-gray-400 bg-gray-800">Month</th>
+              <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Payment</th>
+              <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Principal</th>
+              <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Interest</th>
+              <th className="sticky top-0 z-10 px-2 py-2 text-right text-gray-400 bg-gray-800">Balance</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-800">
+            {emiResult.amortization.slice(0, 60).map((row, i) => (
+              <tr key={i}>
+                <td className="px-2 py-2 whitespace-nowrap text-gray-300">{row.month}</td>
+                <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.payment.toFixed(2)}</td>
+                <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.principal.toFixed(2)}</td>
+                <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.interest.toFixed(2)}</td>
+                <td className="px-2 py-2 whitespace-nowrap text-right text-gray-300">₹{row.balance.toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </motion.div>
+)}
                 </div>
               ) : (
                 <div className="text-center text-gray-500">
