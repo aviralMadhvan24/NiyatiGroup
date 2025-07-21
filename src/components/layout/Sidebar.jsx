@@ -12,7 +12,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
   const navigate = useNavigate();
   const [servicesOpen, setServicesOpen] = useState(false);
 
-  if (!user) return null;
+  
 
   const handleLogout = async () => {
     await logout();
@@ -47,16 +47,16 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
           <>
             {/* User Profile */}
             <div className="flex items-center mb-6 px-4">
-              {user.photoURL && (
+              {user?.photoURL && (
                 <img
-                  src={user.photoURL}
+                  src={user?.photoURL}
                   alt="User"
                   className="rounded-full w-10 h-10 border-2 border-gray-400"
                 />
               )}
               <div className="ml-3 text-gray-100">
-                <p className="font-medium truncate">{user.displayName || 'User'}</p>
-                <p className="text-xs truncate opacity-75">{user.email}</p>
+                <p className="font-medium truncate">{user?.displayName || 'User'}</p>
+                <p className="text-xs truncate opacity-75">{user?.email}</p>
               </div>
             </div>
 

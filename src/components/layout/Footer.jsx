@@ -9,8 +9,15 @@ import {
 } from 'react-icons/fa';
 
 const Footer = () => {
+
   const currentYear = new Date().getFullYear();
-  const socials = ['twitter', 'facebook', 'linkedin', 'instagram'];
+  const socials = ['twitter', 'facebook',  'instagram'];
+const socialLinks = {
+  twitter: 'https://x.com/GroupNiyat95176',
+  facebook: 'https://www.facebook.com/profile.php?id=61578598741738',
+ 
+  instagram: 'https://www.instagram.com/niyatigroup1/?hl=en',
+};
 
   const IconMap = {
     twitter: FaTwitter,
@@ -53,25 +60,29 @@ const Footer = () => {
             <p className="mt-2 text-xs text-gray-400">
           Offering <strong>Tax Consultancy</strong>, <strong>Loan Services</strong> &amp; <strong>Recruitment Solutions</strong>
         </p>
-            <div className="flex space-x-3">
-              {socials.map((social, index) => {
-                const Icon = IconMap[social];
-                return(
-                  <motion.a
-                    key={social}
-                    href="#"
-                    whileHover={{ y: -3, color: '#3b82f6' }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-gray-900 p-2 rounded-lg border border-gray-800 hover:border-red-500/30 text-gray-400 hover:text-red-400 transition-all"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 * index }}
-                  >
-                    <Icon className="w-4 h-4" />
-                  </motion.a>
-                )})}
-            </div>
+          <div className="flex space-x-3">
+  {Object.entries(socialLinks).map(([social, url], index) => {
+    const Icon = IconMap[social];
+    return (
+      <motion.a
+        key={social}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ y: -3, color: '#3b82f6' }}
+        whileTap={{ scale: 0.95 }}
+        className="bg-gray-900 p-2 rounded-lg border border-gray-800 hover:border-red-500/30 text-gray-400 hover:text-red-400 transition-all"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1 * index }}
+      >
+        <Icon className="w-4 h-4" />
+      </motion.a>
+    );
+  })}
+</div>
+
           </motion.div>
 
           {/* Services Column */}
