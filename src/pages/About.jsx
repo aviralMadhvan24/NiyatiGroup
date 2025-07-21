@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const About = () => {
   return (
     <div className="relative bg-red-950 text-gray-300 min-h-screen overflow-hidden">
+      
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">

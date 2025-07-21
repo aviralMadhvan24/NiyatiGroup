@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const Contact = () => {
   return (
-    <section className="relative pt-28 pb-32 md:pt-36 md:pb-36 lg:pt-44 lg:pb-40 bg-red-950 overflow-hidden">
+    <section className=" relative pt-28 pb-32 md:pt-36 md:pb-36 lg:pt-44 lg:pb-40 bg-red-950 overflow-hidden">
       {/* Background Grid */}
       <motion.div
         className="absolute inset-0 overflow-hidden"
@@ -37,7 +37,7 @@ const Contact = () => {
       </motion.div>
 
       {/* Content Section */}
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+      <div className=" container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-3xl">
           <motion.h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white"
