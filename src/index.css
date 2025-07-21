@@ -4,6 +4,15 @@ html {
   scroll-behavior: smooth;
   font-size: 16px; /* Prevent zoom-like scaling */
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000; /* or whatever dark shade you prefer */
+  min-height: 100vh;
+}
+#root {
+  min-height: 100vh;
+}
 
 body {
   font-family: 'Inter', sans-serif;
