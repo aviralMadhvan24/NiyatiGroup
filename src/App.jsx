@@ -13,7 +13,7 @@ import Tax from './pages/Tax';
 import TaxCalculator from './pages/TaxCalculator.jsx';
 import EMICalculator from './pages/EMICalculator.jsx';
 import ApplyForm from './pages/ApplyForm.jsx';
-import CibilCheck from './pages/CibilCheck.jsx';
+
 import Login from './pages/Login';
 import { AuthProvider } from './context/AuthContext.jsx';
 import ProtectedRoute from './components/layout/ProtectedRoutes';
@@ -44,7 +44,7 @@ function App() {
             <Route path="/calculator" element={<ProtectedRoute><TaxCalculator /></ProtectedRoute>} />
             <Route path="/loans/calculate" element={<ProtectedRoute><EMICalculator /></ProtectedRoute>} />
             <Route path="/recruitment/apply" element={<ProtectedRoute><ApplyForm /></ProtectedRoute>} />
-            <Route path="/cibilcheck" element={<ProtectedRoute><CibilCheck /></ProtectedRoute>} />
+            
           </Routes>
         </Layout>
       </Router>
