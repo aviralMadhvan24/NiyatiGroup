@@ -28,12 +28,12 @@ function App() {
             <Route
               path="/"
               element={
-                <ProtectedRoute>
+               
                   <Home />
-                </ProtectedRoute>
+              
               }
             />
-            <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
+            <Route path="/about" element={<About />} />
             <Route path="/recruitment" element={<ProtectedRoute><RecruitmentServices /></ProtectedRoute>} />
             <Route path="/loans" element={<ProtectedRoute><LoanServices /></ProtectedRoute>} />
             <Route path="/services" element={<ProtectedRoute><Services /></ProtectedRoute>} />
