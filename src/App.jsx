@@ -13,27 +13,42 @@ import Tax from './pages/Tax';
 import TaxCalculator from './pages/TaxCalculator.jsx';
 import EMICalculator from './pages/EMICalculator.jsx';
 import ApplyForm from './pages/ApplyForm.jsx';
+import CibilCheck from './pages/CibilCheck.jsx';
+import Login from './pages/Login';
+import { AuthProvider } from './context/AuthContext.jsx';
+import ProtectedRoute from './components/layout/ProtectedRoutes';
+
 function App() {
   return (
-    <Router>
-      <Layout>
-        <Routes>
-         
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/recruitment" element={<RecruitmentServices />} />
-          <Route path="/loans" element={<LoanServices />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/upload" element={<Upload />} />
-          <Route path="/tax" element={<Tax />} />
-          <Route path="/calculator" element={<TaxCalculator />} />
-          <Route path="/loans/calculate" element={<EMICalculator />} />
-          <Route path="/recruitment/apply" element={<ApplyForm />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
+            <Route path="/recruitment" element={<ProtectedRoute><RecruitmentServices /></ProtectedRoute>} />
+            <Route path="/loans" element={<ProtectedRoute><LoanServices /></ProtectedRoute>} />
+            <Route path="/services" element={<ProtectedRoute><Services /></ProtectedRoute>} />
+            <Route path="/faq" element={<ProtectedRoute><Faq /></ProtectedRoute>} />
+            <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
+            <Route path="/upload" element={<ProtectedRoute><Upload /></ProtectedRoute>} />
+            <Route path="/tax" element={<ProtectedRoute><Tax /></ProtectedRoute>} />
+            <Route path="/calculator" element={<ProtectedRoute><TaxCalculator /></ProtectedRoute>} />
+            <Route path="/loans/calculate" element={<ProtectedRoute><EMICalculator /></ProtectedRoute>} />
+            <Route path="/recruitment/apply" element={<ProtectedRoute><ApplyForm /></ProtectedRoute>} />
+            <Route path="/cibilcheck" element={<ProtectedRoute><CibilCheck /></ProtectedRoute>} />
+          </Routes>
+        </Layout>
+      </Router>
+    </AuthProvider>
   );
 }
 
