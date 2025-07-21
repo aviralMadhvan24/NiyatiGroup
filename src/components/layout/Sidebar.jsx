@@ -51,15 +51,15 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
             </div>
             {/* Navigation */}
             <nav className="flex-1 px-2 space-y-2">
-              <NavLink to="/" className={({ isActive }) => `flex items-center p-3 rounded-lg hover:bg-red-600 ${isActive ? 'bg-red-900 text-gray-100' : 'text-gray-200'}`}>
+              <NavLink to="/" className={({ isActive }) => ` cursor-pointer flex items-center p-3 rounded-lg hover:bg-red-600 ${isActive ? 'bg-red-900 text-gray-100' : 'text-gray-200'}`}>
                 <FiHome size={20} />
                 <span className="ml-3">Home</span>
               </NavLink>
-              <NavLink to="/about" className={({ isActive }) => `flex items-center p-3 rounded-lg hover:bg-red-600 ${isActive ? 'bg-red-900 text-gray-100' : 'text-gray-200'}`}>
+              <NavLink to="/about" className={({ isActive }) => `cursor-pointer flex items-center p-3 rounded-lg hover:bg-red-600 ${isActive ? 'bg-red-900 text-gray-100' : 'text-gray-200'}`}>
                 <FiUser size={20} />
                 <span className="ml-3">About Us</span>
               </NavLink>
-              <NavLink to="/services" className={({ isActive }) => `flex items-center p-3 rounded-lg hover:bg-red-600 ${isActive ? 'bg-red-900 text-gray-100' : 'text-gray-200'}`}>
+              <NavLink to="/services" className={({ isActive }) => `cursor-pointer flex items-center p-3 rounded-lg hover:bg-red-600 ${isActive ? 'bg-red-900 text-gray-100' : 'text-gray-200'}`}>
                 <FiServer size={20} />
                 <span className="ml-3">Services</span>
               </NavLink>
@@ -68,10 +68,10 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
             <div className="px-4 pb-4">
               <button 
                 onClick={handleLogout}
-                className="flex items-center w-full p-3 rounded-lg hover:bg-red-600 text-gray-200"
+                className="cursor-pointer flex items-center w-full p-3 rounded-lg hover:bg-red-600 text-gray-200"
               >
                 <FiLogOut size={20} />
-                <span className="ml-3">Logout</span>
+                <span className="cursor-pointer ml-3">Logout</span>
               </button>
             </div>
           </>
