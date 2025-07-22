@@ -7,7 +7,7 @@ import {
   FaLinkedinIn, 
   FaTwitter  
 } from 'react-icons/fa';
-
+import { NavLink } from 'react-router-dom';
 const Footer = () => {
 
   const currentYear = new Date().getFullYear();
@@ -244,6 +244,10 @@ const socialLinks = {
           <p className="text-sm text-gray-500">
             © {currentYear} Niyati Group. All rights reserved.
           </p>
+          <div className="flex space-x-6">
+  <NavLink to="/terms" className="text-gray-400 hover:text-white">Terms of Service</NavLink>
+  <NavLink to="/privacy" className="text-gray-400 hover:text-white">Privacy Policy</NavLink>
+</div>
          <p className="mt-1 text-xs text-gray-600">
           Transforming organizations through strategic talent acquisition
         </p>

@@ -4,7 +4,7 @@ import Header from './Navbar';
 import Footer from './Footer';
 import WhatsAppButton from '../ui/WhatsAppButton';
 import ScrollToTop from '../ui/ScrollToTop';
-import Sidebar from './Sidebar';
+
 // In your Layout.jsx
 import Navbar from './Navbar';
 

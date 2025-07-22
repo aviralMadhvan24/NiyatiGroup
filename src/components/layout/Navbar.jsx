@@ -6,8 +6,12 @@ import {
 } from 'react-icons/fi';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../../firebase';
 const Navbar = () => {
+const [showLoginModal, setShowLoginModal] = useState(false);
+const [protectedRouteTarget, setProtectedRouteTarget] = useState(null);
+
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,6 +19,13 @@ const Navbar = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const dropdownRef = useRef(null);
+    const handleLogin = async () => {
+      try {
+        await signInWithPopup(auth, provider);
+        navigate("/");
+      } catch (err) {
+        console.error(err);
+      }}
 
   // Define protected routes
   const protectedRoutes = ['/tax', '/loans', '/recruitment', '/faq', '/contact'];
@@ -41,15 +52,24 @@ const Navbar = () => {
     navigate('/login');
   };
 
-  const handleNavigation = (to) => {
-    if (protectedRoutes.includes(to) && !user) {
-      setIsMenuOpen(false);
-      navigate('/login');
-      return false;
-    }
+const handleNavigation = (to, isSubLink = false) => {
+  // Always allow navigation to non-protected routes
+  if (!protectedRoutes.includes(to)) {
     setIsMenuOpen(false);
     return true;
-  };
+  }
+  
+  // For protected routes, check if user is logged in
+  if (!user) {
+    setIsMenuOpen(false);
+    setProtectedRouteTarget(to);
+    setShowLoginModal(true);
+    return false;
+  }
+  
+  setIsMenuOpen(false);
+  return true;
+};
 
   const navLinks = [
     { name: 'Home', path: '/', icon: <FiHome /> },
@@ -67,6 +87,15 @@ const Navbar = () => {
     { name: 'FAQ', path: '/faq', icon: <FiHelpCircle /> },
     { name: 'Contact', path: '/contact', icon: <FiPhone /> },
   ];
+
+  // Handle services click - navigate and toggle dropdown
+  const handleServicesClick = (e, path) => {
+    e.preventDefault();
+    if (handleNavigation(path)) {
+      navigate(path);
+    }
+    setServicesOpen(!servicesOpen);
+  };
 
   return (
     <>
@@ -99,16 +128,19 @@ const Navbar = () => {
                 <div key={link.name} className="relative" ref={link.subLinks ? dropdownRef : null}>
                   {link.subLinks ? (
                     <>
-                      <button
-                        onClick={() => setServicesOpen(!servicesOpen)}
-                        className="flex items-center px-3 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                      <NavLink
+                        to={link.path}
+                        onClick={(e) => handleServicesClick(e, link.path)}
+                        className={({ isActive }) => 
+                          `flex items-center px-3 py-2 text-sm font-medium ${
+                            isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                          }`
+                        }
                       >
-                        <span className="flex items-center">
-                          {link.icon}
-                          <span className="ml-2">{link.name}</span>
-                        </span>
+                        {link.icon}
+                        <span className="ml-2">{link.name}</span>
                         {servicesOpen ? <FiChevronUp className="ml-1" /> : <FiChevronDown className="ml-1" />}
-                      </button>
+                      </NavLink>
                       {servicesOpen && (
                         <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gradient-to-b from-red-900 via-red-950 to-black border border-red-800 z-50">
                           <div className="py-1">
@@ -117,7 +149,7 @@ const Navbar = () => {
                                 key={subLink.name}
                                 to={subLink.path}
                                 onClick={(e) => {
-                                  if (!handleNavigation(subLink.path)) {
+                                  if (!handleNavigation(subLink.path, true)) {
                                     e.preventDefault();
                                   }
                                 }}
@@ -163,7 +195,7 @@ const Navbar = () => {
                   )}
                   <button
                     onClick={() => setShowLogoutModal(true)}
-                    className="flex items-center px-3 py-2 text-sm font-medium text-gray-300 hover:text-white"
+                    className="cursor-pointer flex items-center px-3 py-2 text-sm font-medium text-gray-300 hover:text-white"
                   >
                     <FiLogOut className="mr-1" />
                     Logout
@@ -171,8 +203,8 @@ const Navbar = () => {
                 </div>
               ) : (
                 <NavLink
-                  to="/login"
-                  className="px-4 py-2 bg-green-700 text-white text-sm font-medium rounded-md hover:bg-green-800 transition-colors"
+                  to={"/login"}
+                  className="cursor-pointer px-4 py-2 bg-green-700 text-white text-sm font-medium rounded-md hover:bg-green-800 transition-colors"
                 >
                   Login
                 </NavLink>
@@ -212,16 +244,27 @@ const Navbar = () => {
                     <div key={link.name}>
                       {link.subLinks ? (
                         <>
-                          <button
-                            onClick={() => setServicesOpen(!servicesOpen)}
-                            className="cursor-pointer w-full flex items-center justify-between p-3 rounded-lg hover:bg-red-600 text-left text-gray-200"
+                          <NavLink
+                            to={link.path}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setServicesOpen(!servicesOpen);
+                              if (handleNavigation(link.path)) {
+                                navigate(link.path);
+                              }
+                            }}
+                            className={({ isActive }) =>
+                              `flex items-center justify-between p-3 rounded-lg ${
+                                isActive ? 'bg-red-900 text-white' : 'text-gray-200 hover:bg-red-600'
+                              }`
+                            }
                           >
                             <span className="flex items-center">
                               {link.icon}
                               <span className="ml-3">{link.name}</span>
                             </span>
                             {servicesOpen ? <FiChevronUp /> : <FiChevronDown />}
-                          </button>
+                          </NavLink>
                           {servicesOpen && (
                             <div className="ml-8 space-y-1">
                               {link.subLinks.map((subLink) => (
@@ -229,11 +272,15 @@ const Navbar = () => {
                                   key={subLink.name}
                                   to={subLink.path}
                                   onClick={(e) => {
-                                    if (!handleNavigation(subLink.path)) {
+                                    if (!handleNavigation(subLink.path, true)) {
                                       e.preventDefault();
                                     }
                                   }}
-                                  className="block p-2 pl-4 rounded-lg hover:bg-red-600 text-gray-200"
+                                  className={({ isActive }) =>
+                                    `block p-2 pl-4 rounded-lg ${
+                                      isActive ? 'bg-red-900 text-white' : 'text-gray-200 hover:bg-red-600'
+                                    }`
+                                  }
                                 >
                                   {subLink.name}
                                 </NavLink>
@@ -250,8 +297,8 @@ const Navbar = () => {
                             }
                           }}
                           className={({ isActive }) =>
-                            `flex items-center p-3 rounded-lg hover:bg-red-600 ${
-                              isActive ? 'bg-red-900 text-white' : 'text-gray-200'
+                            `flex items-center p-3 rounded-lg ${
+                              isActive ? 'bg-red-900 text-white' : 'text-gray-200 hover:bg-red-600'
                             }`
                           }
                         >
@@ -311,6 +358,31 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      {showLoginModal && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="bg-gradient-to-br from-red-900 via-red-950 to-black rounded-lg p-6 max-w-sm w-full mx-4 border border-red-800">
+      <h3 className="text-xl font-semibold text-white mb-4">Login Required</h3>
+      <p className="text-gray-300 mb-6">Please login to access this page.</p>
+      <div className="flex justify-end space-x-3">
+        <button
+          onClick={() => setShowLoginModal(false)}
+          className="cursor-pointer px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-700 text-white transition-colors"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={() => {
+            setShowLoginModal(false);
+            navigate('/login', { state: { from: protectedRouteTarget } });
+          }}
+          className="cursor-pointer px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white transition-colors"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+  </div>
+)}
     </>
   );
 };
