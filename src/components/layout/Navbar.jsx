@@ -241,73 +241,71 @@ const handleNavigation = (to, isSubLink = false) => {
 
                 <div className="space-y-1">
                   {navLinks.map((link) => (
-                    <div key={link.name}>
+                    <div key={link.name} className="relative" ref={link.subLinks ? dropdownRef : null}>
                       {link.subLinks ? (
                         <>
-                          <NavLink
-                            to={link.path}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setServicesOpen(!servicesOpen);
-                              if (handleNavigation(link.path)) {
-                                navigate(link.path);
-                              }
-                            }}
-                            className={({ isActive }) =>
-                              `flex items-center justify-between p-3 rounded-lg ${
-                                isActive ? 'bg-red-900 text-white' : 'text-gray-200 hover:bg-red-600'
-                              }`
-                            }
-                          >
-                            <span className="flex items-center">
-                              {link.icon}
-                              <span className="ml-3">{link.name}</span>
-                            </span>
-                            {servicesOpen ? <FiChevronUp /> : <FiChevronDown />}
-                          </NavLink>
-                          {servicesOpen && (
-                            <div className="ml-8 space-y-1">
-                              {link.subLinks.map((subLink) => (
-                                <NavLink
-                                  key={subLink.name}
-                                  to={subLink.path}
-                                  onClick={(e) => {
-                                    if (!handleNavigation(subLink.path, true)) {
-                                      e.preventDefault();
-                                    }
-                                  }}
-                                  className={({ isActive }) =>
-                                    `block p-2 pl-4 rounded-lg ${
-                                      isActive ? 'bg-red-900 text-white' : 'text-gray-200 hover:bg-red-600'
-                                    }`
-                                  }
-                                >
-                                  {subLink.name}
-                                </NavLink>
-                              ))}
-                            </div>
-                          )}
-                        </>
-                      ) : (
-                        <NavLink
-                          to={link.path}
-                          onClick={(e) => {
-                            if (!handleNavigation(link.path)) {
-                              e.preventDefault();
-                            }
-                          }}
-                          className={({ isActive }) =>
-                            `flex items-center p-3 rounded-lg ${
-                              isActive ? 'bg-red-900 text-white' : 'text-gray-200 hover:bg-red-600'
-                            }`
-                          }
-                        >
-                          {link.icon}
-                          <span className="ml-3">{link.name}</span>
-                        </NavLink>
-                      )}
-                    </div>
-                  ))}
+                          <div className="flex items-center">
+          <NavLink
+            to={link.path}
+            onClick={() => {
+              setServicesOpen(false); // Close dropdown when main link is clicked
+              handleNavigation(link.path);
+            }}
+            className={({ isActive }) => 
+              `px-3 py-2 text-sm font-medium flex items-center ${
+                isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+              }`
+            }
+          >
+            {link.icon}
+            <span className="ml-2">{link.name}</span>
+          </NavLink>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setServicesOpen(!servicesOpen);
+            }}
+            className="p-1 text-gray-300  hover:text-white focus:outline-none ml-auto"
+          >
+            {servicesOpen ? <FiChevronUp className="w-4 h-4" /> : <FiChevronDown className="w-4 h-4" />}
+          </button>
+        </div>
+        {servicesOpen && (
+          <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gradient-to-b from-red-900 via-red-950 to-black border border-red-800 z-50">
+            <div className="py-1">
+              {link.subLinks.map((subLink) => (
+                <NavLink
+                  key={subLink.name}
+                  to={subLink.path}
+                  onClick={() => {
+                    setServicesOpen(false);
+                    handleNavigation(subLink.path, true);
+                  }}
+                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-red-600 hover:text-white"
+                >
+                  {subLink.name}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+        )}
+      </>
+    ) : (
+      <NavLink
+        to={link.path}
+        onClick={() => handleNavigation(link.path)}
+        className={({ isActive }) => 
+          `px-3 py-2 text-sm font-medium flex items-center ${
+            isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+          }`
+        }
+      >
+        {link.icon}
+        <span className="ml-2">{link.name}</span>
+      </NavLink>
+    )}
+  </div>
+))}
                 </div>
 
                 <div className="mt-3 pt-3 border-t border-red-800">
