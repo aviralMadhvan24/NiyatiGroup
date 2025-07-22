@@ -8,10 +8,13 @@ import {
   FaTwitter  
 } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 const Footer = () => {
-
+  const { user } = useAuth(); 
+  const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
-  const socials = ['twitter', 'facebook',  'instagram'];
+  
 const socialLinks = {
   twitter: 'https://x.com/GroupNiyat95176',
   facebook: 'https://www.facebook.com/profile.php?id=61578598741738',
@@ -25,8 +28,18 @@ const socialLinks = {
     linkedin: FaLinkedinIn,
     instagram: FaInstagram
   };
-  
-  return (
+    const protectedRoutes = ['/tax', '/loans', '/recruitment', '/faq', '/contact'];
+    const handleNavigation = (path) => {
+    if (protectedRoutes.includes(path) && !user) {
+      navigate('/login');
+      window.scrollTo(0, 0); 
+      return false;
+    }
+    navigate(path);
+    window.scrollTo(0, 0); 
+    return true;
+  };
+    return (
     <footer className="relative bg-red-950 text-gray-300 pt-16 pb-10 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -95,36 +108,46 @@ const socialLinks = {
           >
             <h3 className="text-base font-bold text-gray-100">Our Services</h3>
             <ul className="space-y-2">
-              {["Income Tax","GST", 'Permanent Staffing', 'Contract Staffing', 'Executive Search', 'IT Recruitment', "Business Loans","Personal Loans","Home Loans"].map((service, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 + index * 0.05 }}
+             {[
+            { name: "Income Tax", path: "/tax" },
+            { name: "GST", path: "/tax" },
+            { name: 'Permanent Staffing', path: '/recruitment' },
+            { name: 'Contract Staffing', path: '/recruitment' },
+            { name: 'Executive Search', path: '/recruitment' },
+            { name: 'IT Recruitment', path: '/recruitment' },
+            { name: "Business Loans", path: "/loans" },
+            { name: "Personal Loans", path: "/loans" },
+            { name: "Home Loans", path: "/loans" }
+          ].map((service, index) => (
+            <motion.li
+              key={index}
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 + index * 0.05 }}
+            >
+              <button 
+                onClick={() => handleNavigation(service.path)}
+                className="cursor-pointer flex items-center text-sm text-gray-400 hover:text-red-400 transition-colors group w-full text-left"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="14" 
+                  height="14" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-red-400"
                 >
-                  <Link 
-                    to="/services" 
-                    className="flex items-center text-sm text-gray-400 hover:text-red-400 transition-colors group"
-                  >
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="14" 
-                      height="14" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round"
-                      className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-red-400"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                    {service}
-                  </Link>
-                </motion.li>
-              ))}
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+                {service.name}
+              </button>
+            </motion.li>
+          ))}
             </ul>
           </motion.div>
 
@@ -138,41 +161,41 @@ const socialLinks = {
           >
             <h3 className="text-base font-bold text-gray-100">Quick Links</h3>
             <ul className="space-y-2">
-              {[
-                { name: 'Home', path: '/' },
-                { name: 'About Us', path: '/about' },
-                { name: 'Services', path: '/services' },
-                { name: 'Contact', path: '/contact' }
-              ].map((link, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.15 + index * 0.05 }}
+             {[
+            { name: 'Home', path: '/' },
+            { name: 'About Us', path: '/about' },
+            { name: 'Services', path: '/services' },
+            { name: 'Contact', path: '/contact' }
+          ].map((link, index) => (
+            <motion.li
+              key={index}
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 + index * 0.05 }}
+            >
+              <button 
+                onClick={() => handleNavigation(link.path)}
+                className="flex cursor-pointer items-center text-sm text-gray-400 hover:text-red-400 transition-colors group w-full text-left"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="14" 
+                  height="14" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-red-400"
                 >
-                  <Link 
-                    to={link.path} 
-                    className="flex items-center text-sm text-gray-400 hover:text-red-400 transition-colors group"
-                  >
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="14" 
-                      height="14" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round"
-                      className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-red-400"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                    {link.name}
-                  </Link>
-                </motion.li>
-              ))}
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+                {link.name}
+              </button>
+            </motion.li>
+          ))}
             </ul>
           </motion.div>
 
@@ -241,16 +264,32 @@ const socialLinks = {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <p className="text-sm text-gray-500">
-            © {currentYear} Niyati Group. All rights reserved.
-          </p>
-          <div className="flex space-x-6">
-  <NavLink to="/terms" className="text-gray-400 hover:text-white">Terms of Service</NavLink>
-  <NavLink to="/privacy" className="text-gray-400 hover:text-white">Privacy Policy</NavLink>
+     {/* Bottom Copyright Section */}
+<div className="border-t border-gray-800 pt-6 text-center">
+  <p className="text-sm text-gray-500">
+    © {currentYear} Niyati Group. All rights reserved.
+  </p>
+  
+  {/* Add Legal Links Here */}
+  <div className="flex justify-center space-x-4 mt-2">
+    <NavLink 
+      to="/terms" 
+      className="text-xs text-gray-400 hover:text-white transition-colors"
+      onClick={() => window.scrollTo(0, 0)}
+    >
+      Terms of Service
+    </NavLink>
+    <NavLink 
+      to="/privacy" 
+      className="text-xs text-gray-400 hover:text-white transition-colors"
+      onClick={() => window.scrollTo(0, 0)}
+    >
+      Privacy Policy
+    </NavLink>
+  </div>
+
+  
 </div>
-         <p className="mt-1 text-xs text-gray-600">
-          Transforming organizations through strategic talent acquisition
-        </p>
         {/* New services line */}
        <p className="mt-4 text-xs text-gray-400 flex items-center justify-center space-x-1">
             <span>Made by</span>
