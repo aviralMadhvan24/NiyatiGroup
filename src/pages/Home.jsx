@@ -1,9 +1,39 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { useEffect, useState } from 'react';
+import { db } from '../firebase';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 const Home = () => {
   const navigate = useNavigate();
+  const [hasNewJobs, setHasNewJobs] = useState(false);
+  const [loading, setLoading] = useState(true);
+useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const q = query(collection(db, 'jobPosts'), orderBy('postedAt', 'desc'));
+        const querySnapshot = await getDocs(q);
+        const jobData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        // Check if there are any jobs posted in the last 7 days
+        const oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+        
+        const recentJobs = jobData.filter(job => {
+          const postedDate = job.postedAt?.toDate();
+          return postedDate > oneWeekAgo;
+        });
+        
+        setHasNewJobs(recentJobs.length > 0);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchJobs();
+  }, []);
 
   return (
     <div className="relative bg-gradient-to-br from-red-700 via-red-800 to-black text-gray-300 min-h-screen overflow-hidden">
@@ -14,7 +44,34 @@ const Home = () => {
           <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         </div>
       </div>
-
+{!loading && hasNewJobs && (
+        <motion.div 
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="relative z-20 bg-gradient-to-r from-red-600 to-red-800 text-white py-3 px-4 shadow-lg"
+        >
+          <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center">
+              <svg className="w-6 h-6 mr-3 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+              <span className="font-semibold">New job opportunities available!</span>
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/jobs')}
+              className="cursor-pointer px-4 py-2 bg-white text-red-700 font-medium rounded-md hover:bg-gray-100 transition-all flex items-center"
+            >
+              View Jobs
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </motion.button>
+          </div>
+        </motion.div>
+      )}
       {/* Hero Section */}
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4 sm:px-6">
         <section className="max-w-screen-xl mx-auto py-24">

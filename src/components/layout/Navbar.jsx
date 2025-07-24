@@ -86,6 +86,7 @@ const handleNavigation = (to, isSubLink = false) => {
     },
     { name: 'FAQ', path: '/faq', icon: <FiHelpCircle /> },
     { name: 'Contact', path: '/contact', icon: <FiPhone /> },
+    { name: 'Admin', path: '/jobpost', icon: <FiUser /> },
   ];
 
   // Handle services click - navigate and toggle dropdown

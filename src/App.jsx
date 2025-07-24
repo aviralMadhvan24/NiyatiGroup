@@ -14,11 +14,11 @@ import TaxCalculator from './pages/TaxCalculator.jsx';
 import EMICalculator from './pages/EMICalculator.jsx';
 import ApplyForm from './pages/ApplyForm.jsx';
 import LegalPages from './pages/LegalPages.jsx';
-
+import PostJobForm from './pages/PostJobForm.jsx';
 import Login from './pages/Login';
 import { AuthProvider } from './context/AuthContext.jsx';
 import ProtectedRoute from './components/layout/ProtectedRoutes';
-
+import JobBoard from './pages/JobBoard.jsx';
 function App() {
   return (
     <AuthProvider>
@@ -44,10 +44,13 @@ function App() {
             <Route path="/tax" element={<ProtectedRoute><Tax /></ProtectedRoute>} />
             <Route path="/calculator" element={<ProtectedRoute><TaxCalculator /></ProtectedRoute>} />
             <Route path="/loans/calculate" element={<ProtectedRoute><EMICalculator /></ProtectedRoute>} />
-            <Route path="/recruitment/apply" element={<ProtectedRoute><ApplyForm /></ProtectedRoute>} />
-             <Route path="/terms" element={<LegalPages page="terms" />} />
-      <Route path="/privacy" element={<LegalPages page="privacy" />} />
-            
+            <Route path="/jobs/recruitment/apply" element={<ProtectedRoute><ApplyForm /></ProtectedRoute>} />
+            <Route path="/jobPost" element={<ProtectedRoute><PostJobForm /></ProtectedRoute>} />
+            <Route path="/jobs" element={<ProtectedRoute><JobBoard /></ProtectedRoute>} />
+            <Route path="/terms" element={<LegalPages page="terms" />} />
+            <Route path="/privacy" element={<LegalPages page="privacy" />} />
+            <Route path="/postjobform" element={<ProtectedRoute><PostJobForm /></ProtectedRoute>} />
+
           </Routes>
         </Layout>
       </Router>

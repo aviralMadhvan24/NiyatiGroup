@@ -1,10 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
 const ApplyForm = () => {
   return (
     <div className="relative bg-gradient-to-br from-red-700 via-red-800 to-black text-gray-300 min-h-screen overflow-hidden">
-
       {/* Background Grid Overlay */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">
@@ -40,15 +39,55 @@ const ApplyForm = () => {
             className="space-y-6"
           >
             <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="https://niyatigroup1@gmail.com/thank-you.html" />
+            <input
+              type="hidden"
+              name="_next"
+              value="https://niyatigroup1@gmail.com/thank-you.html"
+            />
 
             {[
-              { name: 'name', type: 'text', placeholder: 'Full Name', required: true },
-              { name: 'email', type: 'email', placeholder: 'Email Address', required: true },
-              { name: 'phone', type: 'tel', placeholder: 'Phone Number', required: true },
-              { name: 'location', type: 'text', placeholder: 'City / State', required: true },
-              { name: 'position', type: 'text', placeholder: 'Position Applying For', required: true },
-              { name: 'linkedin', type: 'url', placeholder: 'LinkedIn Profile (optional)', required: false },
+              {
+                name: "job title",
+                type: "text",
+                placeholder: "Job Title",
+                required: true,
+              },
+              {
+                name: "name",
+                type: "text",
+                placeholder: "Full Name",
+                required: true,
+              },
+              {
+                name: "email",
+                type: "email",
+                placeholder: "Email Address",
+                required: true,
+              },
+              {
+                name: "phone",
+                type: "tel",
+                placeholder: "Phone Number",
+                required: true,
+              },
+              {
+                name: "location",
+                type: "text",
+                placeholder: "City / State",
+                required: true,
+              },
+              {
+                name: "position",
+                type: "text",
+                placeholder: "Position Applying For",
+                required: true,
+              },
+              {
+                name: "linkedin",
+                type: "url",
+                placeholder: "LinkedIn Profile (optional)",
+                required: false,
+              },
             ].map((field, index) => (
               <motion.div
                 key={field.name}
@@ -96,7 +135,9 @@ const ApplyForm = () => {
                 required
                 className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-gray-100 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
               />
-              <p className="text-xs text-gray-500 mt-1">Only PDF files accepted</p>
+              <p className="text-xs text-gray-500 mt-1">
+                Only PDF files accepted
+              </p>
             </motion.div>
 
             <motion.button
@@ -109,8 +150,17 @@ const ApplyForm = () => {
               transition={{ delay: 1.1 }}
             >
               Submit Application
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block ml-2" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 inline-block ml-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
               </svg>
             </motion.button>
           </form>
