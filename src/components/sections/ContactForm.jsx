@@ -206,7 +206,7 @@ const ContactForm = () => {
               <p>Mon–Sat: 9:30 AM – 9:00 PM</p>
               <p>Sunday: 9:00 AM – 9:00 PM</p>
               <a 
-                href="https://wa.me/919412190338?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment."
+                href="https://wa.me/919997070599?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment."
                 className="text-indigo-400 hover:underline text-xs block mt-2"
                 target="_blank"
               >
