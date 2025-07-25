@@ -181,9 +181,9 @@ const ContactForm = () => {
               <p>Rajni Niwas, 616, Ganesh Nagar</p>
               <p>Bareilly, Uttar Pradesh 243001</p>
               <a 
-                href="https://www.google.com/maps/place/Niyati+Tax+%26+Financial+Services/"
+                href="https://www.google.com/maps/place/Niyati+Group/@28.3464594,79.3996806,17z/data=!3m1!4b1!4m6!3m5!1s0x39a001ad1ccdb735:0xe77d309c2ea8cc23!8m2!3d28.3464547!4d79.4022555!16s%2Fg%2F11fl45w23d!5m2!1e4!1e2?entry=ttu&g_ep=EgoyMDI1MDcyMi4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
-                className="text-primary hover:underline text-xs"
+                className=" text-indigo-400 hover:underline text-xs"
               >
                 View on map
               </a>
@@ -230,14 +230,14 @@ const ContactForm = () => {
               </div>
             </div>
 
-            {/* Modal */}
+            {/* Modal - Made smaller */}
             {qrOpen && (
               <div
                 className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
                 onClick={() => setQrOpen(false)}
               >
                 <motion.div
-                  className="relative bg-white p-4 rounded-lg max-w-full"
+                  className="relative bg-white p-4 rounded-lg max-w-xs" // Smaller max width
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.2 }}
@@ -252,8 +252,9 @@ const ContactForm = () => {
                   <img
                     src="/upi.jpg"
                     alt="UPI QR Large"
-                    className="w-full max-w-xs sm:max-w-sm md:max-w-md"
+                    className="w-48 h-48 object-contain" // Fixed smaller size
                   />
+                  <p className="text-center text-sm mt-2 text-gray-600">Scan to make payment</p>
                 </motion.div>
               </div>
             )}

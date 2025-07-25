@@ -149,7 +149,7 @@ const ADMIN_EMAIL = "niyatigroup1@gmail.com";
                         <motion.button
                           whileHover={{ scale: 1.03 }}
                           whileTap={{ scale: 0.97 }}
-                          onClick={() => navigate(`/recruitment/apply/${job.id}`)}
+                          onClick={() => navigate(`/apply`)}
                           className="cursor-pointer px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-all whitespace-nowrap"
                         >
                           Apply Now

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
@@ -11,12 +10,16 @@ const PostJobForm = () => {
     title: '',
     company: '',
     location: '',
-    salary: '',
+    minSalary: '',
+    maxSalary: '',
+    salaryType: 'LPA',
+    showAsRange: false,
+    openings: '',
     duration: '',
     description: '',
     applyLink: '',
     lastDate: '',
-    status: 'active' // default status
+    status: 'active'
   });
 
   const navigate = useNavigate();
@@ -30,19 +33,30 @@ const PostJobForm = () => {
   }, []);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setForm(prev => ({
       ...prev,
-      [name]: name === 'salary' ? Number(value) : value
+      [name]: type === 'checkbox' ? checked : 
+              (name === 'minSalary' || name === 'maxSalary' || name === 'openings') ? 
+              Number(value) : value
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate salary range
+    if (form.showAsRange && form.minSalary && form.maxSalary && form.minSalary > form.maxSalary) {
+      alert("Minimum salary cannot be greater than maximum salary");
+      return;
+    }
+
     try {
       await addDoc(collection(db, 'jobPosts'), {
         ...form,
-        salary: Number(form.salary),
+        minSalary: Number(form.minSalary),
+        maxSalary: Number(form.maxSalary),
+        openings: Number(form.openings),
         lastDate: new Date(form.lastDate),
         postedAt: serverTimestamp(),
         status: 'active'
@@ -52,7 +66,11 @@ const PostJobForm = () => {
         title: '',
         company: '',
         location: '',
-        salary: '',
+        minSalary: '',
+        maxSalary: '',
+        salaryType: 'LPA',
+        showAsRange: false,
+        openings: '',
         duration: '',
         description: '',
         applyLink: '',
@@ -86,7 +104,13 @@ const PostJobForm = () => {
               { field: 'title', label: 'Job Title', placeholder: 'e.g. Senior Software Engineer' },
               { field: 'company', label: 'Company Name', placeholder: 'e.g. Niyati Group' },
               { field: 'location', label: 'Location', placeholder: 'e.g. Bareilly, Uttar Pradesh' },
-              { field: 'salary', label: 'Salary (₹)', placeholder: 'e.g. 50000', type: 'number' },
+              { 
+                field: 'openings', 
+                label: 'Number of Openings', 
+                placeholder: 'e.g. 5',
+                type: 'number',
+                min: 1
+              },
               { 
                 field: 'duration', 
                 label: 'Job Duration', 
@@ -94,9 +118,15 @@ const PostJobForm = () => {
                 info: 'Specify if temporary/contract/permanent'
               },
               { field: 'lastDate', label: 'Last Date to Apply', type: 'date' },
-              { field: 'description', label: 'Job Description', placeholder: 'Detailed job description...', textarea: true },
+              { 
+                field: 'description', 
+                label: 'Job Description', 
+                placeholder: 'Detailed job description...', 
+                textarea: true,
+                required: false
+              },
               { field: 'applyLink', label: 'Application Link (optional)', placeholder: 'https://...' }
-            ].map(({ field, label, placeholder, type = 'text', textarea, info }) => (
+            ].map(({ field, label, placeholder, type = 'text', textarea, info, required = true, min }) => (
               <div key={field} className="space-y-2">
                 <div className="flex justify-between items-center">
                   <label className="block text-sm font-medium text-gray-400">{label}</label>
@@ -110,7 +140,7 @@ const PostJobForm = () => {
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     rows={5}
-                    required={field !== 'applyLink'}
+                    required={required}
                   />
                 ) : (
                   <input
@@ -120,13 +150,85 @@ const PostJobForm = () => {
                     value={form[field]}
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                    required={field !== 'applyLink'}
-                    min={type === 'number' ? 0 : undefined}
-                    minDate={type === 'date' ? new Date().toISOString().split('T')[0] : undefined}
+                    
+                    
+                    min={type === 'date' ? new Date().toISOString().split('T')[0] : min}
                   />
                 )}
               </div>
             ))}
+
+            {/* Salary Range Section */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <label className="block text-sm font-medium text-gray-400">Salary</label>
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="showAsRange"
+                    name="showAsRange"
+                    checked={form.showAsRange}
+                    onChange={handleChange}
+                    className="h-4 w-4 rounded border-gray-600 bg-gray-700 text-red-500 focus:ring-red-500"
+                  />
+                  <label htmlFor="showAsRange" className="ml-2 text-sm text-gray-400">
+                    Show as range
+                  </label>
+                </div>
+              </div>
+
+              {form.showAsRange ? (
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs text-gray-400 mb-1">Minimum Salary</label>
+                    <input
+                      type="number"
+                      name="minSalary"
+                      placeholder="e.g. 50000"
+                      value={form.minSalary}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                      min={0}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-gray-400 mb-1">Maximum Salary</label>
+                    <input
+                      type="number"
+                      name="maxSalary"
+                      placeholder="e.g. 80000"
+                      value={form.maxSalary}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                      min={form.minSalary || 0}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    name="minSalary"
+                    placeholder="e.g. 50000"
+                    value={form.minSalary}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    required
+                    min={0}
+                  />
+                </div>
+              )}
+
+              <select
+                name="salaryType"
+                value={form.salaryType}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              >
+                <option value="LPA">LPA</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </div>
             
             <div className="flex justify-end pt-4">
               <motion.button

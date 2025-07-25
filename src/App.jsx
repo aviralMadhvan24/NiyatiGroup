@@ -44,8 +44,8 @@ function App() {
             <Route path="/tax" element={<ProtectedRoute><Tax /></ProtectedRoute>} />
             <Route path="/calculator" element={<ProtectedRoute><TaxCalculator /></ProtectedRoute>} />
             <Route path="/loans/calculate" element={<ProtectedRoute><EMICalculator /></ProtectedRoute>} />
-            <Route path="/jobs/recruitment/apply" element={<ProtectedRoute><ApplyForm /></ProtectedRoute>} />
-            <Route path="/jobPost" element={<ProtectedRoute><PostJobForm /></ProtectedRoute>} />
+            <Route path="/apply" element={<ProtectedRoute><ApplyForm /></ProtectedRoute>} />
+            
             <Route path="/jobs" element={<ProtectedRoute><JobBoard /></ProtectedRoute>} />
             <Route path="/terms" element={<LegalPages page="terms" />} />
             <Route path="/privacy" element={<LegalPages page="privacy" />} />

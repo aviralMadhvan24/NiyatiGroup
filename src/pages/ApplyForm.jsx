@@ -39,11 +39,7 @@ const ApplyForm = () => {
             className="space-y-6"
           >
             <input type="hidden" name="_captcha" value="false" />
-            <input
-              type="hidden"
-              name="_next"
-              value="https://niyatigroup1@gmail.com/thank-you.html"
-            />
+          
 
             {[
               {
