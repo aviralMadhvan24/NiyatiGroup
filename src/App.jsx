@@ -19,6 +19,10 @@ import Login from './pages/Login';
 import { AuthProvider } from './context/AuthContext.jsx';
 import ProtectedRoute from './components/layout/ProtectedRoutes';
 import JobBoard from './pages/JobBoard.jsx';
+import AddLoanOffer from './pages/AddLoanOffer.jsx';
+import LoanOffers from './pages/LoanOffers.jsx';
+import AdminApplications from './pages/AdminApplication.jsx';
+import AdminPage from './pages/AdminPage.jsx';
 function App() {
   return (
     <AuthProvider>
@@ -50,6 +54,10 @@ function App() {
             <Route path="/terms" element={<LegalPages page="terms" />} />
             <Route path="/privacy" element={<LegalPages page="privacy" />} />
             <Route path="/jobpost" element={<ProtectedRoute><PostJobForm /></ProtectedRoute>} />
+            <Route path="/addloan" element={<ProtectedRoute><AddLoanOffer /></ProtectedRoute>} />
+            <Route path="/loanoffers" element={<ProtectedRoute><LoanOffers /></ProtectedRoute>} />
+            <Route path="/admin/applications" element={<ProtectedRoute><AdminApplications /></ProtectedRoute>} />
+            <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
 
           </Routes>
         </Layout>

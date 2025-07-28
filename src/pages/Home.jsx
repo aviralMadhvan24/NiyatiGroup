@@ -8,6 +8,34 @@ const Home = () => {
   const navigate = useNavigate();
   const [hasNewJobs, setHasNewJobs] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [hasNewLoans, setHasNewLoans] = useState(false);
+const [loanLoading, setLoanLoading] = useState(true);
+  useEffect(() => {
+  const fetchLoanOffers = async () => {
+    try {
+      const q = query(collection(db, 'loanOffers'), orderBy('createdAt', 'desc'));
+      const querySnapshot = await getDocs(q);
+      const loanData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      
+      // Check if there are any loans added in the last 7 days
+      const oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      
+      const recentLoans = loanData.filter(loan => {
+        const createdDate = loan.createdAt?.toDate();
+        return createdDate > oneWeekAgo && loan.isActive;
+      });
+      
+      setHasNewLoans(recentLoans.length > 0);
+    } catch (error) {
+      console.error("Error fetching loans:", error);
+    } finally {
+      setLoanLoading(false);
+    }
+  };
+  
+  fetchLoanOffers();
+}, []);
 useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -72,6 +100,35 @@ useEffect(() => {
           </div>
         </motion.div>
       )}
+
+      {!loanLoading && hasNewLoans && (
+  <motion.div 
+    initial={{ opacity: 0, y: -50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="relative z-20 bg-gradient-to-r from-green-600 to-green-800 text-white py-3 px-4 shadow-lg"
+  >
+    <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="flex items-center">
+        <svg className="w-6 h-6 mr-3 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+        </svg>
+        <span className="font-semibold">New loan offers available with special rates!</span>
+      </div>
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => navigate('/loanoffers')}
+        className="cursor-pointer px-4 py-2 bg-white text-green-700 font-medium rounded-md hover:bg-gray-100 transition-all flex items-center"
+      >
+        View Loans
+        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </motion.button>
+    </div>
+  </motion.div>
+)}
       {/* Hero Section */}
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4 sm:px-6">
         <section className="max-w-screen-xl mx-auto py-24">

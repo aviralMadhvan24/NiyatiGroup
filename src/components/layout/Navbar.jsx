@@ -8,27 +8,31 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../../firebase';
-const Navbar = () => {
-const [showLoginModal, setShowLoginModal] = useState(false);
-const [protectedRouteTarget, setProtectedRouteTarget] = useState(null);
 
+const Navbar = () => {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [protectedRouteTarget, setProtectedRouteTarget] = useState(null);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [adminOpen, setAdminOpen] = useState(false); // New state for admin dropdown
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const dropdownRef = useRef(null);
-    const handleLogin = async () => {
-      try {
-        await signInWithPopup(auth, provider);
-        navigate("/");
-      } catch (err) {
-        console.error(err);
-      }}
+  const adminDropdownRef = useRef(null);
+
+  const handleLogin = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   // Define protected routes
-  const protectedRoutes = ['/tax', '/loans', '/recruitment', '/faq', '/contact'];
+  const protectedRoutes = ['/tax', '/loans', '/recruitment', '/faq', '/contact', '/jobpost', '/addloan'];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -41,6 +45,9 @@ const [protectedRouteTarget, setProtectedRouteTarget] = useState(null);
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setServicesOpen(false);
       }
+      if (adminDropdownRef.current && !adminDropdownRef.current.contains(event.target)) {
+        setAdminOpen(false);
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -52,24 +59,24 @@ const [protectedRouteTarget, setProtectedRouteTarget] = useState(null);
     navigate('/login');
   };
 
-const handleNavigation = (to, isSubLink = false) => {
-  // Always allow navigation to non-protected routes
-  if (!protectedRoutes.includes(to)) {
+  const handleNavigation = (to, isSubLink = false) => {
+    // Always allow navigation to non-protected routes
+    if (!protectedRoutes.includes(to)) {
+      setIsMenuOpen(false);
+      return true;
+    }
+    
+    // For protected routes, check if user is logged in
+    if (!user) {
+      setIsMenuOpen(false);
+      setProtectedRouteTarget(to);
+      setShowLoginModal(true);
+      return false;
+    }
+    
     setIsMenuOpen(false);
     return true;
-  }
-  
-  // For protected routes, check if user is logged in
-  if (!user) {
-    setIsMenuOpen(false);
-    setProtectedRouteTarget(to);
-    setShowLoginModal(true);
-    return false;
-  }
-  
-  setIsMenuOpen(false);
-  return true;
-};
+  };
 
   const navLinks = [
     { name: 'Home', path: '/', icon: <FiHome /> },
@@ -86,7 +93,12 @@ const handleNavigation = (to, isSubLink = false) => {
     },
     { name: 'FAQ', path: '/faq', icon: <FiHelpCircle /> },
     { name: 'Contact', path: '/contact', icon: <FiPhone /> },
-    { name: 'Admin', path: '/jobpost', icon: <FiUser /> },
+    { 
+      name: 'Admin', 
+      path: '/admin', 
+      icon: <FiUser />,
+    
+    },
   ];
 
   // Handle services click - navigate and toggle dropdown
@@ -96,6 +108,15 @@ const handleNavigation = (to, isSubLink = false) => {
       navigate(path);
     }
     setServicesOpen(!servicesOpen);
+  };
+
+  // Handle admin click - navigate and toggle dropdown
+  const handleAdminClick = (e, path) => {
+    e.preventDefault();
+    if (handleNavigation(path)) {
+      navigate(path);
+    }
+    setAdminOpen(!adminOpen);
   };
 
   return (
@@ -126,12 +147,12 @@ const handleNavigation = (to, isSubLink = false) => {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-6">
               {navLinks.map((link) => (
-                <div key={link.name} className="relative" ref={link.subLinks ? dropdownRef : null}>
+                <div key={link.name} className="relative" ref={link.subLinks ? (link.name === 'Admin' ? adminDropdownRef : dropdownRef) : null}>
                   {link.subLinks ? (
                     <>
                       <NavLink
                         to={link.path}
-                        onClick={(e) => handleServicesClick(e, link.path)}
+                        onClick={(e) => link.name === 'Admin' ? handleAdminClick(e, link.path) : handleServicesClick(e, link.path)}
                         className={({ isActive }) => 
                           `flex items-center px-3 py-2 text-sm font-medium ${
                             isActive ? 'text-white' : 'text-gray-300 hover:text-white'
@@ -140,9 +161,9 @@ const handleNavigation = (to, isSubLink = false) => {
                       >
                         {link.icon}
                         <span className="ml-2">{link.name}</span>
-                        {servicesOpen ? <FiChevronUp className="ml-1" /> : <FiChevronDown className="ml-1" />}
+                        {(link.name === 'Admin' ? adminOpen : servicesOpen) ? <FiChevronUp className="ml-1" /> : <FiChevronDown className="ml-1" />}
                       </NavLink>
-                      {servicesOpen && (
+                      {(link.name === 'Admin' ? adminOpen : servicesOpen) && (
                         <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gradient-to-b from-red-900 via-red-950 to-black border border-red-800 z-50">
                           <div className="py-1">
                             {link.subLinks.map((subLink) => (
@@ -242,71 +263,86 @@ const handleNavigation = (to, isSubLink = false) => {
 
                 <div className="space-y-1">
                   {navLinks.map((link) => (
-                    <div key={link.name} className="relative" ref={link.subLinks ? dropdownRef : null}>
+                    <div key={link.name} className="relative" ref={link.subLinks ? (link.name === 'Admin' ? adminDropdownRef : dropdownRef) : null}>
                       {link.subLinks ? (
                         <>
                           <div className="flex items-center">
-          <NavLink
-            to={link.path}
-            onClick={() => {
-              setServicesOpen(false); // Close dropdown when main link is clicked
-              handleNavigation(link.path);
-            }}
-            className={({ isActive }) => 
-              `px-3 py-2 text-sm font-medium flex items-center ${
-                isActive ? 'text-white' : 'text-gray-300 hover:text-white'
-              }`
-            }
-          >
-            {link.icon}
-            <span className="ml-2">{link.name}</span>
-          </NavLink>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setServicesOpen(!servicesOpen);
-            }}
-            className="p-1 text-gray-300  hover:text-white focus:outline-none ml-auto"
-          >
-            {servicesOpen ? <FiChevronUp className="w-4 h-4" /> : <FiChevronDown className="w-4 h-4" />}
-          </button>
-        </div>
-        {servicesOpen && (
-          <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gradient-to-b from-red-900 via-red-950 to-black border border-red-800 z-50">
-            <div className="py-1">
-              {link.subLinks.map((subLink) => (
-                <NavLink
-                  key={subLink.name}
-                  to={subLink.path}
-                  onClick={() => {
-                    setServicesOpen(false);
-                    handleNavigation(subLink.path, true);
-                  }}
-                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-red-600 hover:text-white"
-                >
-                  {subLink.name}
-                </NavLink>
-              ))}
-            </div>
-          </div>
-        )}
-      </>
-    ) : (
-      <NavLink
-        to={link.path}
-        onClick={() => handleNavigation(link.path)}
-        className={({ isActive }) => 
-          `px-3 py-2 text-sm font-medium flex items-center ${
-            isActive ? 'text-white' : 'text-gray-300 hover:text-white'
-          }`
-        }
-      >
-        {link.icon}
-        <span className="ml-2">{link.name}</span>
-      </NavLink>
-    )}
-  </div>
-))}
+                            <NavLink
+                              to={link.path}
+                              onClick={() => {
+                                if (link.name === 'Admin') {
+                                  setAdminOpen(!adminOpen);
+                                } else {
+                                  setServicesOpen(!servicesOpen);
+                                }
+                                handleNavigation(link.path);
+                              }}
+                              className={({ isActive }) => 
+                                `px-3 py-2 text-sm font-medium flex items-center ${
+                                  isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                                }`
+                              }
+                            >
+                              {link.icon}
+                              <span className="ml-2">{link.name}</span>
+                            </NavLink>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (link.name === 'Admin') {
+                                  setAdminOpen(!adminOpen);
+                                } else {
+                                  setServicesOpen(!servicesOpen);
+                                }
+                              }}
+                              className="p-1 text-gray-300 hover:text-white focus:outline-none ml-auto"
+                            >
+                              {(link.name === 'Admin' ? adminOpen : servicesOpen) ? 
+                                <FiChevronUp className="w-4 h-4" /> : 
+                                <FiChevronDown className="w-4 h-4" />
+                              }
+                            </button>
+                          </div>
+                          {(link.name === 'Admin' ? adminOpen : servicesOpen) && (
+                            <div className="ml-4 mt-1 mb-2 rounded-md bg-red-900/30 border border-red-800">
+                              <div className="py-1">
+                                {link.subLinks.map((subLink) => (
+                                  <NavLink
+                                    key={subLink.name}
+                                    to={subLink.path}
+                                    onClick={() => {
+                                      if (link.name === 'Admin') {
+                                        setAdminOpen(false);
+                                      } else {
+                                        setServicesOpen(false);
+                                      }
+                                      handleNavigation(subLink.path, true);
+                                    }}
+                                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-red-600 hover:text-white"
+                                  >
+                                    {subLink.name}
+                                  </NavLink>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <NavLink
+                          to={link.path}
+                          onClick={() => handleNavigation(link.path)}
+                          className={({ isActive }) => 
+                            `px-3 py-2 text-sm font-medium flex items-center ${
+                              isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                            }`
+                          }
+                        >
+                          {link.icon}
+                          <span className="ml-2">{link.name}</span>
+                        </NavLink>
+                      )}
+                    </div>
+                  ))}
                 </div>
 
                 <div className="mt-3 pt-3 border-t border-red-800">
@@ -358,30 +394,30 @@ const handleNavigation = (to, isSubLink = false) => {
         </div>
       )}
       {showLoginModal && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-    <div className="bg-gradient-to-br from-red-900 via-red-950 to-black rounded-lg p-6 max-w-sm w-full mx-4 border border-red-800">
-      <h3 className="text-xl font-semibold text-white mb-4">Login Required</h3>
-      <p className="text-gray-300 mb-6">Please login to access this page.</p>
-      <div className="flex justify-end space-x-3">
-        <button
-          onClick={() => setShowLoginModal(false)}
-          className="cursor-pointer px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-700 text-white transition-colors"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={() => {
-            setShowLoginModal(false);
-            navigate('/login', { state: { from: protectedRouteTarget } });
-          }}
-          className="cursor-pointer px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white transition-colors"
-        >
-          Login
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-gradient-to-br from-red-900 via-red-950 to-black rounded-lg p-6 max-w-sm w-full mx-4 border border-red-800">
+            <h3 className="text-xl font-semibold text-white mb-4">Login Required</h3>
+            <p className="text-gray-300 mb-6">Please login to access this page.</p>
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={() => setShowLoginModal(false)}
+                className="cursor-pointer px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-700 text-white transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  setShowLoginModal(false);
+                  navigate('/login', { state: { from: protectedRouteTarget } });
+                }}
+                className="cursor-pointer px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white transition-colors"
+              >
+                Login
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

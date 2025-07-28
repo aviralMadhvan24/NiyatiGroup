@@ -1,7 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
+import { db } from '../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { motion } from "framer-motion";
 
 const ApplyForm = () => {
+  const [formData, setFormData] = useState({
+    jobTitle: '',
+    name: '',
+    email: '',
+    phone: '',
+    location: '',
+    position: '',
+    linkedin: '',
+    experience_level: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await addDoc(collection(db, "jobApplications"), {
+        ...formData,
+        createdAt: serverTimestamp(),
+      });
+
+      alert("Application submitted!");
+      setFormData({
+        jobTitle: '',
+        name: '',
+        email: '',
+        phone: '',
+        location: '',
+        position: '',
+        linkedin: '',
+        experience_level: '',
+      });
+    } catch (error) {
+      console.error("Error submitting application:", error);
+      alert("Submission failed.");
+    }
+  };
+
   return (
     <div className="relative bg-gradient-to-br from-red-700 via-red-800 to-black text-gray-300 min-h-screen overflow-hidden">
       {/* Background Grid Overlay */}
@@ -32,18 +78,10 @@ const ApplyForm = () => {
             Fill out the application form and we’ll get in touch shortly.
           </p>
 
-          <form
-            action="https://formsubmit.co/niyatigroup1@gmail.com"
-            method="POST"
-            encType="multipart/form-data"
-            className="space-y-6"
-          >
-            <input type="hidden" name="_captcha" value="false" />
-          
-
+          <form onSubmit={handleSubmit} className="space-y-6">
             {[
               {
-                name: "job title",
+                name: "jobTitle",
                 type: "text",
                 placeholder: "Job Title",
                 required: true,
@@ -94,6 +132,8 @@ const ApplyForm = () => {
                 <input
                   type={field.type}
                   name={field.name}
+                  value={formData[field.name]}
+                  onChange={handleChange}
                   required={field.required}
                   placeholder={field.placeholder}
                   className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-100 placeholder-gray-500 transition-all"
@@ -108,6 +148,8 @@ const ApplyForm = () => {
             >
               <select
                 name="experience_level"
+                value={formData.experience_level}
+                onChange={handleChange}
                 required
                 className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-100 placeholder-gray-500 transition-all"
               >
@@ -117,23 +159,6 @@ const ApplyForm = () => {
                 <option value="Fresher">Fresher</option>
                 <option value="Experienced">Experienced</option>
               </select>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0 }}
-            >
-              <input
-                type="file"
-                name="resume"
-                accept="application/pdf"
-                required
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-gray-100 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
-              />
-              <p className="text-xs text-gray-500 mt-1">
-                Only PDF files accepted
-              </p>
             </motion.div>
 
             <motion.button
