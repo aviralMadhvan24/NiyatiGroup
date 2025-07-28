@@ -49,7 +49,7 @@ function App() {
             <Route path="/jobs" element={<ProtectedRoute><JobBoard /></ProtectedRoute>} />
             <Route path="/terms" element={<LegalPages page="terms" />} />
             <Route path="/privacy" element={<LegalPages page="privacy" />} />
-            <Route path="/postjobform" element={<ProtectedRoute><PostJobForm /></ProtectedRoute>} />
+            <Route path="/jobpost" element={<ProtectedRoute><PostJobForm /></ProtectedRoute>} />
 
           </Routes>
         </Layout>
