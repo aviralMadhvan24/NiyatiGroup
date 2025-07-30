@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { db } from '../firebase';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { db, auth } from '../firebase';
+import { collection, getDocs, query, orderBy, doc, deleteDoc } from 'firebase/firestore';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+const ADMIN_EMAIL = "niyatigroup1@gmail.com";
 
 const LoanOffers = () => {
   const [loanOffers, setLoanOffers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
+    // Listen for auth changes
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+    });
+
+    // Fetch loan offers
     const fetchLoanOffers = async () => {
       try {
         const q = query(collection(db, 'loanOffers'), orderBy('createdAt', 'desc'));
@@ -20,9 +29,22 @@ const LoanOffers = () => {
         setLoading(false);
       }
     };
-    
+
     fetchLoanOffers();
+    return () => unsubscribe();
   }, []);
+
+  const handleDelete = async (offerId) => {
+    if (window.confirm("Are you sure you want to delete this loan offer?")) {
+      try {
+        await deleteDoc(doc(db, 'loanOffers', offerId));
+        setLoanOffers((old) => old.filter(offer => offer.id !== offerId));
+      } catch (error) {
+        console.error("Error deleting loan offer: ", error);
+        alert("Failed to delete loan offer");
+      }
+    }
+  };
 
   if (loading) {
     return (
@@ -35,7 +57,7 @@ const LoanOffers = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
       <h2 className="text-3xl font-bold text-white mb-8 text-center">Current Loan Offers</h2>
-      
+
       {loanOffers.length === 0 ? (
         <div className="text-center py-12 text-gray-400">
           No active loan offers available at the moment.
@@ -57,9 +79,9 @@ const LoanOffers = () => {
                     {offer.interestRate}% Interest
                   </span>
                 </div>
-                
+
                 <p className="text-gray-400 mb-4">{offer.description}</p>
-                
+
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-gray-500">Max Amount:</span>
@@ -70,19 +92,31 @@ const LoanOffers = () => {
                     <span className="text-white">{offer.minTenure}-{offer.maxTenure} months</span>
                   </div>
                 </div>
-                
+
                 <div className="mt-6 pt-4 border-t border-gray-800">
                   <h4 className="text-sm font-medium text-gray-300 mb-2">Eligibility:</h4>
                   <p className="text-gray-400 text-sm">{offer.eligibility}</p>
                 </div>
-                
+
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   className="mt-6 w-full py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors"
                 >
-                  Apply Now
+                  <Link to={`/loanapply`}>Apply Now</Link>
                 </motion.button>
+
+                {/* Admin-only Delete button */}
+                {currentUser && currentUser.email === ADMIN_EMAIL && (
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => handleDelete(offer.id)}
+                    className="cursor-pointer mt-3 w-full py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md transition-colors"
+                  >
+                    Delete
+                  </motion.button>
+                )}
               </div>
             </motion.div>
           ))}

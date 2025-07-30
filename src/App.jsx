@@ -23,6 +23,8 @@ import AddLoanOffer from './pages/AddLoanOffer.jsx';
 import LoanOffers from './pages/LoanOffers.jsx';
 import AdminApplications from './pages/AdminApplication.jsx';
 import AdminPage from './pages/AdminPage.jsx';
+import LoanApplyForm from './pages/LoanApplyForm.jsx';
+import AdminLoanApplications from './pages/AdminLoanApplications.jsx';
 function App() {
   return (
     <AuthProvider>
@@ -56,8 +58,10 @@ function App() {
             <Route path="/jobpost" element={<ProtectedRoute><PostJobForm /></ProtectedRoute>} />
             <Route path="/addloan" element={<ProtectedRoute><AddLoanOffer /></ProtectedRoute>} />
             <Route path="/loanoffers" element={<ProtectedRoute><LoanOffers /></ProtectedRoute>} />
-            <Route path="/admin/applications" element={<ProtectedRoute><AdminApplications /></ProtectedRoute>} />
+            <Route path="/admin/jobapplications" element={<ProtectedRoute><AdminApplications /></ProtectedRoute>} />
+            <Route path="/admin/loanapplications" element={<ProtectedRoute><AdminLoanApplications /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
+            <Route path="/loanapply" element={<ProtectedRoute><LoanApplyForm /></ProtectedRoute>} />
 
           </Routes>
         </Layout>
