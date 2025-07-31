@@ -25,6 +25,8 @@ import AdminApplications from './pages/AdminApplication.jsx';
 import AdminPage from './pages/AdminPage.jsx';
 import LoanApplyForm from './pages/LoanApplyForm.jsx';
 import AdminLoanApplications from './pages/AdminLoanApplications.jsx';
+import GenericApplyForm from './pages/GenericApplyForm.jsx';
+import AdminGenericApplications from './pages/AdminGenericApplications.jsx';
 function App() {
   return (
     <AuthProvider>
@@ -51,6 +53,7 @@ function App() {
             <Route path="/calculator" element={<ProtectedRoute><TaxCalculator /></ProtectedRoute>} />
             <Route path="/loans/calculate" element={<ProtectedRoute><EMICalculator /></ProtectedRoute>} />
             <Route path="/apply" element={<ProtectedRoute><ApplyForm /></ProtectedRoute>} />
+            <Route path="/genericapply" element={<ProtectedRoute><GenericApplyForm /></ProtectedRoute>} />
             
             <Route path="/jobs" element={<ProtectedRoute><JobBoard /></ProtectedRoute>} />
             <Route path="/terms" element={<LegalPages page="terms" />} />
@@ -59,6 +62,7 @@ function App() {
             <Route path="/addloan" element={<ProtectedRoute><AddLoanOffer /></ProtectedRoute>} />
             <Route path="/loanoffers" element={<ProtectedRoute><LoanOffers /></ProtectedRoute>} />
             <Route path="/admin/jobapplications" element={<ProtectedRoute><AdminApplications /></ProtectedRoute>} />
+            <Route path="/admin/genericjobapplications" element={<ProtectedRoute><AdminGenericApplications /></ProtectedRoute>} />
             <Route path="/admin/loanapplications" element={<ProtectedRoute><AdminLoanApplications /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
             <Route path="/loanapply" element={<ProtectedRoute><LoanApplyForm /></ProtectedRoute>} />

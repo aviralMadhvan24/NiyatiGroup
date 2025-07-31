@@ -106,31 +106,7 @@ const AdminApplications = () => {
                   className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 shadow-lg"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-4">
-                      <div>
-                        <h3 className="text-xl font-semibold text-white">{app.name}</h3>
-                        <p className="text-gray-400">{app.email}</p>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-sm text-gray-500">Phone</p>
-                          <p className="text-white">{app.phone}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-500">Location</p>
-                          <p className="text-white">{app.location}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-500">Position</p>
-                          <p className="text-white">{app.position}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-500">Experience</p>
-                          <p className="text-white">{app.experience_level}</p>
-                        </div>
-                      </div>
-                    </div>
+                  
 
                     <div className="space-y-4">
                       <div>
@@ -152,12 +128,7 @@ const AdminApplications = () => {
                         </div>
                       )}
 
-                      <div className="flex space-x-4 pt-2">
-                        <p className="text-sm text-gray-500">Contact</p>
-                        <a href={`tel:${app.phone}`} className="text-white hover:text-red-400 transition-colors">
-                          {app.phone}
-                        </a>
-                      </div>
+                 
 
                       {/* Display Resume PDF Link if available */}
                       {app.cvUrl && (

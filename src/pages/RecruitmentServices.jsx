@@ -63,6 +63,7 @@ const RecruitmentServices = () => {
               </motion.p>
               <motion.div className="flex flex-col sm:flex-row justify-center gap-4" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.8 }}>
                 <Link to="/jobs"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium shadow-lg">Apply for Jobs</motion.button></Link>
+                <Link to="/genericapply"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium shadow-lg">Upload CV for upcoming jobs</motion.button></Link>
               </motion.div>
             </motion.div>
           </div>

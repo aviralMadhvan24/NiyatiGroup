@@ -70,6 +70,20 @@ const AdminPage = () => {
               whileTap={{ scale: 0.97 }}
               className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-red-600 transition-all"
             >
+              <h2 className="text-xl font-semibold mb-4"> Generic Applications</h2>
+              <p className="text-gray-400 mb-4">View generic job applications</p>
+              <Link 
+                to="/admin/genericjobapplications" 
+                className="inline-block px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg"
+              >
+                View Applications
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-red-600 transition-all"
+            >
               <h2 className="text-xl font-semibold mb-4"> Loan Applications</h2>
               <p className="text-gray-400 mb-4">View loan applications</p>
               <Link 

@@ -3,7 +3,7 @@ import { db, auth } from '../firebase';
 import { collection, getDocs, query, orderBy, doc, deleteDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
+import { Link } from 'react-router-dom';
 const JobBoard = () => {
   const [jobs, setJobs] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
@@ -153,7 +153,7 @@ salaryType: data.salaryType || "monthly",
                         <motion.button
                           whileHover={{ scale: 1.03 }}
                           whileTap={{ scale: 0.97 }}
-                          onClick={() => navigate(`/apply`)}
+                          onClick={() => navigate(`/apply`,{ state: { jobId: job.id, jobTitle: job.title } })}
                           className="cursor-pointer px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-all whitespace-nowrap"
                         >
                           Apply Now
@@ -195,6 +195,17 @@ salaryType: data.salaryType || "monthly",
                 </div>
               </motion.div>
             ))}
+            <div className="mt-12 text-center">
+      <p className="text-gray-400 mb-4 text-lg">
+        Don’t see a suitable job for you?
+      </p>
+      <Link 
+        to="/genericapply" 
+        className="inline-block px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors"
+      >
+        Submit Your Resume
+      </Link>
+    </div>
           </div>
         )}
       </div>
