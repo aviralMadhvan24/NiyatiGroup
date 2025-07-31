@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { db } from '../firebase';
+import { db } from '../firebase';  // Your Firebase config should export `db` (Firestore)
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { motion } from "framer-motion";
+
+const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/djs7dznnh/auto/upload";
+const CLOUDINARY_PRESET = "niyatigroup";
 
 const ApplyForm = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +16,11 @@ const ApplyForm = () => {
     position: '',
     linkedin: '',
     experience_level: '',
+    cvUrl: '',           // to store Cloudinary URL after upload
   });
+  const [file, setFile] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -22,12 +29,56 @@ const ApplyForm = () => {
     }));
   };
 
+  const handleFileChange = (e) => {
+    if (e.target.files[0] && e.target.files[0].type === "application/pdf") {
+      setFile(e.target.files[0]);
+    } else {
+      alert("Please upload a PDF file only.");
+      e.target.value = null;  // reset input
+    }
+  };
+
+  // Upload file to Cloudinary (unsigned)
+  const uploadToCloudinary = async (file) => {
+    const data = new FormData();
+    data.append('file', file);
+    data.append('upload_preset', CLOUDINARY_PRESET);
+
+    const response = await fetch(CLOUDINARY_URL, {
+      method: 'POST',
+      body: data,
+    });
+
+    if (!response.ok) {
+      throw new Error("Cloudinary upload failed");
+    }
+
+    return response.json();  // returns response including secure_url
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
 
     try {
+      let cvUrl = "";
+
+      if (file) {
+        // Upload and get URL
+        const uploadRes = await uploadToCloudinary(file);
+        if (uploadRes.secure_url) {
+          cvUrl = uploadRes.secure_url;
+        } else {
+          alert("Failed to upload CV to Cloudinary.");
+          setSubmitting(false);
+          return;
+        }
+      }
+
+      // Save application data + cvUrl to Firestore
       await addDoc(collection(db, "jobApplications"), {
         ...formData,
+        cvUrl,
         createdAt: serverTimestamp(),
       });
 
@@ -41,10 +92,15 @@ const ApplyForm = () => {
         position: '',
         linkedin: '',
         experience_level: '',
+        cvUrl: '',
       });
+      setFile(null);
+      setUploadProgress(0);
     } catch (error) {
       console.error("Error submitting application:", error);
-      alert("Submission failed.");
+      alert("Submission failed. Please try again.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -53,7 +109,7 @@ const ApplyForm = () => {
       {/* Background Grid Overlay */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">
-          <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+          <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
         </div>
       </div>
 
@@ -75,53 +131,18 @@ const ApplyForm = () => {
             Apply for a Position
           </motion.h2>
           <p className="text-gray-400 mb-8">
-            Fill out the application form and we’ll get in touch shortly.
+            Fill out the application form and upload your CV in PDF format.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {[
-              {
-                name: "jobTitle",
-                type: "text",
-                placeholder: "Job Title",
-                required: true,
-              },
-              {
-                name: "name",
-                type: "text",
-                placeholder: "Full Name",
-                required: true,
-              },
-              {
-                name: "email",
-                type: "email",
-                placeholder: "Email Address",
-                required: true,
-              },
-              {
-                name: "phone",
-                type: "tel",
-                placeholder: "Phone Number",
-                required: true,
-              },
-              {
-                name: "location",
-                type: "text",
-                placeholder: "City / State",
-                required: true,
-              },
-              {
-                name: "position",
-                type: "text",
-                placeholder: "Position Applying For",
-                required: true,
-              },
-              {
-                name: "linkedin",
-                type: "url",
-                placeholder: "LinkedIn Profile (optional)",
-                required: false,
-              },
+              { name: "jobTitle", type: "text", placeholder: "Job Title", required: true },
+              { name: "name", type: "text", placeholder: "Full Name", required: true },
+              { name: "email", type: "email", placeholder: "Email Address", required: true },
+              { name: "phone", type: "tel", placeholder: "Phone Number", required: true },
+              { name: "location", type: "text", placeholder: "City / State", required: true },
+              { name: "position", type: "text", placeholder: "Position Applying For", required: true },
+              { name: "linkedin", type: "url", placeholder: "LinkedIn Profile (optional)", required: false },
             ].map((field, index) => (
               <motion.div
                 key={field.name}
@@ -141,6 +162,7 @@ const ApplyForm = () => {
               </motion.div>
             ))}
 
+            {/* Experience Level Select */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -161,6 +183,28 @@ const ApplyForm = () => {
               </select>
             </motion.div>
 
+            {/* File upload for CV */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0 }}
+            >
+              <label className="block mb-2 text-gray-400" htmlFor="cvFile">
+                Upload CV/Resume (PDF only)
+              </label>
+              <input
+                id="cvFile"
+                type="file"
+                accept="application/pdf"
+                onChange={handleFileChange}
+                className="w-full text-gray-100"
+                disabled={submitting}
+              />
+              {uploadProgress > 0 && (
+                <p className="text-sm text-gray-400 mt-1">Uploading: {uploadProgress}%</p>
+              )}
+            </motion.div>
+
             <motion.button
               type="submit"
               whileHover={{ scale: 1.03 }}
@@ -169,20 +213,9 @@ const ApplyForm = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.1 }}
+              disabled={submitting}
             >
-              Submit Application
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 inline-block ml-2"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              {submitting ? "Submitting..." : "Submit Application"}
             </motion.button>
           </form>
         </motion.div>

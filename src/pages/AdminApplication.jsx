@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { db } from '../firebase';
-import { collection, getDocs } from 'firebase/firestore';
-import { auth } from '../firebase';
+import { db, auth } from '../firebase';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { motion } from 'framer-motion';
+
+const ADMIN_EMAIL = "niyatigroup1@gmail.com";
 
 const AdminApplications = () => {
   const [applications, setApplications] = useState([]);
@@ -12,16 +13,16 @@ const AdminApplications = () => {
     const fetchApplications = async () => {
       try {
         const user = auth.currentUser;
-        if (!user || user.email !== "niyatigroup1@gmail.com") {
+        if (!user || user.email !== ADMIN_EMAIL) {
           alert("Access denied");
           return;
         }
 
         const snapshot = await getDocs(collection(db, "jobApplications"));
-        const data = snapshot.docs.map(doc => ({ 
-          id: doc.id, 
+        const data = snapshot.docs.map(doc => ({
+          id: doc.id,
           ...doc.data(),
-          createdAt: doc.data().createdAt?.toDate().toLocaleString() 
+          createdAt: doc.data().createdAt?.toDate?.().toLocaleString()
         }));
         setApplications(data);
       } catch (error) {
@@ -33,6 +34,18 @@ const AdminApplications = () => {
 
     fetchApplications();
   }, []);
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this application?")) {
+      try {
+        await deleteDoc(doc(db, "jobApplications", id));
+        setApplications(prev => prev.filter(app => app.id !== id));
+      } catch (error) {
+        console.error("Failed to delete application:", error);
+        alert("Failed to delete application. Please try again.");
+      }
+    }
+  };
 
   if (loading) {
     return (
@@ -49,7 +62,7 @@ const AdminApplications = () => {
       {/* Background Grid Overlay */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">
-          <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+          <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
         </div>
       </div>
 
@@ -124,7 +137,7 @@ const AdminApplications = () => {
                         <p className="text-sm text-gray-500">Applied For</p>
                         <p className="text-white font-medium">{app.jobTitle}</p>
                       </div>
-                      
+
                       {app.linkedin && (
                         <div>
                           <p className="text-sm text-gray-500">LinkedIn</p>
@@ -139,13 +152,40 @@ const AdminApplications = () => {
                         </div>
                       )}
 
-
                       <div className="flex space-x-4 pt-2">
-                      <p className="text-sm text-gray-500">Contact</p>
-                     <a href={`tel:${app.phone}`} className="text-white hover:text-red-400 transition-colors">
-  {app.phone}
-</a>
+                        <p className="text-sm text-gray-500">Contact</p>
+                        <a href={`tel:${app.phone}`} className="text-white hover:text-red-400 transition-colors">
+                          {app.phone}
+                        </a>
                       </div>
+
+                      {/* Display Resume PDF Link if available */}
+                      {app.cvUrl && (
+                        <div className="mt-4">
+                          <p className="text-sm text-gray-400 mb-1">Resume:</p>
+                          <a 
+                            href={app.cvUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-blue-400 hover:underline"
+                          >
+                            View PDF Resume
+                          </a>
+                        </div>
+                      )}
+
+                      {/* Delete Button - Admin only */}
+                      {auth.currentUser?.email === ADMIN_EMAIL && (
+                        <motion.button
+                          onClick={() => handleDelete(app.id)}
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.97 }}
+                          className="mt-6 w-full py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md transition-colors"
+                          type="button"
+                        >
+                          Delete Application
+                        </motion.button>
+                      )}
                     </div>
                   </div>
 
