@@ -7,27 +7,9 @@ const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/djs7dznnh/auto/upload";
 const CLOUDINARY_PRESET = "niyatigroup";
 
 const ApplyForm = () => {
-  const [formData, setFormData] = useState({
-    jobTitle: '',
-    name: '',
-    email: '',
-    phone: '',
-    location: '',
-    position: '',
-    linkedin: '',
-    experience_level: '',
-    cvUrl: '',           // to store Cloudinary URL after upload
-  });
   const [file, setFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [submitting, setSubmitting] = useState(false);
-
-  const handleChange = (e) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
 
   const handleFileChange = (e) => {
     if (e.target.files[0] && e.target.files[0].type === "application/pdf") {
@@ -58,44 +40,36 @@ const ApplyForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!file) {
+      alert("Please select a PDF file to upload.");
+      return;
+    }
+
     setSubmitting(true);
 
     try {
-      let cvUrl = "";
+      // Upload and get URL
+      const uploadRes = await uploadToCloudinary(file);
+      const cvUrl = uploadRes.secure_url;
 
-      if (file) {
-        // Upload and get URL
-        const uploadRes = await uploadToCloudinary(file);
-        if (uploadRes.secure_url) {
-          cvUrl = uploadRes.secure_url;
-        } else {
-          alert("Failed to upload CV to Cloudinary.");
-          setSubmitting(false);
-          return;
-        }
+      if (!cvUrl) {
+        alert("Failed to upload CV to Cloudinary.");
+        setSubmitting(false);
+        return;
       }
 
-      // Save application data + cvUrl to Firestore
+      // Save CV URL to Firestore with timestamp
       await addDoc(collection(db, "jobApplications"), {
-        ...formData,
         cvUrl,
         createdAt: serverTimestamp(),
       });
 
-      alert("Application submitted!");
-      setFormData({
-        jobTitle: '',
-        name: '',
-        email: '',
-        phone: '',
-        location: '',
-        position: '',
-        linkedin: '',
-        experience_level: '',
-        cvUrl: '',
-      });
+      alert("CV uploaded successfully!");
       setFile(null);
       setUploadProgress(0);
+      // Clear file input manually (optional)
+      document.getElementById("cvFile").value = null;
+
     } catch (error) {
       console.error("Error submitting application:", error);
       alert("Submission failed. Please try again.");
@@ -114,7 +88,7 @@ const ApplyForm = () => {
       </div>
 
       {/* Form Container */}
-      <div className="relative mt-20 z-10 max-w-4xl mx-auto px-6 py-16">
+      <div className="relative mt-20 z-10 max-w-md mx-auto px-6 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -123,74 +97,22 @@ const ApplyForm = () => {
           className="bg-gray-950 p-10 rounded-2xl border border-gray-800 shadow-2xl"
         >
           <motion.h2
-            className="text-3xl font-bold text-gray-100 mb-4"
+            className="text-3xl font-bold text-gray-100 mb-8 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
           >
-            Apply for a Position
+            Upload Your CV (PDF)
           </motion.h2>
-          <p className="text-gray-400 mb-8">
-            Fill out the application form and upload your CV in PDF format.
-          </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {[
-              { name: "jobTitle", type: "text", placeholder: "Job Title", required: true },
-              { name: "name", type: "text", placeholder: "Full Name", required: true },
-              { name: "email", type: "email", placeholder: "Email Address", required: true },
-              { name: "phone", type: "tel", placeholder: "Phone Number", required: true },
-              { name: "location", type: "text", placeholder: "City / State", required: true },
-              { name: "position", type: "text", placeholder: "Position Applying For", required: true },
-              { name: "linkedin", type: "url", placeholder: "LinkedIn Profile (optional)", required: false },
-            ].map((field, index) => (
-              <motion.div
-                key={field.name}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + index * 0.1 }}
-              >
-                <input
-                  type={field.type}
-                  name={field.name}
-                  value={formData[field.name]}
-                  onChange={handleChange}
-                  required={field.required}
-                  placeholder={field.placeholder}
-                  className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-100 placeholder-gray-500 transition-all"
-                />
-              </motion.div>
-            ))}
-
-            {/* Experience Level Select */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
-            >
-              <select
-                name="experience_level"
-                value={formData.experience_level}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-100 placeholder-gray-500 transition-all"
-              >
-                <option value="" disabled>
-                  Select Experience Level
-                </option>
-                <option value="Fresher">Fresher</option>
-                <option value="Experienced">Experienced</option>
-              </select>
-            </motion.div>
-
-            {/* File upload for CV */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0 }}
+              transition={{ delay: 0.2 }}
             >
               <label className="block mb-2 text-gray-400" htmlFor="cvFile">
-                Upload CV/Resume (PDF only)
+                CV/Resume (PDF only)
               </label>
               <input
                 id="cvFile"
@@ -199,10 +121,8 @@ const ApplyForm = () => {
                 onChange={handleFileChange}
                 className="w-full text-gray-100"
                 disabled={submitting}
+                required
               />
-              {uploadProgress > 0 && (
-                <p className="text-sm text-gray-400 mt-1">Uploading: {uploadProgress}%</p>
-              )}
             </motion.div>
 
             <motion.button
@@ -212,10 +132,10 @@ const ApplyForm = () => {
               className="w-full py-3 bg-primary text-white rounded-lg font-medium shadow-lg hover:bg-primary/90 transition-all"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1 }}
+              transition={{ delay: 0.4 }}
               disabled={submitting}
             >
-              {submitting ? "Submitting..." : "Submit Application"}
+              {submitting ? "Uploading..." : "Submit"}
             </motion.button>
           </form>
         </motion.div>
