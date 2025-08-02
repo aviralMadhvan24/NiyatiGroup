@@ -75,7 +75,8 @@ const PostJobForm = () => {
         description: '',
         applyLink: '',
         lastDate: '',
-        status: 'active'
+        status: 'active',
+         experienceLevel: 'fresher'
       });
     } catch (error) {
       alert("Error posting job: " + error.message);
@@ -229,6 +230,21 @@ const PostJobForm = () => {
                 <option value="monthly">Monthly</option>
               </select>
             </div>
+            <div className="space-y-2">
+  <label className="block text-sm font-medium text-gray-400">Experience Level</label>
+  <select
+    name="experienceLevel"
+    value={form.experienceLevel}
+    onChange={handleChange}
+    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+    required
+  >
+    <option value="fresher">Fresher</option>
+    <option value="experienced">Experienced</option>
+   
+  </select>
+</div>
+
             
             <div className="flex justify-end pt-4">
               <motion.button
