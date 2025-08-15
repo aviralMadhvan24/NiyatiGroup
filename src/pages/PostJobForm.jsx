@@ -241,7 +241,8 @@ const PostJobForm = () => {
   >
     <option value="fresher">Fresher</option>
     <option value="experienced">Experienced</option>
-   
+    <option value="both">Both (Fresher & Experienced)</option>
+
   </select>
 </div>
 

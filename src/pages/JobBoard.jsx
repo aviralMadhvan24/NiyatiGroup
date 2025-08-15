@@ -1,36 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { db, auth } from '../firebase';
-import { collection, getDocs, query, orderBy, doc, deleteDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import { collection, getDocs, query, orderBy, doc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
 const JobBoard = () => {
   const [jobs, setJobs] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [editingDateJobId, setEditingDateJobId] = useState(null);
+  const [newDate, setNewDate] = useState("");
   const navigate = useNavigate();
+  
   const ADMIN_EMAIL = "niyatigroup1@gmail.com";
 
   useEffect(() => {
     const fetchJobs = async () => {
       const q = query(collection(db, 'jobPosts'), orderBy('postedAt', 'desc'));
       const querySnapshot = await getDocs(q);
-      const jobData = querySnapshot.docs.map(doc => {
-        const data = doc.data();
+      const jobData = querySnapshot.docs.map(docSnap => {
+        const data = docSnap.data();
         const lastDate = data.lastDate?.toDate();
         const now = new Date();
-        return { 
-          id: doc.id, 
+        return {
+          id: docSnap.id,
           ...data,
           lastDate,
-          formattedSalary: data.showAsRange && data.minSalary !== undefined && data.maxSalary !== undefined
-            ? `₹${new Intl.NumberFormat('en-IN').format(data.minSalary)} - ₹${new Intl.NumberFormat('en-IN').format(data.maxSalary)}`
-            : (data.minSalary !== undefined
-                ? `₹${new Intl.NumberFormat('en-IN').format(data.minSalary)}`
-                : null),
+          formattedSalary:
+            data.showAsRange && data.minSalary !== undefined && data.maxSalary !== undefined
+              ? `₹${new Intl.NumberFormat('en-IN').format(data.minSalary)} - ₹${new Intl.NumberFormat('en-IN').format(data.maxSalary)}`
+              : data.minSalary !== undefined
+              ? `₹${new Intl.NumberFormat('en-IN').format(data.minSalary)}`
+              : null,
           salaryType: data.salaryType || "monthly",
-          status: data.status === 'closed' ? 'closed' : 
-                  (lastDate && lastDate < now) ? 'expired' : 'active'
+          status:
+            data.status === 'closed'
+              ? 'closed'
+              : lastDate && lastDate < now
+              ? 'expired'
+              : 'active'
         };
       });
       setJobs(jobData);
@@ -56,6 +63,29 @@ const JobBoard = () => {
     }
   };
 
+  const handleDateUpdate = async (jobId) => {
+    if (!newDate) {
+      alert("Please select a new date");
+      return;
+    }
+    try {
+      await updateDoc(doc(db, 'jobPosts', jobId), {
+        lastDate: new Date(newDate)
+      });
+      alert("Last date updated successfully!");
+      setJobs(prevJobs =>
+        prevJobs.map(job =>
+          job.id === jobId ? { ...job, lastDate: new Date(newDate), status: 'active' } : job
+        )
+      );
+      setEditingDateJobId(null);
+      setNewDate("");
+    } catch (error) {
+      console.error("Error updating date: ", error);
+      alert("Failed to update date");
+    }
+  };
+
   const getStatusBadge = (status) => {
     const statusStyles = {
       active: 'bg-green-600/20 text-green-400 border-green-400/30',
@@ -71,7 +101,7 @@ const JobBoard = () => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-gray-900 to-gray-950 text-gray-300 py-12 px-4 sm:px-6">
-      {/* Background Grid Overlay */}
+      {/* Background Grid */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       </div>
@@ -178,23 +208,61 @@ const JobBoard = () => {
                         </motion.button>
                       )}
                       {currentUser && currentUser.email === ADMIN_EMAIL && (
-                        <motion.button
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.97 }}
-                          onClick={() => handleDelete(job.id)}
-                          className="cursor-pointer px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg transition-all"
-                        >
-                          Delete
-                        </motion.button>
+                        <>
+                          <motion.button
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            onClick={() => handleDelete(job.id)}
+                            className="cursor-pointer px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg transition-all"
+                          >
+                            Delete
+                          </motion.button>
+                          <motion.button
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            onClick={() => setEditingDateJobId(job.id)}
+                            className="cursor-pointer px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all"
+                          >
+                            Extend Date
+                          </motion.button>
+                        </>
                       )}
                     </div>
                   </div>
-                  
+
+                  {/* Extend Date Picker */}
+                  {editingDateJobId === job.id && (
+                    <div className="mt-3 flex gap-2 items-center">
+                      <input
+                        type="date"
+                        min={new Date().toISOString().split('T')[0]}
+                        value={newDate}
+                        onChange={(e) => setNewDate(e.target.value)}
+                        className="px-3 py-2 bg-gray-700 rounded border border-gray-600"
+                      />
+                      <button
+                        onClick={() => handleDateUpdate(job.id)}
+                        className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => {
+                          setEditingDateJobId(null);
+                          setNewDate("");
+                        }}
+                        className="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
+
                   <div className="mt-6 pt-6 border-t border-gray-700">
                     <h4 className="text-lg font-semibold text-white mb-2">Job Description</h4>
                     <p className="text-gray-400 whitespace-pre-line">{job.description}</p>
                   </div>
-                  
+
                   {job.applyLink && job.status === 'active' && (
                     <div className="mt-4">
                       <a 
@@ -213,6 +281,8 @@ const JobBoard = () => {
                 </div>
               </motion.div>
             ))}
+            
+            {/* Generic Apply Section */}
             <div className="mt-12 text-center">
               <p className="text-gray-400 mb-4 text-lg">
                 Don’t see a suitable job for you?
