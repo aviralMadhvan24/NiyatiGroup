@@ -19,22 +19,11 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [adminOpen, setAdminOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const dropdownRef = useRef(null);
-  const adminDropdownRef = useRef(null);
 
   // Check admin privileges
   const isAdmin = user && user.email === ADMIN_EMAIL;
-
-  const handleLogin = async () => {
-    try {
-      await signInWithPopup(auth, provider);
-      navigate('/');
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   // Protected routes list
   const protectedRoutes = [
@@ -51,9 +40,6 @@ const Navbar = () => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setServicesOpen(false);
-      }
-      if (adminDropdownRef.current && !adminDropdownRef.current.contains(event.target)) {
-        setAdminOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -106,15 +92,6 @@ const Navbar = () => {
       navigate(path);
     }
     setServicesOpen(!servicesOpen);
-  };
-
-  // Admin Dropdown Handler
-  const handleAdminClick = (e, path) => {
-    e.preventDefault();
-    if (handleNavigation(path)) {
-      navigate(path);
-    }
-    setAdminOpen(!adminOpen);
   };
 
   return (
@@ -203,30 +180,24 @@ const Navbar = () => {
                 </div>
               ))}
 
-              {/* ADMIN LINK, only visible for admin */}
+              {/* ADMIN LINK: only visible for admin. No dropdown, no caret. */}
               {isAdmin && (
-                <div className="relative" ref={adminDropdownRef}>
-                  <NavLink
-                    to="/admin"
-                    onClick={(e) => handleAdminClick(e, '/admin')}
-                    className={({ isActive }) => 
-                      `flex items-center px-3 py-2 text-sm font-medium ${
-                        isActive ? 'text-white' : 'text-gray-300 hover:text-white'
-                      }`
+                <NavLink
+                  to="/admin"
+                  onClick={(e) => {
+                    if (!handleNavigation('/admin')) {
+                      e.preventDefault();
                     }
-                  >
-                    <FiUser />
-                    <span className="ml-2">Admin</span>
-                    {adminOpen ? <FiChevronUp className="ml-1" /> : <FiChevronDown className="ml-1" />}
-                  </NavLink>
-                  {adminOpen && (
-                    <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gradient-to-b from-red-900 via-red-950 to-black border border-red-800 z-50">
-                      <div className="py-1">
-                      
-                      </div>
-                    </div>
-                  )}
-                </div>
+                  }}
+                  className={({ isActive }) => 
+                    `flex items-center px-3 py-2 text-sm font-medium ${
+                      isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                    }`
+                  }
+                >
+                  <FiUser />
+                  <span className="ml-2">Admin</span>
+                </NavLink>
               )}
 
               {/* User/Auth Section */}
@@ -249,7 +220,7 @@ const Navbar = () => {
                 </div>
               ) : (
                 <NavLink
-                  to={"/login"}
+                  to="/login"
                   className="cursor-pointer px-4 py-2 bg-green-700 text-white text-sm font-medium rounded-md hover:bg-green-800 transition-colors"
                 >
                   Login
@@ -352,37 +323,21 @@ const Navbar = () => {
                       )}
                     </div>
                   ))}
-                  {/* Admin MOBILE link */}
+
+                  {/* Admin MOBILE link: simple, no dropdown/caret, only visible for admin */}
                   {isAdmin && (
-                    <div className="relative" ref={adminDropdownRef}>
-                      <div className="flex items-center">
-                        <NavLink
-                          to="/admin"
-                          onClick={() => {
-                            setAdminOpen(!adminOpen);
-                            handleNavigation('/admin');
-                          }}
-                          className={({ isActive }) =>
-                            `px-3 py-2 text-sm font-medium flex items-center ${
-                              isActive ? 'text-white' : 'text-gray-300 hover:text-white'
-                            }`
-                          }
-                        >
-                          <FiUser />
-                          <span className="ml-2">Admin</span>
-                        </NavLink>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setAdminOpen(!adminOpen);
-                          }}
-                          className="p-1 text-gray-300 hover:text-white focus:outline-none ml-auto"
-                        >
-                          {adminOpen ? <FiChevronUp className="w-4 h-4" /> : <FiChevronDown className="w-4 h-4" />}
-                        </button>
-                      </div>
-                 
-                    </div>
+                    <NavLink
+                      to="/admin"
+                      onClick={() => handleNavigation('/admin')}
+                      className={({ isActive }) =>
+                        `px-3 py-2 text-sm font-medium flex items-center ${
+                          isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                        }`
+                      }
+                    >
+                      <FiUser />
+                      <span className="ml-2">Admin</span>
+                    </NavLink>
                   )}
                 </div>
                 <div className="mt-3 pt-3 border-t border-red-800">
