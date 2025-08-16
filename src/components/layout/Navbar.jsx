@@ -9,6 +9,8 @@ import { useAuth } from '../../context/AuthContext';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../../firebase';
 
+const ADMIN_EMAIL = 'niyatigroup1@gmail.com';
+
 const Navbar = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [protectedRouteTarget, setProtectedRouteTarget] = useState(null);
@@ -17,22 +19,27 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [adminOpen, setAdminOpen] = useState(false); // New state for admin dropdown
+  const [adminOpen, setAdminOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const dropdownRef = useRef(null);
   const adminDropdownRef = useRef(null);
 
+  // Check admin privileges
+  const isAdmin = user && user.email === ADMIN_EMAIL;
+
   const handleLogin = async () => {
     try {
       await signInWithPopup(auth, provider);
-      navigate("/");
+      navigate('/');
     } catch (err) {
       console.error(err);
     }
   };
 
-  // Define protected routes
-  const protectedRoutes = ['/tax', '/loans', '/recruitment', '/faq', '/contact', '/jobpost', '/addloan'];
+  // Protected routes list
+  const protectedRoutes = [
+    '/tax', '/loans', '/recruitment', '/faq', '/contact', '/jobpost', '/addloan'
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -60,24 +67,21 @@ const Navbar = () => {
   };
 
   const handleNavigation = (to, isSubLink = false) => {
-    // Always allow navigation to non-protected routes
     if (!protectedRoutes.includes(to)) {
       setIsMenuOpen(false);
       return true;
     }
-    
-    // For protected routes, check if user is logged in
     if (!user) {
       setIsMenuOpen(false);
       setProtectedRouteTarget(to);
       setShowLoginModal(true);
       return false;
     }
-    
     setIsMenuOpen(false);
     return true;
   };
 
+  // Do NOT include Admin here
   const navLinks = [
     { name: 'Home', path: '/', icon: <FiHome /> },
     { name: 'About', path: '/about', icon: <FiUser /> },
@@ -93,15 +97,9 @@ const Navbar = () => {
     },
     { name: 'FAQ', path: '/faq', icon: <FiHelpCircle /> },
     { name: 'Contact', path: '/contact', icon: <FiPhone /> },
-    { 
-      name: 'Admin', 
-      path: '/admin', 
-      icon: <FiUser />,
-    
-    },
   ];
 
-  // Handle services click - navigate and toggle dropdown
+  // Services Dropdown Handler
   const handleServicesClick = (e, path) => {
     e.preventDefault();
     if (handleNavigation(path)) {
@@ -110,7 +108,7 @@ const Navbar = () => {
     setServicesOpen(!servicesOpen);
   };
 
-  // Handle admin click - navigate and toggle dropdown
+  // Admin Dropdown Handler
   const handleAdminClick = (e, path) => {
     e.preventDefault();
     if (handleNavigation(path)) {
@@ -147,12 +145,12 @@ const Navbar = () => {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-6">
               {navLinks.map((link) => (
-                <div key={link.name} className="relative" ref={link.subLinks ? (link.name === 'Admin' ? adminDropdownRef : dropdownRef) : null}>
+                <div key={link.name} className="relative" ref={link.subLinks ? dropdownRef : null}>
                   {link.subLinks ? (
                     <>
                       <NavLink
                         to={link.path}
-                        onClick={(e) => link.name === 'Admin' ? handleAdminClick(e, link.path) : handleServicesClick(e, link.path)}
+                        onClick={(e) => handleServicesClick(e, link.path)}
                         className={({ isActive }) => 
                           `flex items-center px-3 py-2 text-sm font-medium ${
                             isActive ? 'text-white' : 'text-gray-300 hover:text-white'
@@ -161,9 +159,9 @@ const Navbar = () => {
                       >
                         {link.icon}
                         <span className="ml-2">{link.name}</span>
-                        {(link.name === 'Admin' ? adminOpen : servicesOpen) ? <FiChevronUp className="ml-1" /> : <FiChevronDown className="ml-1" />}
+                        {servicesOpen ? <FiChevronUp className="ml-1" /> : <FiChevronDown className="ml-1" />}
                       </NavLink>
-                      {(link.name === 'Admin' ? adminOpen : servicesOpen) && (
+                      {servicesOpen && (
                         <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gradient-to-b from-red-900 via-red-950 to-black border border-red-800 z-50">
                           <div className="py-1">
                             {link.subLinks.map((subLink) => (
@@ -204,6 +202,32 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
+
+              {/* ADMIN LINK, only visible for admin */}
+              {isAdmin && (
+                <div className="relative" ref={adminDropdownRef}>
+                  <NavLink
+                    to="/admin"
+                    onClick={(e) => handleAdminClick(e, '/admin')}
+                    className={({ isActive }) => 
+                      `flex items-center px-3 py-2 text-sm font-medium ${
+                        isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                      }`
+                    }
+                  >
+                    <FiUser />
+                    <span className="ml-2">Admin</span>
+                    {adminOpen ? <FiChevronUp className="ml-1" /> : <FiChevronDown className="ml-1" />}
+                  </NavLink>
+                  {adminOpen && (
+                    <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gradient-to-b from-red-900 via-red-950 to-black border border-red-800 z-50">
+                      <div className="py-1">
+                      
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* User/Auth Section */}
               {user ? (
@@ -263,18 +287,14 @@ const Navbar = () => {
 
                 <div className="space-y-1">
                   {navLinks.map((link) => (
-                    <div key={link.name} className="relative" ref={link.subLinks ? (link.name === 'Admin' ? adminDropdownRef : dropdownRef) : null}>
+                    <div key={link.name} className="relative" ref={link.subLinks ? dropdownRef : null}>
                       {link.subLinks ? (
                         <>
                           <div className="flex items-center">
                             <NavLink
                               to={link.path}
                               onClick={() => {
-                                if (link.name === 'Admin') {
-                                  setAdminOpen(!adminOpen);
-                                } else {
-                                  setServicesOpen(!servicesOpen);
-                                }
+                                setServicesOpen(!servicesOpen);
                                 handleNavigation(link.path);
                               }}
                               className={({ isActive }) => 
@@ -289,21 +309,14 @@ const Navbar = () => {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                if (link.name === 'Admin') {
-                                  setAdminOpen(!adminOpen);
-                                } else {
-                                  setServicesOpen(!servicesOpen);
-                                }
+                                setServicesOpen(!servicesOpen);
                               }}
                               className="p-1 text-gray-300 hover:text-white focus:outline-none ml-auto"
                             >
-                              {(link.name === 'Admin' ? adminOpen : servicesOpen) ? 
-                                <FiChevronUp className="w-4 h-4" /> : 
-                                <FiChevronDown className="w-4 h-4" />
-                              }
+                              {servicesOpen ? <FiChevronUp className="w-4 h-4" /> : <FiChevronDown className="w-4 h-4" />}
                             </button>
                           </div>
-                          {(link.name === 'Admin' ? adminOpen : servicesOpen) && (
+                          {servicesOpen && (
                             <div className="ml-4 mt-1 mb-2 rounded-md bg-red-900/30 border border-red-800">
                               <div className="py-1">
                                 {link.subLinks.map((subLink) => (
@@ -311,11 +324,7 @@ const Navbar = () => {
                                     key={subLink.name}
                                     to={subLink.path}
                                     onClick={() => {
-                                      if (link.name === 'Admin') {
-                                        setAdminOpen(false);
-                                      } else {
-                                        setServicesOpen(false);
-                                      }
+                                      setServicesOpen(false);
                                       handleNavigation(subLink.path, true);
                                     }}
                                     className="block px-4 py-2 text-sm text-gray-300 hover:bg-red-600 hover:text-white"
@@ -343,8 +352,39 @@ const Navbar = () => {
                       )}
                     </div>
                   ))}
+                  {/* Admin MOBILE link */}
+                  {isAdmin && (
+                    <div className="relative" ref={adminDropdownRef}>
+                      <div className="flex items-center">
+                        <NavLink
+                          to="/admin"
+                          onClick={() => {
+                            setAdminOpen(!adminOpen);
+                            handleNavigation('/admin');
+                          }}
+                          className={({ isActive }) =>
+                            `px-3 py-2 text-sm font-medium flex items-center ${
+                              isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                            }`
+                          }
+                        >
+                          <FiUser />
+                          <span className="ml-2">Admin</span>
+                        </NavLink>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setAdminOpen(!adminOpen);
+                          }}
+                          className="p-1 text-gray-300 hover:text-white focus:outline-none ml-auto"
+                        >
+                          {adminOpen ? <FiChevronUp className="w-4 h-4" /> : <FiChevronDown className="w-4 h-4" />}
+                        </button>
+                      </div>
+                 
+                    </div>
+                  )}
                 </div>
-
                 <div className="mt-3 pt-3 border-t border-red-800">
                   {user ? (
                     <button
@@ -393,6 +433,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      {/* Login Required Modal */}
       {showLoginModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-gradient-to-br from-red-900 via-red-950 to-black rounded-lg p-6 max-w-sm w-full mx-4 border border-red-800">
