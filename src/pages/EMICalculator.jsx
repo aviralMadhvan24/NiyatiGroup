@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const RATE_LIMITS = {
-  personal:    { min: 10,  max: 28 },   // Personal Loan: 12%–28%
-  business:    { min: 10,  max: 28 },   // Business Loan: 12%–28%
-  home:        { min: 7, max: 18 },   // Home Loan:    9.5%–18%
-  lap:         { min: 8, max: 18 }    // Loan Against Property: 9.5%–18%
+  personal:    { min: 8,  max: 30 },
+  business:    { min: 8,  max: 30 },
+  home:        { min: 7,  max: 18 },
+  lap:         { min: 8,  max: 18 }
 };
 
 const EMICalculator = () => {
