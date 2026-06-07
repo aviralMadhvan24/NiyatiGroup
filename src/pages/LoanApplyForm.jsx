@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { motion } from "framer-motion";
-import { FiDollarSign, FiArrowRight, FiShield } from "react-icons/fi";
+import { FiDollarSign, FiArrowRight, FiShield, FiCheck } from "react-icons/fi";
 
 const LoanApplyForm = () => {
   const [formData, setFormData] = useState({

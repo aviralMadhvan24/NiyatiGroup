@@ -136,29 +136,29 @@ const GenericApplyForm = () => {
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="relative">
-                    <FiUsers className="absolute top-4 left-4 text-teal-600" />
+                    <FiUsers className="absolute top-4 left-4 text-teal-900" />
                     <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Full Name" className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-medium" />
                   </div>
                   <div className="relative">
-                    <FiMail className="absolute top-4 left-4 text-teal-600" />
+                    <FiMail className="absolute top-4 left-4 text-teal-900" />
                     <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="Email" className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-medium" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="relative">
-                    <FiPhone className="absolute top-4 left-4 text-teal-600" />
+                    <FiPhone className="absolute top-4 left-4 text-teal-900" />
                     <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required placeholder="Phone" className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-medium" />
                   </div>
                   <div className="relative">
-                    <FiMapPin className="absolute top-4 left-4 text-teal-600" />
+                    <FiMapPin className="absolute top-4 left-4 text-teal-900" />
                     <input type="text" name="location" value={formData.location} onChange={handleChange} required placeholder="City/State" className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-medium" />
                   </div>
                 </div>
 
                 <div className="relative">
-                   <FiBriefcase className="absolute top-4 left-4 text-teal-600" />
-                   <select name="experience" value={formData.experience} onChange={handleChange} required className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold appearance-none cursor-pointer">
+                   <FiBriefcase className="absolute top-4 left-4 text-teal-900" />
+                   <select name="experience" value={formData.experience} onChange={handleChange} required className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold appearance-none cursor-pointer text-slate-900">
                       <option value="" disabled>Select Experience Level</option>
                       <option value="Fresher">Fresher</option>
                       <option value="Experienced">Experienced</option>

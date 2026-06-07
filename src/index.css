@@ -57,6 +57,17 @@ h1, h2, h3, h4, h5, h6 {
   @apply font-bold;
 }
 
+input::placeholder, 
+textarea::placeholder {
+  color: #1e293b;
+  opacity: 1;
+  font-weight: 500;
+}
+
+input, select, textarea {
+  color: #020617 !important;
+}
+
 /* ─── Page Transitions ─── */
 .page-enter {
   opacity: 0;

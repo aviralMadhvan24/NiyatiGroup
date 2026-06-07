@@ -117,12 +117,12 @@ const ApplyForm = () => {
               />
               <div className="relative z-10 py-4">
                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-teal-900/5 group-hover:scale-110 transition-transform">
-                    {file ? <FiFileText className="text-3xl text-teal-600" /> : <FiUploadCloud className="text-3xl text-slate-300" />}
+                    {file ? <FiFileText className="text-3xl text-teal-600" /> : <FiUploadCloud className="text-3xl text-slate-800" />}
                  </div>
                  <p className="text-slate-700 font-bold mb-1">
                    {file ? file.name : "Choose CV/Resume"}
                  </p>
-                 <p className="text-slate-400 text-xs font-medium italic">PDF file up to 5MB</p>
+                 <p className="text-slate-800 text-xs font-medium italic">PDF file up to 5MB</p>
               </div>
             </div>
 
@@ -153,7 +153,7 @@ const ApplyForm = () => {
               <FiArrowRight />
             </motion.button>
             
-            <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+            <p className="text-center text-[10px] text-slate-900 font-bold uppercase tracking-widest">
               Secure Cloud Processing by Niyati Group
             </p>
           </form>
@@ -162,7 +162,7 @@ const ApplyForm = () => {
         <div className="mt-8 text-center">
            <button 
              onClick={() => navigate(-1)}
-             className="text-slate-400 hover:text-teal-600 font-bold text-sm transition-colors"
+             className="text-slate-900 hover:text-teal-600 font-bold text-sm transition-colors"
            >
              ← Cancel and return
            </button>
