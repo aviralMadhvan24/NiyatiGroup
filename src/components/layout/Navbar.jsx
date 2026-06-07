@@ -129,7 +129,7 @@ const Navbar = () => {
                           `flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                             isActive 
                               ? 'text-teal-700 bg-teal-50' 
-                              : 'text-slate-600 hover:text-teal-700 hover:bg-teal-50/50'
+                              : 'text-slate-900 hover:text-teal-700 hover:bg-teal-50/50'
                           }`
                         }
                       >
@@ -149,7 +149,7 @@ const Navbar = () => {
                                     e.preventDefault();
                                   }
                                 }}
-                                className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-teal-50 hover:text-teal-700 transition-colors"
+                                className="block px-4 py-2.5 text-sm text-slate-900 hover:bg-teal-50 hover:text-teal-700 transition-colors"
                               >
                                 {subLink.name}
                               </NavLink>
@@ -170,7 +170,7 @@ const Navbar = () => {
                         `px-4 py-2 text-sm font-medium flex items-center rounded-lg transition-all duration-200 ${
                           isActive 
                             ? 'text-teal-700 bg-teal-50' 
-                            : 'text-slate-600 hover:text-teal-700 hover:bg-teal-50/50'
+                            : 'text-slate-900 hover:text-teal-700 hover:bg-teal-50/50'
                         }`
                       }
                     >
@@ -193,7 +193,7 @@ const Navbar = () => {
                     `flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                       isActive 
                         ? 'text-teal-700 bg-teal-50' 
-                        : 'text-slate-600 hover:text-teal-700 hover:bg-teal-50/50'
+                        : 'text-slate-900 hover:text-teal-700 hover:bg-teal-50/50'
                     }`
                   }
                 >
@@ -232,7 +232,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-lg text-slate-600 hover:text-teal-700 hover:bg-teal-50 transition-colors"
+              className="lg:hidden p-2 rounded-lg text-slate-900 hover:text-teal-700 hover:bg-teal-50 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -272,7 +272,7 @@ const Navbar = () => {
                               }}
                               className={({ isActive }) => 
                                 `px-3 py-2.5 text-sm font-medium flex items-center rounded-lg ${
-                                  isActive ? 'text-teal-700 bg-teal-50' : 'text-slate-600 hover:text-teal-700'
+                                  isActive ? 'text-teal-700 bg-teal-50' : 'text-slate-900 hover:text-teal-700'
                                 }`
                               }
                             >
@@ -300,7 +300,7 @@ const Navbar = () => {
                                       setServicesOpen(false);
                                       handleNavigation(subLink.path, true);
                                     }}
-                                    className="block px-4 py-2 text-sm text-slate-600 hover:bg-teal-100 hover:text-teal-700 rounded-md"
+                                    className="block px-4 py-2 text-sm text-slate-900 hover:bg-teal-100 hover:text-teal-700 rounded-md"
                                   >
                                     {subLink.name}
                                   </NavLink>
@@ -315,7 +315,7 @@ const Navbar = () => {
                           onClick={() => handleNavigation(link.path)}
                           className={({ isActive }) => 
                             `px-3 py-2.5 text-sm font-medium flex items-center rounded-lg ${
-                              isActive ? 'text-teal-700 bg-teal-50' : 'text-slate-600 hover:text-teal-700'
+                              isActive ? 'text-teal-700 bg-teal-50' : 'text-slate-900 hover:text-teal-700'
                             }`
                           }
                         >
@@ -332,7 +332,7 @@ const Navbar = () => {
                       onClick={() => handleNavigation('/admin')}
                       className={({ isActive }) =>
                         `px-3 py-2.5 text-sm font-medium flex items-center rounded-lg ${
-                          isActive ? 'text-teal-700 bg-teal-50' : 'text-slate-600 hover:text-teal-700'
+                          isActive ? 'text-teal-700 bg-teal-50' : 'text-slate-900 hover:text-teal-700'
                         }`
                       }
                     >
