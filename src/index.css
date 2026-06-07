@@ -2,10 +2,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-slate-800: #0f172a;
-  --color-slate-700: #1e293b;
-  --color-slate-500: #334155;
-  --color-slate-400: #475569;
+  --color-slate-800: #020617;
+  --color-slate-700: #0f172a;
+  --color-slate-500: #1e293b;
+  --color-slate-400: #334155;
 }
 
 /* ─── NiyatiGroup Consistent Theme Tokens ─── */
@@ -19,8 +19,8 @@
   --niyati-accent: #14b8a6;
   --niyati-dark: #134e4a;
   --niyati-navy: #0f172a;
-  --niyati-text: #0f172a;
-  --niyati-text-muted: #334155;
+  --niyati-text: #020617;
+  --niyati-text-muted: #1e293b;
 }
 
 html {
