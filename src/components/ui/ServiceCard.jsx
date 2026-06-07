@@ -14,7 +14,7 @@ const ServiceCard = ({ service, index }) => {
       whileHover={{ 
         y: -8,
         backgroundColor: "rgba(17, 24, 39, 1)", // gray-900
-        boxShadow: "0 25px 50px -12px rgba(239, 68, 68, 0.25)"
+        boxShadow: "0 25px 50px -12px rgba(20, 184, 166, 0.25)"
       }}
       className="bg-gray-800 rounded-2xl overflow-hidden shadow-xl border border-gray-700 hover:border-gray-600 transition-all duration-300 relative"
     >
@@ -24,10 +24,10 @@ const ServiceCard = ({ service, index }) => {
         <motion.div 
           className="bg-gray-700 p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6 border border-gray-600"
           whileHover={{ 
-            rotate: 5,
-            backgroundColor: 'rgba(239, 68, 68, 0.1)',
-            borderColor: 'rgba(239, 68, 68, 0.3)'
-          }}
+              rotate: 5,
+              backgroundColor: 'rgba(20, 184, 166, 0.08)',
+              borderColor: 'rgba(20, 184, 166, 0.3)'
+            }}
           transition={{ duration: 0.3 }}
         >
           <motion.div
@@ -51,7 +51,7 @@ const ServiceCard = ({ service, index }) => {
                 strokeWidth="2" 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
-                className="text-red-400" // Changed to red for consistency
+                className="text-teal-400" // theme switched to teal
               >
                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
               </svg>
@@ -104,7 +104,7 @@ const ServiceCard = ({ service, index }) => {
       
       {/* Floating Decoration */}
       <motion.div 
-        className="absolute top-0 right-0 w-16 h-16 bg-red-900/20 rounded-bl-2xl border-t border-r border-red-800/30"
+        className="absolute top-0 right-0 w-16 h-16 bg-teal-900/20 rounded-bl-2xl border-t border-r border-teal-800/30"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -113,7 +113,7 @@ const ServiceCard = ({ service, index }) => {
 
       {/* Subtle Glow Effect */}
       <div className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-900/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-900/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
       </div>
     </motion.div>
   );
