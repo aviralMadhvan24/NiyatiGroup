@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FiDollarSign, FiCalculator, FiHome, FiCreditCard, FiArrowRight } from 'react-icons/fi';
+import { FiDollarSign, FiHome, FiCreditCard, FiArrowRight, FiUsers } from 'react-icons/fi';
+import { LuCalculator } from 'react-icons/lu';
 
 const LoanServices = () => {
   const partnerBanks = [
@@ -83,7 +84,7 @@ const LoanServices = () => {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link to="/loans/calculate">
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-8 py-4 bg-teal-600 text-white font-bold rounded-xl shadow-xl shadow-teal-900/10 transition-all flex items-center justify-center gap-2">
-                  <FiCalculator />
+                  <LuCalculator />
                   Calculate EMI
                 </motion.button>
               </Link>
@@ -194,5 +195,5 @@ const LoanServices = () => {
   );
 };
 
-import { FiUsers } from 'react-icons/fi';
+
 export default LoanServices;

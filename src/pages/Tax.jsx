@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FiCalculator, FiPhone, FiCheckCircle, FiShield, FiArrowRight } from 'react-icons/fi';
+import { FiPhone, FiCheckCircle, FiShield, FiArrowRight } from 'react-icons/fi';
+import { LuCalculator } from 'react-icons/lu';
 
 const Tax = () => {
   const services = [
@@ -45,7 +46,7 @@ const Tax = () => {
     { 
       title: 'Freelancers', 
       description: 'Specialized tax solutions for consultants and independent professionals.', 
-      icon: <FiCalculator />
+      icon: <LuCalculator />
     }
   ];
 
@@ -73,7 +74,7 @@ const Tax = () => {
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Link to="/calculator">
                   <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-8 py-4 bg-teal-600 text-white font-bold rounded-xl shadow-xl shadow-teal-900/10 transition-all flex items-center gap-2">
-                    <FiCalculator />
+                    <LuCalculator />
                     Tax Calculator
                   </motion.button>
                 </Link>

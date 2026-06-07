@@ -2,53 +2,36 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiMail, FiLock, FiArrowRight, FiInfo } from 'react-icons/fi';
+import { FiInfo, FiArrowRight } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
   
-  const { login, googleLogin } = useAuth();
+  const { googleLogin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from || '/';
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleGoogleLogin = async () => {
     try {
       setError('');
       setLoading(true);
-      await login(email, password);
+      await googleLogin();
       navigate(from, { replace: true });
     } catch (err) {
-      setError('Failed to log in. Please check your credentials.');
+      setError('Connection failed. Please check your internet and try again.');
       console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleGoogleLogin = async () => {
-    try {
-      setError('');
-      setGoogleLoading(true);
-      await googleLogin();
-      navigate(from, { replace: true });
-    } catch (err) {
-      setError('Google Sign-In failed. Please try again.');
-      console.error(err);
-    } finally {
-      setGoogleLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen niyati-bg-pattern bg-[#e8f4f8] flex items-center justify-center px-4 pt-16">
       
+      {/* Dynamic Background Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <motion.div 
           animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
@@ -63,119 +46,75 @@ const Login = () => {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md relative z-10"
       >
-        <div className="text-center mb-8">
+        <div className="text-center mb-10">
            <div className="flex justify-center mb-6">
-              <div className="bg-white p-4 rounded-3xl shadow-xl shadow-teal-900/5 border border-teal-50">
-                 <img src="/logo3.png" alt="Logo" className="w-16 h-16" />
-              </div>
+              <motion.div 
+                whileHover={{ rotate: 10 }}
+                className="bg-white p-5 rounded-[2rem] shadow-2xl shadow-teal-900/10 border border-white"
+              >
+                 <img src="/logo3.png" alt="Niyati Logo" className="w-20 h-20" />
+              </motion.div>
            </div>
-           <h1 className="text-3xl font-bold text-slate-800">Welcome Back</h1>
-           <p className="text-slate-500 font-medium mt-2">Sign in to your NiyatiGroup account</p>
+           <h1 className="text-4xl font-black text-slate-800 tracking-tight">Admin Access</h1>
+           <p className="text-slate-500 font-bold mt-3 uppercase tracking-widest text-xs">Niyati Group Dashboard</p>
         </div>
 
-        <div className="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl shadow-teal-900/10 border border-teal-50 relative overflow-hidden">
+        <motion.div
+          className="bg-white/80 backdrop-blur-xl p-10 md:p-12 rounded-[3rem] shadow-2xl shadow-teal-900/10 border border-white relative overflow-hidden"
+        >
            {error && (
              <motion.div 
-               initial={{ opacity: 0, y: -10 }}
-               animate={{ opacity: 1, y: 0 }}
-               className="mb-6 p-4 bg-red-50 text-red-600 rounded-2xl flex items-center gap-3 text-sm font-bold border border-red-100"
+               initial={{ opacity: 0, scale: 0.9 }}
+               animate={{ opacity: 1, scale: 1 }}
+               className="mb-8 p-4 bg-red-50 text-red-600 rounded-2xl flex items-center gap-3 text-xs font-bold border border-red-100"
              >
-               <FiInfo className="shrink-0" />
+               <FiInfo className="shrink-0 text-lg" />
                {error}
              </motion.div>
            )}
 
-           <form onSubmit={handleSubmit} className="space-y-6">
-             <div>
-                <label className="block text-slate-700 font-bold mb-2 text-sm ml-1">Email Address</label>
-                <div className="relative">
-                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-teal-600">
-                      <FiMail />
-                   </div>
-                   <input
-                     type="email"
-                     required
-                     value={email}
-                     onChange={(e) => setEmail(e.target.value)}
-                     className="w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-800 placeholder-slate-400 font-medium"
-                     placeholder="name@company.com"
-                   />
-                </div>
-             </div>
-
-             <div>
-                <label className="block text-slate-700 font-bold mb-2 text-sm ml-1 flex justify-between">
-                   <span>Password</span>
-                   <Link to="#" className="text-teal-600 text-xs hover:underline">Forgot password?</Link>
-                </label>
-                <div className="relative">
-                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-teal-600">
-                      <FiLock />
-                   </div>
-                   <input
-                     type="password"
-                     required
-                     value={password}
-                     onChange={(e) => setPassword(e.target.value)}
-                     className="w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-800 placeholder-slate-400 font-medium"
-                     placeholder="••••••••"
-                   />
-                </div>
-             </div>
-
-             <motion.button
-               type="submit"
-               disabled={loading || googleLoading}
-               whileHover={{ scale: 1.02, backgroundColor: '#0d9488' }}
-               whileTap={{ scale: 0.98 }}
-               className="w-full py-4 bg-teal-600 text-white rounded-2xl font-bold shadow-xl shadow-teal-900/10 transition-all flex items-center justify-center gap-2 disabled:opacity-70"
-             >
-               {loading ? 'Signing in...' : 'Sign In'}
-               <FiArrowRight />
-             </motion.button>
-           </form>
-
-           <div className="relative my-8">
-              <div className="absolute inset-0 flex items-center">
-                 <div className="w-full border-t border-slate-100"></div>
+           <div className="space-y-8">
+              <div className="text-center">
+                 <p className="text-slate-600 font-medium leading-relaxed mb-8">
+                    To maintain security, administrative access is restricted to authorized Google accounts only.
+                 </p>
               </div>
-              <div className="relative flex justify-center text-sm">
-                 <span className="px-4 bg-white text-slate-400 font-bold uppercase tracking-widest text-[10px]">Or continue with</span>
-              </div>
+
+              <motion.button
+                type="button"
+                disabled={loading}
+                onClick={handleGoogleLogin}
+                whileHover={{ scale: 1.02, backgroundColor: '#ffffff' }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full py-5 bg-white border-2 border-slate-100 text-slate-800 rounded-[1.5rem] font-black shadow-xl shadow-teal-900/5 transition-all flex items-center justify-center gap-4 disabled:opacity-70 group"
+              >
+                {loading ? (
+                  <div className="animate-spin rounded-full h-6 w-6 border-3 border-teal-500 border-t-transparent"></div>
+                ) : (
+                  <>
+                    <FcGoogle className="text-2xl" />
+                    <span>Continue with Google</span>
+                    <FiArrowRight className="text-slate-300 group-hover:text-teal-500 transition-colors" />
+                  </>
+                )}
+              </motion.button>
            </div>
 
-           <motion.button
-             type="button"
-             disabled={loading || googleLoading}
-             onClick={handleGoogleLogin}
-             whileHover={{ scale: 1.02, backgroundColor: '#f8fafc' }}
-             whileTap={{ scale: 0.98 }}
-             className="w-full py-4 bg-white border border-slate-200 text-slate-700 rounded-2xl font-bold shadow-sm transition-all flex items-center justify-center gap-3 disabled:opacity-70"
-           >
-             {googleLoading ? (
-               <div className="animate-spin rounded-full h-5 w-5 border-2 border-teal-500 border-t-transparent"></div>
-             ) : (
-               <FcGoogle className="text-xl" />
-             )}
-             Google Account
-           </motion.button>
-
-           <div className="mt-8 pt-8 border-t border-slate-50 text-center">
-              <p className="text-slate-500 text-sm font-medium">
-                Administrative access only. By signing in, you agree to our 
-                <Link to="/terms" className="text-teal-600 ml-1">Terms</Link>
+           <div className="mt-12 pt-8 border-t border-slate-50 text-center">
+              <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] leading-relaxed">
+                Secure Authentication <br />
+                Managed by Google Firebase
               </p>
            </div>
-        </div>
+        </motion.div>
 
-        <div className="mt-8 text-center">
-           <Link to="/" className="text-slate-400 hover:text-teal-600 text-sm font-medium transition-colors">
-              ← Back to homepage
+        <div className="mt-10 text-center">
+           <Link to="/" className="text-slate-400 hover:text-teal-600 text-xs font-black uppercase tracking-widest transition-colors">
+              ← Return to Main Site
            </Link>
         </div>
       </motion.div>

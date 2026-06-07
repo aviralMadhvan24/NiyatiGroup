@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiDollarSign, FiCalendar, FiTrendingUp, FiRefreshCw, FiArrowRight } from 'react-icons/fi';
+import { LuCalculator } from 'react-icons/lu';
 
 const RATE_LIMITS = {
   personal:    { min: 8,  max: 30 },
@@ -96,7 +97,7 @@ const EMICalculator = () => {
         <section className="pt-20 pb-12 text-center">
            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto">
               <motion.div className="inline-flex items-center px-4 py-2 mb-6 font-bold rounded-full text-teal-700 bg-teal-50 border border-teal-100 shadow-sm">
-                <FiCalculator className="mr-2" />
+                <LuCalculator className="mr-2" />
                 EMI Calculator
               </motion.div>
               <h1 className="text-4xl md:text-6xl font-bold text-slate-800 mb-6">Plan Your <span className="text-teal-600">Finances</span></h1>
