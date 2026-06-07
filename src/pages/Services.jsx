@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FiDollarSign, FiUsers, FiTrendingUp, FiCheck, FiArrowRight } from 'react-icons/fi';
+import { FiDollarSign, FiUsers, FiTrendingUp, FiCheck, FiArrowRight, FiPhone } from 'react-icons/fi';
 
 const Services = () => {
   return (
