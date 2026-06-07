@@ -177,7 +177,7 @@ const GenericApplyForm = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium"
+              className="w-full py-3 bg-sky-500 hover:bg-sky-600 text-white rounded-lg font-medium"
             >
               {hasClickedPay ? (submitting ? "Submitting..." : "Submit Application") : "Proceed to Pay ₹500"}
             </button>
@@ -190,7 +190,7 @@ const GenericApplyForm = () => {
         <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
           <div className="bg-gray-900 p-8 rounded-xl text-center border border-gray-700 w-96">
 
-            <h3 className="text-xl font-bold text-blue-400 mb-4">Pay ₹500 to Continue</h3>
+            <h3 className="text-xl font-bold text-sky-300 mb-4">Pay ₹500 to Continue</h3>
 
             <p className="text-gray-300 mb-2">UPI ID:</p>
             <p className="text-white font-semibold text-lg mb-4">
@@ -200,7 +200,7 @@ const GenericApplyForm = () => {
             {/* UPI Deep Link */}
             <a
               href="upi://pay?pa=nitishsaxena8-2@okhsfcbank&pn=NIYATI%20GROUP&am=500&cu=INR"
-              className="block w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium mb-3"
+              className="block w-full py-3 bg-sky-500 hover:bg-sky-600 text-white rounded-lg font-medium mb-3"
             >
               Pay ₹500
             </a>

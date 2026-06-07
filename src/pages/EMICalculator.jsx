@@ -114,7 +114,7 @@ const submitFormData = async (result) => {
                     type="text" 
                     value={name} 
                     onChange={e => setName(e.target.value)} 
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-teal-500" 
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-sky-500" 
                     placeholder="Enter your name" 
                   />
                 </div>
@@ -124,7 +124,7 @@ const submitFormData = async (result) => {
                     type="tel" 
                     value={phone} 
                     onChange={e => setPhone(e.target.value)} 
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-teal-500" 
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-sky-500" 
                     placeholder="Enter your phone number" 
                   />
                 </div>
@@ -132,7 +132,7 @@ const submitFormData = async (result) => {
 
               <div>
                 <label className="block text-gray-300 mb-2">Loan Type</label>
-                <select value={loanType} onChange={e => setLoanType(e.target.value)} className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-teal-500">
+                <select value={loanType} onChange={e => setLoanType(e.target.value)} className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-sky-500">
                   <option value="personal">Personal Loan</option>
                   <option value="business">Business Loan</option>
                   <option value="home">Home Loan</option>
@@ -143,24 +143,24 @@ const submitFormData = async (result) => {
 
               <div>
                 <label className="block text-gray-300 mb-2">Loan Amount (₹)</label>
-                <input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-teal-500" placeholder="Enter loan amount" />
+                <input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-sky-500" placeholder="Enter loan amount" />
               </div>
 
               <div>
                 <label className="block text-gray-300 mb-2">Interest Rate (% p.a.) <span className="text-gray-400">(Range: {min}% - {max}%)</span></label>
-                <input type="number" step="0.01" value={interestRate} onChange={e => setInterestRate(e.target.value)} min={min} max={max} className={`w-full px-4 py-3 bg-gray-800 border ${rateValid ? 'border-gray-700' : 'border-teal-500'} rounded-lg text-white focus:ring-2 focus:ring-teal-500`} placeholder="Enter interest rate" />
-                {!rateValid && interestRate !== '' && (<p className="mt-1 text-xs text-teal-400">Please enter a rate between {min}% and {max}%</p>)}
+                <input type="number" step="0.01" value={interestRate} onChange={e => setInterestRate(e.target.value)} min={min} max={max} className={`w-full px-4 py-3 bg-gray-800 border ${rateValid ? 'border-gray-700' : 'border-sky-500'} rounded-lg text-white focus:ring-2 focus:ring-sky-500`} placeholder="Enter interest rate" />
+                {!rateValid && interestRate !== '' && (<p className="mt-1 text-xs text-sky-400">Please enter a rate between {min}% and {max}%</p>)}
              
               </div>
 
               <div>
                 <label className="block text-gray-300 mb-2">Loan Tenure (Years)</label>
-                <input type="number" value={tenure} onChange={e => setTenure(e.target.value)} className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-teal-500" placeholder="Enter loan tenure" />
+                <input type="number" value={tenure} onChange={e => setTenure(e.target.value)} className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-sky-500" placeholder="Enter loan tenure" />
               
               </div>
 
               <div className="flex space-x-4 pt-2">
-                <motion.button onClick={calculateEMI} disabled={!principal || !interestRate || !tenure || !rateValid || !name || !phone} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className={`px-6 py-3 rounded-lg font-medium ${(principal && interestRate && tenure && rateValid && name && phone) ? 'bg-teal-600 hover:bg-teal-700' : 'bg-gray-700 cursor-not-allowed'} text-white transition flex-1`}>Calculate EMI</motion.button>
+                <motion.button onClick={calculateEMI} disabled={!principal || !interestRate || !tenure || !rateValid || !name || !phone} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className={`px-6 py-3 rounded-lg font-medium ${(principal && interestRate && tenure && rateValid && name && phone) ? 'bg-sky-600 hover:bg-sky-700' : 'bg-gray-700 cursor-not-allowed'} text-white transition flex-1`}>Calculate EMI</motion.button>
                 
                 <motion.button onClick={resetCalculator} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium text-white transition flex-1">Reset</motion.button>
             
@@ -177,12 +177,12 @@ const submitFormData = async (result) => {
                     <div className="flex justify-between"><span className="text-gray-400">Monthly EMI:</span><span className="text-white">₹{emiResult.emi.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span></div>
                     <div className="flex justify-between"><span className="text-gray-400">Total Interest:</span><span className="text-white">₹{emiResult.totalInterest.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span></div>
                     <div className="flex justify-between"><span className="text-gray-400">Total Payment:</span><span className="text-white">₹{emiResult.totalPayment.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span></div>
-                    <div className="flex justify-between border-t border-gray-700 pt-3"><span className="text-gray-300 font-medium">Principal Amount:</span><span className="text-teal-400 font-bold">₹{parseFloat(principal).toLocaleString('en-IN')}</span></div>
+                    <div className="flex justify-between border-t border-gray-700 pt-3"><span className="text-gray-300 font-medium">Principal Amount:</span><span className="text-sky-400 font-bold">₹{parseFloat(principal).toLocaleString('en-IN')}</span></div>
                   </div>
                   <p className="text-center text-xs text-gray-500 mt-4 font-bold">
   **TERMS AND CONDITIONS APPLIED**
 </p>
-                  <button onClick={() => setShowAmortization(!showAmortization)} className="w-full mt-4 text-teal-400 hover:text-teal-300 text-sm text-center">{showAmortization ? 'Hide Amortization Schedule' : 'Show Amortization Schedule'}</button>
+                  <button onClick={() => setShowAmortization(!showAmortization)} className="w-full mt-4 text-sky-400 hover:text-sky-300 text-sm text-center">{showAmortization ? 'Hide Amortization Schedule' : 'Show Amortization Schedule'}</button>
                   {showAmortization && (
                     <motion.div 
                       initial={{ opacity: 0, height: 0 }} 

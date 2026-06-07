@@ -105,7 +105,7 @@ const ApplyForm = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
           >
-            Apply for: <span className="text-blue-400">{jobTitle || "General Application"}</span>
+            Apply for: <span className="text-sky-300">{jobTitle || "General Application"}</span>
           </motion.h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -134,7 +134,7 @@ const ApplyForm = () => {
             <motion.button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-md bg-blue-600 py-3 text-white shadow-lg transition hover:bg-blue-700 disabled:opacity-50"
+              className="w-full rounded-md bg-sky-500 py-3 text-white shadow-lg transition hover:bg-sky-600 disabled:opacity-50"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

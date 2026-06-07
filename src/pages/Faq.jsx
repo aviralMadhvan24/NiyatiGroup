@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const Faq = () => {
   // Apply gradient background once at the root
-  const gradientBg = 'bg-gradient-to-br from-teal-700 via-teal-800 to-black/70';
+  const gradientBg = 'bg-gradient-to-br from-sky-700 via-sky-800 to-black/70';
 
   return (
     <div className={`relative ${gradientBg} text-gray-100 min-h-screen overflow-hidden`}>
@@ -40,7 +40,7 @@ const Faq = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              Frequently Asked <span className="text-teal-500">Questions</span>
+              Frequently Asked <span className="text-sky-500">Questions</span>
             </motion.h1>
             <motion.p
               className="mt-4 text-xl text-gray-300"
@@ -72,8 +72,8 @@ const Faq = () => {
           <div className="container mx-auto px-4 md:px-6 max-w-3xl">
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8">
               <div className="flex flex-col md:flex-row items-center gap-6">
-                <div className="p-4 bg-teal-600/20 rounded-full">
-                  <div className="bg-teal-600 w-16 h-16 rounded-full flex items-center justify-center">
+                <div className="p-4 bg-sky-600/20 rounded-full">
+                  <div className="bg-sky-600 w-16 h-16 rounded-full flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-white">
                       <path fillRule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clipRule="evenodd" />
                     </svg>
@@ -88,7 +88,7 @@ const Faq = () => {
                     href="https://wa.me/+919997070599"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center px-6 py-3 bg-teal-600 text-white rounded-full font-medium"
+                    className="inline-flex items-center px-6 py-3 bg-sky-600 text-white rounded-full font-medium"
                   >
                     Chat with Expert
                   </motion.a>

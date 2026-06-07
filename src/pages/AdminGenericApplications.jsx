@@ -50,7 +50,7 @@
 //   if (loading) {
 //     return (
 //       <div className="flex justify-center items-center h-screen">
-//         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
+//         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-sky-500"></div>
 //       </div>
 //     );
 //   }
@@ -89,7 +89,7 @@
 //                   </div>
 //                   {app.cvUrl && (
 //                     <div className="mb-4">
-//                       <a href={app.cvUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+//                       <a href={app.cvUrl} target="_blank" rel="noopener noreferrer" className="text-sky-300 hover:underline">
 //                         View PDF Resume
 //                       </a>
 //                     </div>
@@ -167,13 +167,13 @@ const AdminGenericApplications = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-sky-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="relative bg-gradient-to-br from-teal-700 via-teal-800 to-black text-gray-300 min-h-screen overflow-hidden">
+    <div className="relative bg-gradient-to-br from-sky-700 via-sky-800 to-black text-gray-300 min-h-screen overflow-hidden">
       <div className="relative z-10 max-w-4xl mx-auto px-6 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -219,7 +219,7 @@ const AdminGenericApplications = () => {
                         href={app.cvUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-400 hover:underline"
+                        className="text-sky-300 hover:underline"
                       >
                         View PDF Resume
                       </a>

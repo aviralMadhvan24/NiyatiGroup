@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const LoanServices = () => {
-  const gradientBg = 'bg-gradient-to-br from-teal-700 via-teal-800 to-black';
+  const gradientBg = 'bg-gradient-to-br from-sky-700 via-sky-800 to-black';
 
   const partnerBanks = [
     { name: 'SBI', logo: '/banks/sbi.png' },
@@ -73,19 +73,19 @@ const LoanServices = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            Loan <span className="text-teal-500">Services</span>
+            Loan <span className="text-sky-500">Services</span>
           </motion.h1>
           <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
             Tailored financial solutions for your personal and business needs
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Link to="/loans/calculate">
-              <button className="px-8 py-3 bg-blue-600 hover:bg-blue-800 rounded-lg">
+              <button className="px-8 py-3 bg-sky-500 hover:bg-sky-700 rounded-lg">
                 Calculate EMI
               </button>
             </Link>
             <Link to="/loanoffers">
-              <button className="px-8 py-3 bg-blue-600 hover:bg-blue-800 rounded-lg">
+              <button className="px-8 py-3 bg-sky-500 hover:bg-sky-700 rounded-lg">
                 Checkout Loan Offers
               </button>
             </Link>
@@ -102,7 +102,7 @@ const LoanServices = () => {
       viewport={{ once: true }}
       className="text-center text-xl font-semibold mb-10"
     >
-      Trusted Banking <span className="text-teal-500">Partners</span>
+      Trusted Banking <span className="text-sky-500">Partners</span>
     </motion.h3>
 
     <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-6 justify-items-center">
@@ -153,7 +153,7 @@ const LoanServices = () => {
                   href={loan.whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block mt-4 text-teal-500 hover:text-teal-700"
+                  className="inline-block mt-4 text-sky-500 hover:text-sky-700"
                 >
                   Get Started on WhatsApp →
                 </a>

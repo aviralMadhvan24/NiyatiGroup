@@ -51,7 +51,7 @@ const AdminApplications = () => {
     return (
       <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-gray-300 min-h-screen overflow-hidden">
         <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-sky-500"></div>
         </div>
       </div>
     );
@@ -121,7 +121,7 @@ const AdminApplications = () => {
                             href={app.linkedin} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-blue-400 hover:underline"
+                            className="text-sky-300 hover:underline"
                           >
                             View Profile
                           </a>
@@ -138,7 +138,7 @@ const AdminApplications = () => {
                             href={app.cvUrl} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-blue-400 hover:underline"
+                            className="text-sky-300 hover:underline"
                           >
                             View PDF Resume
                           </a>

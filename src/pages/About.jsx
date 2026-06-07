@@ -53,8 +53,8 @@ const About = () => {
               transition={{ delay: 0.2 }}
             >
               <span className="relative flex h-2.5 w-2.5 mr-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-500 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-indigo-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-500 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sky-500" />
               </span>
               About NiyatiGroup
             </motion.div>
@@ -142,7 +142,7 @@ const About = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-gradient-to-r from-indigo-600/20 to-blue-600/20 border border-gray-800 rounded-xl p-8 text-center"
+            className="bg-gradient-to-r from-sky-600/20 to-sky-500/20 border border-gray-800 rounded-xl p-8 text-center"
           >
             <h2 className="text-2xl font-bold text-gray-100 mb-4">Ready to Partner with Us?</h2>
             <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-6">
@@ -153,7 +153,7 @@ const About = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-6 py-2.5 bg-gray-600 hover:bg-blue-800 text-white rounded-lg font-medium shadow-md transition-colors text-sm"
+                  className="px-6 py-2.5 bg-gray-600 hover:bg-sky-700 text-white rounded-lg font-medium shadow-md transition-colors text-sm"
                 >
                   Contact Us
                 </motion.button>
@@ -162,7 +162,7 @@ const About = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-6 py-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-lg font-medium shadow-md transition-colors text-sm"
+                  className="px-6 py-2.5 bg-sky-500 hover:bg-sky-700 text-white rounded-lg font-medium shadow-md transition-colors text-sm"
                 >
                   Explore Recruitment
                 </motion.button>

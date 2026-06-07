@@ -150,7 +150,7 @@ const Navbar = () => {
                                     e.preventDefault();
                                   }
                                 }}
-                                className="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-600 hover:text-white"
+                                className="block px-4 py-2 text-sm text-gray-300 hover:bg-sky-500 hover:text-white"
                               >
                                 {subLink.name}
                               </NavLink>
@@ -230,7 +230,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-md text-gray-300 hover:text-white hover:bg-blue-600 transition-colors"
+              className="lg:hidden p-2 rounded-md text-gray-300 hover:text-white hover:bg-sky-500 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -298,7 +298,7 @@ const Navbar = () => {
                                       setServicesOpen(false);
                                       handleNavigation(subLink.path, true);
                                     }}
-                                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-600 hover:text-white"
+                                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-sky-500 hover:text-white"
                                   >
                                     {subLink.name}
                                   </NavLink>
@@ -344,7 +344,7 @@ const Navbar = () => {
                   {user ? (
                     <button
                       onClick={() => setShowLogoutModal(true)}
-                      className="cursor-pointer w-full flex items-center justify-center p-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white"
+                      className="cursor-pointer w-full flex items-center justify-center p-3 rounded-lg bg-sky-500 hover:bg-sky-600 text-white"
                     >
                       <FiLogOut className="mr-2" />
                       Logout
@@ -380,7 +380,7 @@ const Navbar = () => {
               </button>
               <button
                 onClick={handleLogout}
-                className="cursor-pointer px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                className="cursor-pointer px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white transition-colors"
               >
                 Logout
               </button>

@@ -29,7 +29,7 @@ const Login = () => {
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-red-500"
+            className="absolute rounded-full bg-sky-500"
             style={{
               width: Math.random() * 5 + 1 + 'px',
               height: Math.random() * 5 + 1 + 'px',
@@ -58,7 +58,7 @@ const Login = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-sky-500 rounded-xl flex items-center justify-center mx-auto mb-4">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
               </svg>
@@ -68,7 +68,7 @@ const Login = () => {
           </div>
 
           <div className="mb-6 p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
-            <p className="text-center text-blue-400 font-medium">
+            <p className="text-center text-sky-300 font-medium">
               <svg className="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
@@ -80,7 +80,7 @@ const Login = () => {
             onClick={handleLogin}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-slate-900 hover:to-red-800 rounded-lg font-medium text-white transition flex items-center justify-center gap-3 shadow-lg"
+            className="w-full px-6 py-3 bg-gradient-to-r from-sky-600 to-sky-700 hover:from-slate-900 hover:to-sky-800 rounded-lg font-medium text-white transition flex items-center justify-center gap-3 shadow-lg"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -93,7 +93,7 @@ const Login = () => {
 
           <div className="mt-8 pt-6 border-t border-gray-800 text-center">
             <p className="text-sm text-gray-400">
-              By continuing, you agree to our <NavLink to="/terms" className="text-blue-400 hover:underline">Terms of Service</NavLink> and <NavLink to="/privacy" className="text-blue-400 hover:underline">Privacy Policy</NavLink>
+              By continuing, you agree to our <NavLink to="/terms" className="text-sky-300 hover:underline">Terms of Service</NavLink> and <NavLink to="/privacy" className="text-sky-300 hover:underline">Privacy Policy</NavLink>
             </p>
             <p className="text-xs text-gray-500 mt-2">
               © {new Date().getFullYear()} Niyati Group. All rights reserved.

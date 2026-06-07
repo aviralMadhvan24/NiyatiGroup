@@ -28,8 +28,8 @@ const Services = () => {
               transition={{ delay: 0.2 }}
             >
               <span className="relative flex h-3 w-3 mr-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
               </span>
               Trusted Business Solutions Since 2019
             </motion.div>
@@ -40,7 +40,7 @@ const Services = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              <span className="text-blue-400">Niyati</span> Group
+              <span className="text-sky-300">Niyati</span> Group
             </motion.h1>
 
             <motion.p 
@@ -60,11 +60,11 @@ const Services = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 hover:border-indigo-500/30 transition-all"
+              className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 hover:border-sky-500/30 transition-all"
             >
               <div className="flex items-center mb-6">
-                <div className="bg-indigo-500/10 p-3 rounded-xl mr-4 border border-indigo-500/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-400">
+                <div className="bg-sky-500/10 p-3 rounded-xl mr-4 border border-sky-500/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400">
                     <line x1="12" y1="1" x2="12" y2="23"></line>
                     <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                   </svg>
@@ -76,19 +76,19 @@ const Services = () => {
               </p>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-400 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400 mr-2">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span className="text-gray-300">Income Tax Filing</span>
                 </div>
                 <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-400 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400 mr-2">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span className="text-gray-300">GST Compliance</span>
                 </div>
                 <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-400 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400 mr-2">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span className="text-gray-300">Tax Planning</span>
@@ -98,7 +98,7 @@ const Services = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-800 cursor-pointer rounded-lg text-white font-medium transition-colors"
+                  className="w-full px-6 py-3 bg-sky-500 hover:bg-sky-700 cursor-pointer rounded-lg text-white font-medium transition-colors"
                 >
                   Explore Tax Services
                 </motion.button>
@@ -110,11 +110,11 @@ const Services = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9 }}
-              className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 hover:border-blue-500/30 transition-all"
+              className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 hover:border-sky-400/30 transition-all"
             >
               <div className="flex items-center mb-6">
-                <div className="bg-blue-500/10 p-3 rounded-xl mr-4 border border-blue-500/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400">
+                <div className="bg-sky-400/10 p-3 rounded-xl mr-4 border border-sky-400/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-300">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                     <circle cx="9" cy="7" r="4"></circle>
                     <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
@@ -128,19 +128,19 @@ const Services = () => {
               </p>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-300 mr-2">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span className="text-gray-300">Executive Search</span>
                 </div>
                 <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-300 mr-2">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span className="text-gray-300">Permanent Staffing</span>
                 </div>
                 <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-300 mr-2">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span className="text-gray-300">Talent Acquisition</span>
@@ -150,7 +150,7 @@ const Services = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="cursor-pointer w-full px-6 py-3 bg-blue-600 hover:bg-blue-800 rounded-lg text-white font-medium transition-colors"
+                  className="cursor-pointer w-full px-6 py-3 bg-sky-500 hover:bg-sky-700 rounded-lg text-white font-medium transition-colors"
                 >
                   Explore Recruitment Services
                 </motion.button>
@@ -199,7 +199,7 @@ const Services = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="cursor-pointer w-full px-6 py-3 bg-blue-600 hover:bg-blue-800 rounded-lg text-white font-medium transition-colors"
+                  className="cursor-pointer w-full px-6 py-3 bg-sky-500 hover:bg-sky-700 rounded-lg text-white font-medium transition-colors"
                 >
                   Explore Loan Services
                 </motion.button>
@@ -227,11 +227,11 @@ const Services = () => {
                   Our mission is to deliver exceptional value through expertise, integrity, and personalized service across all our offerings.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <div className="bg-indigo-500/10 px-4 py-2 rounded-lg border border-indigo-500/20">
-                    <p className="text-indigo-400 font-medium">15+ Years Experience</p>
+                  <div className="bg-sky-500/10 px-4 py-2 rounded-lg border border-sky-500/20">
+                    <p className="text-sky-400 font-medium">15+ Years Experience</p>
                   </div>
-                  <div className="bg-blue-500/10 px-4 py-2 rounded-lg border border-blue-500/20">
-                    <p className="text-blue-400 font-medium">5000+ Clients Served</p>
+                  <div className="bg-sky-400/10 px-4 py-2 rounded-lg border border-sky-400/20">
+                    <p className="text-sky-300 font-medium">5000+ Clients Served</p>
                   </div>
                   <div className="bg-green-500/10 px-4 py-2 rounded-lg border border-green-500/20">
                     <p className="text-green-400 font-medium">Financial Solutions</p>
@@ -259,8 +259,8 @@ const Services = () => {
                     }
                   ].map((value, index) => (
                     <div key={index} className="flex items-start">
-                      <div className="bg-indigo-500/10 p-2 rounded-lg mr-4 border border-indigo-500/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-400">
+                      <div className="bg-sky-500/10 p-2 rounded-lg mr-4 border border-sky-500/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400">
                           <path d={value.icon} />
                         </svg>
                       </div>
@@ -283,7 +283,7 @@ const Services = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-gradient-to-r from-indigo-600/20 to-blue-600/20 border border-gray-800 rounded-2xl p-12 text-center"
+            className="bg-gradient-to-r from-sky-600/20 to-sky-500/20 border border-gray-800 rounded-2xl p-12 text-center"
           >
             <h2 className="text-3xl font-bold text-gray-100 mb-6">Ready to Get Started?</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
@@ -295,7 +295,7 @@ const Services = () => {
 
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="cursor-pointer px-8 py-3.5 bg-blue-600 hover:bg-blue-800 text-white rounded-lg font-medium shadow-lg transition-colors"
+                  className="cursor-pointer px-8 py-3.5 bg-sky-500 hover:bg-sky-700 text-white rounded-lg font-medium shadow-lg transition-colors"
                 >
                   Contact Us
                 </motion.button>

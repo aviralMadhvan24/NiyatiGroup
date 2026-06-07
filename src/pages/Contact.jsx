@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const Contact = () => {
   return (
-    <section className=" relative pt-28 pb-32 md:pt-36 md:pb-36 lg:pt-44 lg:pb-40 bg-teal-950 overflow-hidden">
+    <section className=" relative pt-28 pb-32 md:pt-36 md:pb-36 lg:pt-44 lg:pb-40 bg-sky-950 overflow-hidden">
       {/* Background Grid */}
       <motion.div
         className="absolute inset-0 overflow-hidden"

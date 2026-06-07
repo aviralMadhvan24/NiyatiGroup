@@ -49,9 +49,9 @@ const AdminLoanApplications = () => {
 
   if (loading) {
     return (
-      <div className="relative bg-gradient-to-br from-teal-700 via-teal-800 to-black text-gray-300 min-h-screen overflow-hidden">
+      <div className="relative bg-gradient-to-br from-sky-700 via-sky-800 to-black text-gray-300 min-h-screen overflow-hidden">
         <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-sky-500"></div>
         </div>
       </div>
     );
@@ -157,7 +157,7 @@ const AdminLoanApplications = () => {
 
                       <div className="flex space-x-4 pt-2">
                         <p className="text-sm text-gray-500">Contact</p>
-                        <a href={`tel:${app.phone}`} className="text-white hover:text-blue-400 transition-colors">
+                        <a href={`tel:${app.phone}`} className="text-white hover:text-sky-300 transition-colors">
                           {app.phone}
                         </a>
                       </div>

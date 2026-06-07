@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const AdminPage = () => {
   return (
-    <div className="relative bg-gradient-to-br from-teal-700 via-teal-800 to-black text-gray-300 min-h-screen overflow-hidden">
+    <div className="relative bg-gradient-to-br from-sky-700 via-sky-800 to-black text-gray-300 min-h-screen overflow-hidden">
       {/* Background Grid Overlay */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">
@@ -24,13 +24,13 @@ const AdminPage = () => {
             <motion.div
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-blue-600 transition-all"
+              className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-sky-500 transition-all"
             >
               <h2 className="text-xl font-semibold mb-4">Job Postings</h2>
               <p className="text-gray-400 mb-4">Create and manage job postings</p>
               <Link 
                 to="/jobpost" 
-                className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+                className="inline-block px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-lg"
               >
                 Manage Jobs
               </Link>
@@ -39,13 +39,13 @@ const AdminPage = () => {
             <motion.div
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-blue-600 transition-all"
+              className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-sky-500 transition-all"
             >
               <h2 className="text-xl font-semibold mb-4">Loan Offers</h2>
               <p className="text-gray-400 mb-4">Create and manage loan offers</p>
               <Link 
                 to="/addloan" 
-                className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+                className="inline-block px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-lg"
               >
                 Manage Loans
               </Link>
@@ -54,13 +54,13 @@ const AdminPage = () => {
             <motion.div
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-blue-600 transition-all"
+              className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-sky-500 transition-all"
             >
               <h2 className="text-xl font-semibold mb-4">Applications</h2>
               <p className="text-gray-400 mb-4">View job applications</p>
               <Link 
                 to="/admin/jobapplications" 
-                className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+                className="inline-block px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-lg"
               >
                 View Applications
               </Link>
@@ -68,13 +68,13 @@ const AdminPage = () => {
             <motion.div
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-blue-600 transition-all"
+              className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-sky-500 transition-all"
             >
               <h2 className="text-xl font-semibold mb-4"> Generic Applications</h2>
               <p className="text-gray-400 mb-4">View generic job applications</p>
               <Link 
                 to="/admin/genericjobapplications" 
-                className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+                className="inline-block px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-lg"
               >
                 View Applications
               </Link>
@@ -82,13 +82,13 @@ const AdminPage = () => {
             <motion.div
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-blue-600 transition-all"
+              className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-sky-500 transition-all"
             >
               <h2 className="text-xl font-semibold mb-4"> Loan Applications</h2>
               <p className="text-gray-400 mb-4">View loan applications</p>
               <Link 
                 to="/admin/loanapplications" 
-                className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+                className="inline-block px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-lg"
               >
                 View Applications
               </Link>

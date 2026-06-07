@@ -64,7 +64,7 @@ useEffect(() => {
   }, []);
 
   return (
-    <div className="relative bg-gradient-to-br from-teal-700 via-teal-800 to-black text-gray-300 min-h-screen overflow-hidden">
+    <div className="relative bg-gradient-to-br from-sky-700 via-sky-800 to-black text-gray-300 min-h-screen overflow-hidden">
 
       {/* Background Grid Overlay */}
       <div className="absolute inset-0 overflow-hidden">
@@ -77,7 +77,7 @@ useEffect(() => {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="relative z-20 bg-gradient-to-r from-teal-600 to-teal-800 text-white py-3 px-4 shadow-lg"
+          className="relative z-20 bg-gradient-to-r from-sky-600 to-sky-800 text-white py-3 px-4 shadow-lg"
         >
           <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center">
@@ -90,7 +90,7 @@ useEffect(() => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/jobs')}
-              className="cursor-pointer px-4 py-2 bg-white text-teal-700 font-medium rounded-md hover:bg-gray-100 transition-all flex items-center"
+              className="cursor-pointer px-4 py-2 bg-white text-sky-700 font-medium rounded-md hover:bg-gray-100 transition-all flex items-center"
             >
               View Jobs
               <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -146,7 +146,7 @@ useEffect(() => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                Welcome to <span className="text-teal-500">Niyati</span> Group
+                Welcome to <span className="text-sky-500">Niyati</span> Group
               </motion.h1>
               <motion.p
                 className="text-base sm:text-lg text-gray-400 max-w-xl mx-auto lg:mx-0"
@@ -161,7 +161,7 @@ useEffect(() => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="cursor-pointer px-6 py-3 bg-teal-600 hover:bg-teal-800 text-white font-medium rounded-lg transition-colors"
+                    className="cursor-pointer px-6 py-3 bg-sky-600 hover:bg-sky-800 text-white font-medium rounded-lg transition-colors"
                   >
                     Explore Our Services
                   </motion.button>
@@ -192,7 +192,7 @@ useEffect(() => {
       </div>
 
       {/* Office Locations Section */}
-      <section className="relative z-10 bg-teal-900 text-gray-200 py-20 px-4 sm:px-6">
+      <section className="relative z-10 bg-sky-900 text-gray-200 py-20 px-4 sm:px-6">
         <div className="max-w-screen-xl mx-auto space-y-12">
           <h2 className="text-3xl sm:text-4xl font-semibold text-center text-white mb-12">
             Our Office Locations

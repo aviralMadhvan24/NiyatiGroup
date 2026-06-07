@@ -90,7 +90,7 @@ const JobBoard = () => {
     const statusStyles = {
       active: 'bg-green-600/20 text-green-400 border-green-400/30',
       expired: 'bg-yellow-600/20 text-yellow-400 border-yellow-400/30',
-      closed: 'bg-teal-600/20 text-teal-400 border-teal-400/30'
+      closed: 'bg-sky-600/20 text-sky-400 border-sky-400/30'
     };
     return (
       <span className={`text-xs px-2 py-1 rounded-full border ${statusStyles[status]}`}>
@@ -112,7 +112,7 @@ const JobBoard = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl sm:text-4xl font-bold mb-8 text-white text-center"
         >
-          Current <span className="text-teal-500">Job</span> Opportunities
+          Current <span className="text-sky-500">Job</span> Opportunities
         </motion.h2>
 
         {jobs.length === 0 ? (
@@ -133,7 +133,7 @@ const JobBoard = () => {
                 transition={{ delay: index * 0.1 }}
                 className={`bg-gray-800/50 backdrop-blur-sm border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all
                 ${job.status === 'expired' ? 'border-yellow-600/50 opacity-90' : 
-                  job.status === 'closed' ? 'border-teal-600/50 opacity-90' : 'border-gray-700'}`}
+                  job.status === 'closed' ? 'border-sky-600/50 opacity-90' : 'border-gray-700'}`}
               >
                 <div className="p-6 sm:p-8">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -142,7 +142,7 @@ const JobBoard = () => {
                         <h3 className="text-xl sm:text-2xl font-bold text-white">{job.title}</h3>
                         {getStatusBadge(job.status)}
                       </div>
-                      <p className="text-teal-400 font-medium mt-1">{job.company}</p>
+                      <p className="text-sky-400 font-medium mt-1">{job.company}</p>
                       <div className="flex flex-wrap items-center gap-4 mt-3 text-sm">
                         {/* Location */}
                         <div className="flex items-center text-gray-400">
@@ -202,7 +202,7 @@ const JobBoard = () => {
                           whileHover={{ scale: 1.03 }}
                           whileTap={{ scale: 0.97 }}
                           onClick={() => navigate(`/apply`,{ state: { jobId: job.id, jobTitle: job.title } })}
-                          className="cursor-pointer px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-lg transition-all whitespace-nowrap"
+                          className="cursor-pointer px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-all whitespace-nowrap"
                         >
                           Apply Now
                         </motion.button>
@@ -221,7 +221,7 @@ const JobBoard = () => {
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                             onClick={() => setEditingDateJobId(job.id)}
-                            className="cursor-pointer px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all"
+                            className="cursor-pointer px-4 py-3 bg-sky-500 hover:bg-sky-600 text-white font-medium rounded-lg transition-all"
                           >
                             Extend Date
                           </motion.button>
@@ -269,7 +269,7 @@ const JobBoard = () => {
                         href={job.applyLink} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-teal-400 hover:text-teal-300 inline-flex items-center"
+                        className="text-sky-400 hover:text-sky-300 inline-flex items-center"
                       >
                         External Application Link
                         <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -289,7 +289,7 @@ const JobBoard = () => {
               </p>
               <Link 
                 to="/genericapply" 
-                className="inline-block px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-semibold transition-colors"
+                className="inline-block px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-semibold transition-colors"
               >
                 Submit Your Resume
               </Link>

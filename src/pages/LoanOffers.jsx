@@ -49,7 +49,7 @@ const LoanOffers = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-sky-500"></div>
       </div>
     );
   }
@@ -75,7 +75,7 @@ const LoanOffers = () => {
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-xl font-semibold text-white">{offer.title}</h3>
-                  <span className="px-3 py-1 bg-blue-600 text-white text-sm rounded-full">
+                  <span className="px-3 py-1 bg-sky-500 text-white text-sm rounded-full">
                     {offer.interestRate}% Interest
                   </span>
                 </div>
@@ -101,7 +101,7 @@ const LoanOffers = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="mt-6 w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
+                  className="mt-6 w-full py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-md transition-colors"
                 >
                   <Link to={`/loanapply`}>Apply Now</Link>
                 </motion.button>

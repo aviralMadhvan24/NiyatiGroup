@@ -34,14 +34,14 @@ const AboutSection = () => {
               ].map((item, index) => (
                 <motion.div 
                   key={index}
-                  className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 text-blue-400"
+                  className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 text-sky-300"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 + 0.4, duration: 0.5 }}
                 >
                   <h3 className="text-2xl font-bold text-primary">{item.title}</h3>
-                  <p className="text-violet-600 mt-1">{item.desc}</p>
+                  <p className="text-sky-600 mt-1">{item.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -59,7 +59,7 @@ const AboutSection = () => {
               alt="About Niyati Group" 
               className="w-full h-auto rounded-xl shadow-lg"
             />
-            <p className="mt-4 text-blue-400 text-3xl font-semibold text-center text-white">
+            <p className="mt-4 text-sky-300 text-3xl font-semibold text-center text-white">
   Mr. Nitish Saxena, Founder & CEO
 </p>
 

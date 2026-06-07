@@ -183,7 +183,7 @@ const ContactForm = () => {
               <a 
                 href="https://www.google.com/maps/place/Niyati+Group/@28.3464594,79.3996806,17z/data=!3m1!4b1!4m6!3m5!1s0x39a001ad1ccdb735:0xe77d309c2ea8cc23!8m2!3d28.3464547!4d79.4022555!16s%2Fg%2F11fl45w23d!5m2!1e4!1e2?entry=ttu&g_ep=EgoyMDI1MDcyMi4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
-                className=" text-indigo-400 hover:underline text-xs"
+                className=" text-sky-400 hover:underline text-xs"
               >
                 View on map
               </a>
@@ -195,8 +195,8 @@ const ContactForm = () => {
               <p>9997070599, 7060439854</p>
               <p>niyatigroup1@gmail.com</p>
               <div className="flex gap-3 mt-2">
-                <a href="tel:09412190338" className="text-indigo-400 hover:underline text-xs">Call now</a>
-                <a href="mailto:niyatigroup1@gmail.com" className="text-indigo-400 hover:underline text-xs">Email us</a>
+                <a href="tel:09412190338" className="text-sky-400 hover:underline text-xs">Call now</a>
+                <a href="mailto:niyatigroup1@gmail.com" className="text-sky-400 hover:underline text-xs">Email us</a>
               </div>
             </div>
 
@@ -207,7 +207,7 @@ const ContactForm = () => {
               <p>Sunday: 9:00 AM – 9:00 PM</p>
               <a 
                 href="https://wa.me/919997070599?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment."
-                className="text-indigo-400 hover:underline text-xs block mt-2"
+                className="text-sky-400 hover:underline text-xs block mt-2"
                 target="_blank"
               >
                 Book an appointment
