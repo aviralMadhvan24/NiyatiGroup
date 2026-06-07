@@ -3,14 +3,16 @@ import { motion } from 'framer-motion';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { FiMail, FiLock, FiArrowRight, FiInfo } from 'react-icons/fi';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   
-  const { login } = useAuth();
+  const { login, googleLogin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from || '/';
@@ -27,6 +29,20 @@ const Login = () => {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      setError('');
+      setGoogleLoading(true);
+      await googleLogin();
+      navigate(from, { replace: true });
+    } catch (err) {
+      setError('Google Sign-In failed. Please try again.');
+      console.error(err);
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
@@ -114,7 +130,7 @@ const Login = () => {
 
              <motion.button
                type="submit"
-               disabled={loading}
+               disabled={loading || googleLoading}
                whileHover={{ scale: 1.02, backgroundColor: '#0d9488' }}
                whileTap={{ scale: 0.98 }}
                className="w-full py-4 bg-teal-600 text-white rounded-2xl font-bold shadow-xl shadow-teal-900/10 transition-all flex items-center justify-center gap-2 disabled:opacity-70"
@@ -123,6 +139,31 @@ const Login = () => {
                <FiArrowRight />
              </motion.button>
            </form>
+
+           <div className="relative my-8">
+              <div className="absolute inset-0 flex items-center">
+                 <div className="w-full border-t border-slate-100"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                 <span className="px-4 bg-white text-slate-400 font-bold uppercase tracking-widest text-[10px]">Or continue with</span>
+              </div>
+           </div>
+
+           <motion.button
+             type="button"
+             disabled={loading || googleLoading}
+             onClick={handleGoogleLogin}
+             whileHover={{ scale: 1.02, backgroundColor: '#f8fafc' }}
+             whileTap={{ scale: 0.98 }}
+             className="w-full py-4 bg-white border border-slate-200 text-slate-700 rounded-2xl font-bold shadow-sm transition-all flex items-center justify-center gap-3 disabled:opacity-70"
+           >
+             {googleLoading ? (
+               <div className="animate-spin rounded-full h-5 w-5 border-2 border-teal-500 border-t-transparent"></div>
+             ) : (
+               <FcGoogle className="text-xl" />
+             )}
+             Google Account
+           </motion.button>
 
            <div className="mt-8 pt-8 border-t border-slate-50 text-center">
               <p className="text-slate-500 text-sm font-medium">
