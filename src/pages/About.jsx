@@ -74,7 +74,7 @@ const About = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
-              At NiyatiGroup, we specialize in Tax Consultancy and Job Recruitment, delivering expert solutions tailored to each client's needs since 2019.
+              At NiyatiGroup, we specialize in Tax Consultancy, Loan Assistance and Job Recruitment, delivering expert solutions tailored to each client's needs since 2019.
             </motion.p>
           </motion.div>
         </section>

@@ -154,7 +154,7 @@ useEffect(() => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                Comprehensive business solutions through our specialized divisions in tax consultancy and recruitment services.
+                Comprehensive business solutions through our specialized divisions in tax consultancy, loan assistance, and recruitment services.
               </motion.p>
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
                 <Link to="/services">
