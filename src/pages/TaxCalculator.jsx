@@ -5,7 +5,7 @@ import { Calculator, BookOpen, MessageCircle } from 'lucide-react';
 
 const TaxCalculator = () => {
  return (
-    <motion.div className="relative bg-gradient-to-br from-red-700 via-red-800 to-black text-gray-300 min-h-screen overflow-hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+    <motion.div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-gray-300 min-h-screen overflow-hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       {/* Background grid overlay */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">
@@ -16,7 +16,7 @@ const TaxCalculator = () => {
       <div className="relative z-10 container mx-auto px-4 sm:px-6 py-16 md:py-24">
         <motion.div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 md:p-8 shadow-xl max-w-4xl mx-auto" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <div className="flex items-center justify-center mb-6">
-            <Calculator className="h-8 w-8 text-red-400 mr-2" />
+            <Calculator className="h-8 w-8 text-blue-400 mr-2" />
             <h2 className="text-3xl font-bold text-white text-center">Income Tax Calculator</h2>
           </div>
           

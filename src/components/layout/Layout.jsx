@@ -10,7 +10,7 @@ import Navbar from './Navbar';
 
 const Layout = ({ children }) => {
   return (
-    <div className="relative bg-gradient-to-br from-red-700 via-red-800 to-black text-gray-300 min-h-screen overflow-hidden">
+    <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-gray-300 min-h-screen overflow-hidden">
       {/* Background Grid Overlay */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">

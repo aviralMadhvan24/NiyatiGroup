@@ -80,12 +80,12 @@ const LoanServices = () => {
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Link to="/loans/calculate">
-              <button className="px-8 py-3 bg-red-600 hover:bg-red-800 rounded-lg">
+              <button className="px-8 py-3 bg-blue-600 hover:bg-blue-800 rounded-lg">
                 Calculate EMI
               </button>
             </Link>
             <Link to="/loanoffers">
-              <button className="px-8 py-3 bg-red-600 hover:bg-red-800 rounded-lg">
+              <button className="px-8 py-3 bg-blue-600 hover:bg-blue-800 rounded-lg">
                 Checkout Loan Offers
               </button>
             </Link>

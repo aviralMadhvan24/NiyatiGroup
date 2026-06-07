@@ -40,7 +40,7 @@ const socialLinks = {
     return true;
   };
     return (
-    <footer className="relative bg-red-950 text-gray-300 pt-16 pb-10 overflow-hidden">
+    <footer className="relative bg-slate-950 text-gray-300 pt-16 pb-10 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">
@@ -60,14 +60,14 @@ const socialLinks = {
           >
             <div className="flex items-center">
               <motion.div 
-                className="bg-red-600 w-10 h-10 rounded-xl flex items-center justify-center"
+                className="bg-blue-600 w-10 h-10 rounded-xl flex items-center justify-center"
                 whileHover={{ rotate: 5, scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
                 <span className="text-white font-bold text-xl">N</span>
               </motion.div>
               <span className="ml-3 text-xl font-bold text-gray-100">
-                Niyati<span className="text-red-500">Group</span>
+                Niyati<span className="text-blue-400">Group</span>
               </span>
             </div>
             <p className="mt-2 text-xs text-gray-400">
@@ -84,7 +84,7 @@ const socialLinks = {
         rel="noopener noreferrer"
         whileHover={{ y: -3, color: '#3b82f6' }}
         whileTap={{ scale: 0.95 }}
-        className="bg-gray-900 p-2 rounded-lg border border-gray-800 hover:border-red-500/30 text-gray-400 hover:text-red-400 transition-all"
+        className="bg-gray-900 p-2 rounded-lg border border-gray-800 hover:border-red-500/30 text-gray-400 hover:text-blue-400 transition-all"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -128,7 +128,7 @@ const socialLinks = {
             >
               <button 
                 onClick={() => handleNavigation(service.path)}
-                className="cursor-pointer flex items-center text-sm text-gray-400 hover:text-red-400 transition-colors group w-full text-left"
+                className="cursor-pointer flex items-center text-sm text-gray-400 hover:text-blue-400 transition-colors group w-full text-left"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
@@ -140,7 +140,7 @@ const socialLinks = {
                   strokeWidth="2" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
-                  className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-red-400"
+                  className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-blue-400"
                 >
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
@@ -176,7 +176,7 @@ const socialLinks = {
             >
               <button 
                 onClick={() => handleNavigation(link.path)}
-                className="flex cursor-pointer items-center text-sm text-gray-400 hover:text-red-400 transition-colors group w-full text-left"
+                className="flex cursor-pointer items-center text-sm text-gray-400 hover:text-blue-400 transition-colors group w-full text-left"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
@@ -188,7 +188,7 @@ const socialLinks = {
                   strokeWidth="2" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
-                  className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-red-400"
+                  className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-blue-400"
                 >
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
@@ -248,7 +248,7 @@ const socialLinks = {
                   "https://wa.me/+919997070599?text=Hi%2C%20I%20would%20like%20to%20request%20a%20consultation.",
                   "_blank"
                 )}
-                className="w-full px-4 py-2.5 bg-red-600 hover:bg-red-800 rounded-lg cursor-pointer text-sm text-white font-medium transition-colors"
+                className="w-full px-4 py-2.5 bg-blue-600 hover:bg-blue-800 rounded-lg cursor-pointer text-sm text-white font-medium transition-colors"
               >
                 Request Consultation
               </motion.button>
@@ -297,7 +297,7 @@ const socialLinks = {
               href="https://www.click2biz.in" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex items-center hover:text-red-400 transition-colors"
+              className="flex items-center hover:text-blue-400 transition-colors"
             >
               <img 
                 src="/logo.png" 

@@ -58,7 +58,7 @@ const AdminLoanApplications = () => {
   }
 
   return (
-    <div className="relative bg-gradient-to-br from-red-700 via-red-800 to-black text-gray-300 min-h-screen overflow-hidden">
+    <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-gray-300 min-h-screen overflow-hidden">
       {/* Background Grid Overlay */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">
@@ -157,7 +157,7 @@ const AdminLoanApplications = () => {
 
                       <div className="flex space-x-4 pt-2">
                         <p className="text-sm text-gray-500">Contact</p>
-                        <a href={`tel:${app.phone}`} className="text-white hover:text-red-400 transition-colors">
+                        <a href={`tel:${app.phone}`} className="text-white hover:text-blue-400 transition-colors">
                           {app.phone}
                         </a>
                       </div>

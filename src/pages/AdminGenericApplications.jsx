@@ -56,7 +56,7 @@
 //   }
 
 //   return (
-//     <div className="relative bg-gradient-to-br from-red-700 via-red-800 to-black text-gray-300 min-h-screen overflow-hidden">
+//     <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-gray-300 min-h-screen overflow-hidden">
 //       <div className="relative z-10 max-w-4xl mx-auto px-6 py-16">
 //         <motion.div
 //           initial={{ opacity: 0, y: 20 }}

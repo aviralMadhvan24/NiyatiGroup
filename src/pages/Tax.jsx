@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const Tax = () => {
-  const gradientBg = 'bg-gradient-to-br from-red-700 via-red-800 to-black';
+  const gradientBg = 'bg-gradient-to-br from-slate-900 via-slate-800 to-black';
   const services = [
     { 
       id: 1, 
@@ -89,12 +89,12 @@ const Tax = () => {
                 <span className="relative flex h-3 w-3 mr-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span><span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span></span>
                 Expert Tax Solutions
               </motion.div>
-              <motion.h1 className="text-5xl font-bold text-gray-100 mb-4" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.4 }}>Tax <span className="text-red-500">Services</span></motion.h1>
+              <motion.h1 className="text-5xl font-bold text-gray-100 mb-4" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.4 }}>Tax <span className="text-blue-400">Services</span></motion.h1>
               <motion.p className="text-xl text-gray-400 mb-8" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.6 }}>
                 Comprehensive tax solutions for individuals and businesses.
               </motion.p>
               <motion.div className="flex flex-col sm:flex-row justify-center gap-4" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.8 }}>
-                <Link to="/calculator"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium shadow-lg">Tax Calculator</motion.button></Link>
+                <Link to="/calculator"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-blue-600 hover:bg-blue-800 rounded-lg text-white font-medium shadow-lg">Tax Calculator</motion.button></Link>
                 <Link to="/contact"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border border-gray-700 backdrop-blur-sm">Consult Our Experts</motion.button></Link>
               </motion.div>
             </motion.div>
@@ -105,7 +105,7 @@ const Tax = () => {
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className="text-4xl font-bold text-gray-100">Our Tax <span className="text-red-500">Services</span></h2>
+              <h2 className="text-4xl font-bold text-gray-100">Our Tax <span className="text-blue-400">Services</span></h2>
               <p className="mt-4 text-gray-400">Complete tax solutions tailored to your needs.</p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -113,7 +113,7 @@ const Tax = () => {
                 <motion.div key={s.id} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col hover:border-blue-500/30 transition" initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} whileHover={{ y:-5 }}>
                   <h3 className="text-xl font-semibold text-gray-100 mb-2">{s.title}</h3>
                   <p className="text-gray-400 flex-grow">{s.description}</p>
-                  <a href={s.whatsappLink} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center text-red-600 hover:text-red-800">Get Started on WhatsApp</a>
+                  <a href={s.whatsappLink} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center text-blue-400 hover:text-blue-500">Get Started on WhatsApp</a>
                 </motion.div>
               ))}
             </div>
@@ -121,10 +121,10 @@ const Tax = () => {
         </section>
 
         {/* Specializations */}
-        <section className="py-16 md:py-24 bg-red-950/50 border-t border-gray-800">
+        <section className="py-16 md:py-24 bg-slate-950/50 border-t border-gray-800">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className="text-4xl font-bold text-gray-100">Our <span className="text-red-500">Specializations</span></h2>
+              <h2 className="text-4xl font-bold text-gray-100">Our <span className="text-blue-400">Specializations</span></h2>
               <p className="mt-4 text-gray-400">Tailored tax solutions for different needs.</p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -142,10 +142,10 @@ const Tax = () => {
         </section>
 
         {/* Process */}
-        <section className="py-16 md:py-24 bg-red-950/50 border-y border-gray-800">
+        <section className="py-16 md:py-24 bg-slate-950/50 border-y border-gray-800">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className="text-4xl font-bold text-gray-100">Our Tax <span className="text-red-500">Process</span></h2>
+              <h2 className="text-4xl font-bold text-gray-100">Our Tax <span className="text-blue-400">Process</span></h2>
               <p className="mt-4 text-gray-400">A streamlined approach for stress-free tax compliance.</p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -163,10 +163,10 @@ const Tax = () => {
         </section>
 
         {/* Testimonials */}
-        <section className="py-16 md:py-24 bg-red-950/50">
+        <section className="py-16 md:py-24 bg-slate-950/50">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className="text-4xl font-bold text-gray-100">Client <span className="text-red-500">Success</span></h2>
+              <h2 className="text-4xl font-bold text-gray-100">Client <span className="text-blue-400">Success</span></h2>
               <p className="mt-4 text-gray-400">Hear from satisfied clients about their tax experience.</p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -192,12 +192,12 @@ const Tax = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 md:py-24 bg-gradient-to-br bg-red-950/50 text-center">
+        <section className="py-16 md:py-24 bg-gradient-to-br bg-slate-950/50 text-center">
           <div className="container mx-auto px-4 md:px-6">
-            <motion.h2 initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-4xl font-bold text-gray-100 mb-4">Ready to Optimize Your <span className="text-red-500">Tax Strategy</span>?</motion.h2>
+            <motion.h2 initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-4xl font-bold text-gray-100 mb-4">Ready to Optimize Your <span className="text-blue-400">Tax Strategy</span>?</motion.h2>
             <motion.p initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.2, duration:0.5 }} className="text-gray-400 mb-8">Let our experts handle your tax needs with precision and care.</motion.p>
             <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.4, duration:0.5 }} className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/contact"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-red-600 hover:bg-red-800 cursor-pointer rounded-lg text-white font-medium shadow-lg">Get Started</motion.button></Link>
+              <Link to="/contact"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-blue-600 hover:bg-blue-800 cursor-pointer rounded-lg text-white font-medium shadow-lg">Get Started</motion.button></Link>
               <a href="tel:+919997070599"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border cursor-pointer border-gray-700 backdrop-blur-sm">Call Our Experts</motion.button></a>
             </motion.div>
           </div>

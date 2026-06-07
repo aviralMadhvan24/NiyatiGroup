@@ -34,7 +34,7 @@ const AboutSection = () => {
               ].map((item, index) => (
                 <motion.div 
                   key={index}
-                  className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 text-red-500"
+                  className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 text-blue-400"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -59,7 +59,7 @@ const AboutSection = () => {
               alt="About Niyati Group" 
               className="w-full h-auto rounded-xl shadow-lg"
             />
-            <p className="mt-4 text-shadow-red-800 text-3xl font-semibold text-center text-white">
+            <p className="mt-4 text-blue-400 text-3xl font-semibold text-center text-white">
   Mr. Nitish Saxena, Founder & CEO
 </p>
 

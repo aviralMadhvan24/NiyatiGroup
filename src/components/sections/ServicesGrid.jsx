@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const ServicesGrid = () => {
   return (
-    <section className="relative py-28 bg-red-950 overflow-hidden">
+    <section className="relative py-28 bg-slate-950 overflow-hidden">
       {/* Animated Background Elements */}
       <motion.div 
         className="absolute inset-0 overflow-hidden"

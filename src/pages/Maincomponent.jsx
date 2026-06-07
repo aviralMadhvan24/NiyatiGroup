@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const MainComponent = () => {
   return (
-    <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 lg:pt-44 lg:pb-32 bg-gradient-to-br from-red-900 to-gray-950 overflow-hidden">
+    <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 lg:pt-44 lg:pb-32 bg-gradient-to-br from-slate-900 to-gray-950 overflow-hidden">
       {/* Animated Background Elements */}
       <motion.div 
         className="absolute inset-0 overflow-hidden"

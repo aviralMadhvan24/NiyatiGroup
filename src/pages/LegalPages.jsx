@@ -10,7 +10,7 @@ const LegalPages = ({ page }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-950 to-black text-gray-300">
       {/* Navigation */}
-      <nav className="bg-gradient-to-r from-red-900 via-red-950 to-black py-4 px-4 sm:px-6 shadow-lg">
+      <nav className="bg-gradient-to-r from-slate-900 via-slate-900 to-black py-4 px-4 sm:px-6 shadow-lg">
         <div className="container mx-auto flex items-center justify-between">
           <button 
             onClick={() => navigate('/')}
@@ -39,11 +39,11 @@ const LegalPages = ({ page }) => {
           transition={{ duration: 0.5 }}
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-red-900 via-red-950 to-black p-6 sm:p-8">
+          <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-black p-6 sm:p-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <div className="bg-gray-900/50 border border-gray-800 w-12 h-12 rounded-lg flex items-center justify-center">
-                  {isTerms ? <FiBook className="w-6 h-6 text-red-400" /> : <FiLock className="w-6 h-6 text-red-400" />}
+                  {isTerms ? <FiBook className="w-6 h-6 text-blue-400" /> : <FiLock className="w-6 h-6 text-blue-400" />}
                 </div>
                 <div>
                   <h1 className="text-2xl sm:text-3xl font-bold text-white">
@@ -70,7 +70,7 @@ const LegalPages = ({ page }) => {
             {/* Introduction */}
             <section className="mb-10">
               <h2 className="text-xl font-bold text-white mb-4 flex items-center">
-                <FiBriefcase className="mr-2 text-red-400" />
+                <FiBriefcase className="mr-2 text-blue-400" />
                 About Niyati Group
               </h2>
               <p className="mb-4">
@@ -82,7 +82,7 @@ const LegalPages = ({ page }) => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                 <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
                   <div className="flex items-center mb-2">
-                    <FiDollarSign className="w-5 h-5 text-red-400 mr-2" />
+                    <FiDollarSign className="w-5 h-5 text-blue-400 mr-2" />
                     <h3 className="font-bold text-white">Tax Services</h3>
                   </div>
                   <p className="text-sm">
@@ -92,7 +92,7 @@ const LegalPages = ({ page }) => {
                 
                 <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
                   <div className="flex items-center mb-2">
-                    <FiDollarSign className="w-5 h-5 text-red-400 mr-2" />
+                    <FiDollarSign className="w-5 h-5 text-blue-400 mr-2" />
                     <h3 className="font-bold text-white">Loan Assistance</h3>
                   </div>
                   <p className="text-sm">
@@ -102,7 +102,7 @@ const LegalPages = ({ page }) => {
                 
                 <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
                   <div className="flex items-center mb-2">
-                    <FiBriefcase className="w-5 h-5 text-red-400 mr-2" />
+                    <FiBriefcase className="w-5 h-5 text-blue-400 mr-2" />
                     <h3 className="font-bold text-white">Job Recruitment</h3>
                   </div>
                   <p className="text-sm">
@@ -115,7 +115,7 @@ const LegalPages = ({ page }) => {
             {/* Main Content */}
             <section>
               <h2 className="text-xl font-bold text-white mb-4 flex items-center">
-                <FiShield className="mr-2 text-red-400" />
+                <FiShield className="mr-2 text-blue-400" />
                 {isTerms ? "Terms Governing Our Services" : "Your Privacy Matters"}
               </h2>
               
@@ -294,7 +294,7 @@ Bareilly, Uttar Pradesh, 243001</p>
           </div>
           
           {/* Footer */}
-          <div className="bg-gradient-to-r from-red-900 via-red-950 to-black p-6 text-center">
+          <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-black p-6 text-center">
             <div className="flex flex-col sm:flex-row items-center justify-between">
               <div className="flex items-center justify-center sm:justify-start mb-4 sm:mb-0">
                 <div className="bg-gray-900/50 border border-gray-800 w-10 h-10 rounded-lg flex items-center justify-center shadow-md">

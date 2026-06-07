@@ -97,8 +97,8 @@ const Navbar = () => {
   return (
     <>
       <nav className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-gradient-to-r from-red-900/95 via-red-950/95 to-black/95 shadow-lg py-2' : 
-        'bg-gradient-to-r from-red-900 via-red-950 to-black py-4'
+        scrolled ? 'bg-gradient-to-r from-slate-900/95 via-slate-900/95 to-black/95 shadow-lg py-2' : 
+        'bg-gradient-to-r from-slate-900 via-slate-900 to-black py-4'
       }`}>
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center">
@@ -139,7 +139,7 @@ const Navbar = () => {
                         {servicesOpen ? <FiChevronUp className="ml-1" /> : <FiChevronDown className="ml-1" />}
                       </NavLink>
                       {servicesOpen && (
-                        <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gradient-to-b from-red-900 via-red-950 to-black border border-red-800 z-50">
+                        <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gradient-to-b from-slate-900 via-slate-900 to-black border border-slate-700 z-50">
                           <div className="py-1">
                             {link.subLinks.map((subLink) => (
                               <NavLink
@@ -150,7 +150,7 @@ const Navbar = () => {
                                     e.preventDefault();
                                   }
                                 }}
-                                className="block px-4 py-2 text-sm text-gray-300 hover:bg-red-600 hover:text-white"
+                                className="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-600 hover:text-white"
                               >
                                 {subLink.name}
                               </NavLink>
@@ -230,7 +230,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-md text-gray-300 hover:text-white hover:bg-red-600 transition-colors"
+              className="lg:hidden p-2 rounded-md text-gray-300 hover:text-white hover:bg-blue-600 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -242,7 +242,7 @@ const Navbar = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="lg:hidden bg-gradient-to-b from-red-900 via-red-950 to-black shadow-lg overflow-hidden"
+              className="lg:hidden bg-gradient-to-b from-slate-900 via-slate-900 to-black shadow-lg overflow-hidden"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
@@ -250,7 +250,7 @@ const Navbar = () => {
             >
               <div className="px-4 py-3">
                 {user && (
-                  <div className="mb-4 p-3 bg-red-900/30 rounded-lg">
+                  <div className="mb-4 p-3 bg-slate-900/30 rounded-lg">
                     <p className="font-medium text-white">{user.displayName || 'User'}</p>
                     <p className="text-xs text-gray-300">{user.email}</p>
                   </div>
@@ -288,7 +288,7 @@ const Navbar = () => {
                             </button>
                           </div>
                           {servicesOpen && (
-                            <div className="ml-4 mt-1 mb-2 rounded-md bg-red-900/30 border border-red-800">
+                            <div className="ml-4 mt-1 mb-2 rounded-md bg-slate-900/30 border border-slate-700">
                               <div className="py-1">
                                 {link.subLinks.map((subLink) => (
                                   <NavLink
@@ -298,7 +298,7 @@ const Navbar = () => {
                                       setServicesOpen(false);
                                       handleNavigation(subLink.path, true);
                                     }}
-                                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-red-600 hover:text-white"
+                                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-600 hover:text-white"
                                   >
                                     {subLink.name}
                                   </NavLink>
@@ -340,11 +340,11 @@ const Navbar = () => {
                     </NavLink>
                   )}
                 </div>
-                <div className="mt-3 pt-3 border-t border-red-800">
+                <div className="mt-3 pt-3 border-t border-slate-700">
                   {user ? (
                     <button
                       onClick={() => setShowLogoutModal(true)}
-                      className="cursor-pointer w-full flex items-center justify-center p-3 rounded-lg bg-red-600 hover:bg-red-700 text-white"
+                      className="cursor-pointer w-full flex items-center justify-center p-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white"
                     >
                       <FiLogOut className="mr-2" />
                       Logout
@@ -368,7 +368,7 @@ const Navbar = () => {
       {/* Logout Confirmation Modal */}
       {showLogoutModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-gradient-to-br from-red-900 via-red-950 to-black rounded-lg p-6 max-w-sm w-full mx-4 border border-red-800">
+          <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-black rounded-lg p-6 max-w-sm w-full mx-4 border border-slate-700">
             <h3 className="text-xl font-semibold text-white mb-4">Confirm Logout</h3>
             <p className="text-gray-300 mb-6">Are you sure you want to log out?</p>
             <div className="flex justify-end space-x-3">
@@ -380,7 +380,7 @@ const Navbar = () => {
               </button>
               <button
                 onClick={handleLogout}
-                className="cursor-pointer px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition-colors"
+                className="cursor-pointer px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
               >
                 Logout
               </button>
@@ -391,7 +391,7 @@ const Navbar = () => {
       {/* Login Required Modal */}
       {showLoginModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-gradient-to-br from-red-900 via-red-950 to-black rounded-lg p-6 max-w-sm w-full mx-4 border border-red-800">
+          <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-black rounded-lg p-6 max-w-sm w-full mx-4 border border-slate-700">
             <h3 className="text-xl font-semibold text-white mb-4">Login Required</h3>
             <p className="text-gray-300 mb-6">Please login to access this page.</p>
             <div className="flex justify-end space-x-3">

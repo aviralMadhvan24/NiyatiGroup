@@ -148,7 +148,7 @@ const AddLoanOffer = () => {
           whileTap={{ scale: 0.98 }}
           type="submit"
           disabled={isSubmitting}
-          className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md transition-colors w-full"
+          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors w-full"
         >
           {isSubmitting ? 'Submitting...' : 'Add Loan Offer'}
         </motion.button>

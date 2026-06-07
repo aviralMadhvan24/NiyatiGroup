@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Services = () => {
   return (
-    <div className="relative bg-gradient-to-br from-red-700 via-red-800 to-black text-gray-300 min-h-screen overflow-hidden">
+    <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-gray-300 min-h-screen overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">
@@ -40,7 +40,7 @@ const Services = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              <span className="text-red-500">Niyati</span> Group
+              <span className="text-blue-400">Niyati</span> Group
             </motion.h1>
 
             <motion.p 
@@ -98,7 +98,7 @@ const Services = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full px-6 py-3 bg-red-600 hover:bg-red-800 cursor-pointer rounded-lg text-white font-medium transition-colors"
+                  className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-800 cursor-pointer rounded-lg text-white font-medium transition-colors"
                 >
                   Explore Tax Services
                 </motion.button>
@@ -150,7 +150,7 @@ const Services = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="cursor-pointer w-full px-6 py-3 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium transition-colors"
+                  className="cursor-pointer w-full px-6 py-3 bg-blue-600 hover:bg-blue-800 rounded-lg text-white font-medium transition-colors"
                 >
                   Explore Recruitment Services
                 </motion.button>
@@ -199,7 +199,7 @@ const Services = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="cursor-pointer w-full px-6 py-3 bg-red-600 hover:bg-red-800 rounded-lg text-white font-medium transition-colors"
+                  className="cursor-pointer w-full px-6 py-3 bg-blue-600 hover:bg-blue-800 rounded-lg text-white font-medium transition-colors"
                 >
                   Explore Loan Services
                 </motion.button>
@@ -295,7 +295,7 @@ const Services = () => {
 
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="cursor-pointer px-8 py-3.5 bg-red-600 hover:bg-red-800 text-white rounded-lg font-medium shadow-lg transition-colors"
+                  className="cursor-pointer px-8 py-3.5 bg-blue-600 hover:bg-blue-800 text-white rounded-lg font-medium shadow-lg transition-colors"
                 >
                   Contact Us
                 </motion.button>

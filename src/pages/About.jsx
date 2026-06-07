@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const About = () => {
   return (
-    <div className="relative bg-red-950 text-gray-300 min-h-screen overflow-hidden">
+    <div className="relative bg-slate-950 text-gray-300 min-h-screen overflow-hidden">
       
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -153,7 +153,7 @@ const About = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-6 py-2.5 bg-gray-600 hover:bg-red-800 text-white rounded-lg font-medium shadow-md transition-colors text-sm"
+                  className="px-6 py-2.5 bg-gray-600 hover:bg-blue-800 text-white rounded-lg font-medium shadow-md transition-colors text-sm"
                 >
                   Contact Us
                 </motion.button>
@@ -162,7 +162,7 @@ const About = () => {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-6 py-2.5 bg-red-600 hover:bg-red-800 text-white rounded-lg font-medium shadow-md transition-colors text-sm"
+                  className="px-6 py-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-lg font-medium shadow-md transition-colors text-sm"
                 >
                   Explore Recruitment
                 </motion.button>
