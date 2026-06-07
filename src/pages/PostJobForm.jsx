@@ -3,7 +3,8 @@ import { db, auth } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { ADMIN_EMAIL } from '../config/admin';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiBriefcase, FiMapPin, FiClock, FiDollarSign, FiPlusCircle, FiCheckCircle, FiLink } from 'react-icons/fi';
 
 const PostJobForm = () => {
   const [form, setForm] = useState({
@@ -19,9 +20,11 @@ const PostJobForm = () => {
     description: '',
     applyLink: '',
     lastDate: '',
-    status: 'active'
+    status: 'active',
+    experienceLevel: 'fresher'
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,10 +47,11 @@ const PostJobForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // Validate salary range
     if (form.showAsRange && form.minSalary && form.maxSalary && form.minSalary > form.maxSalary) {
       alert("Minimum salary cannot be greater than maximum salary");
+      setIsSubmitting(false);
       return;
     }
 
@@ -76,187 +80,145 @@ const PostJobForm = () => {
         applyLink: '',
         lastDate: '',
         status: 'active',
-         experienceLevel: 'fresher'
+        experienceLevel: 'fresher'
       });
     } catch (error) {
       alert("Error posting job: " + error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-gray-900 to-gray-950 text-gray-300 py-12 px-4 sm:px-6">
-      {/* Background Grid Overlay */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-      </div>
+    <div className="relative min-h-screen niyati-bg-pattern bg-[#e8f4f8] pt-24 pb-20 px-4">
+      <div className="max-w-4xl mx-auto relative z-10">
+        <header className="text-center mb-12">
+           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
+              <div className="inline-flex items-center px-4 py-2 mb-6 font-bold rounded-full text-teal-700 bg-white border border-teal-100 shadow-sm">
+                <FiPlusCircle className="mr-2" />
+                Recruitment Dashboard
+              </div>
+              <h1 className="text-4xl font-black text-slate-800 mb-4">Post a <span className="text-teal-600">New Opening</span></h1>
+           </motion.div>
+        </header>
 
-      <div className="relative z-10 max-w-2xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-xl p-6 sm:p-8"
+          className="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl shadow-teal-900/10 border border-teal-50"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-white">
-            Post a New <span className="text-blue-400">Job</span> Opportunity
-          </h2>
-          
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {[
-              { field: 'title', label: 'Job Title', placeholder: 'e.g. Senior Software Engineer' },
-              { field: 'company', label: 'Company Name', placeholder: 'e.g. Niyati Group' },
-              { field: 'location', label: 'Location', placeholder: 'e.g. Bareilly, Uttar Pradesh' },
-              { 
-                field: 'openings', 
-                label: 'Number of Openings', 
-                placeholder: 'e.g. 5',
-                type: 'number',
-                min: 1
-              },
-              { 
-                field: 'duration', 
-                label: 'Job Duration', 
-                placeholder: 'e.g. Full-time, 6 months contract, Permanent',
-                info: 'Specify if temporary/contract/permanent'
-              },
-              { field: 'lastDate', label: 'Last Date to Apply', type: 'date' },
-              { 
-                field: 'description', 
-                label: 'Job Description', 
-                placeholder: 'Detailed job description...', 
-                textarea: true,
-                required: false
-              },
-              { field: 'applyLink', label: 'Application Link (optional)', placeholder: 'https://...' }
-            ].map(({ field, label, placeholder, type = 'text', textarea, info, required = true, min }) => (
-              <div key={field} className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <label className="block text-sm font-medium text-gray-400">{label}</label>
-                  {info && <span className="text-xs text-gray-500">{info}</span>}
-                </div>
-                {textarea ? (
-                  <textarea
-                    name={field}
-                    placeholder={placeholder}
-                    value={form[field]}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    rows={5}
-                    required={required}
-                  />
-                ) : (
-                  <input
-                    type={type}
-                    name={field}
-                    placeholder={placeholder}
-                    value={form[field]}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    
-                    
-                    min={type === 'date' ? new Date().toISOString().split('T')[0] : min}
-                  />
-                )}
-              </div>
-            ))}
-
-            {/* Salary Range Section */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <label className="block text-sm font-medium text-gray-400">Salary</label>
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id="showAsRange"
-                    name="showAsRange"
-                    checked={form.showAsRange}
-                    onChange={handleChange}
-                    className="h-4 w-4 rounded border-gray-600 bg-gray-700 text-blue-400 focus:ring-blue-500"
-                  />
-                  <label htmlFor="showAsRange" className="ml-2 text-sm text-gray-400">
-                    Show as range
-                  </label>
-                </div>
-              </div>
-
-              {form.showAsRange ? (
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs text-gray-400 mb-1">Minimum Salary</label>
-                    <input
-                      type="number"
-                      name="minSalary"
-                      placeholder="e.g. 50000"
-                      value={form.minSalary}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      min={0}
-                    />
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+               <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Job Title</label>
+                  <div className="relative">
+                     <FiBriefcase className="absolute top-4 left-4 text-teal-600" />
+                     <input type="text" name="title" value={form.title} onChange={handleChange} placeholder="e.g. Senior Accountant" className="w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold text-slate-900" required />
                   </div>
-                  <div>
-                    <label className="block text-xs text-gray-400 mb-1">Maximum Salary</label>
-                    <input
-                      type="number"
-                      name="maxSalary"
-                      placeholder="e.g. 80000"
-                      value={form.maxSalary}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      min={form.minSalary || 0}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    name="minSalary"
-                    placeholder="e.g. 50000"
-                    value={form.minSalary}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    required
-                    min={0}
-                  />
-                </div>
-              )}
-
-              <select
-                name="salaryType"
-                value={form.salaryType}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="LPA">LPA</option>
-                <option value="monthly">Monthly</option>
-              </select>
+               </div>
+               <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Company Name</label>
+                  <input type="text" name="company" value={form.company} onChange={handleChange} placeholder="e.g. Niyati Group" className="w-full px-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold text-slate-900" required />
+               </div>
             </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+               <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Location</label>
+                  <div className="relative">
+                     <FiMapPin className="absolute top-4 left-4 text-teal-600" />
+                     <input type="text" name="location" value={form.location} onChange={handleChange} placeholder="e.g. Bareilly / Remote" className="w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold text-slate-900" required />
+                  </div>
+               </div>
+               <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Number of Openings</label>
+                  <input type="number" name="openings" value={form.openings} onChange={handleChange} min="1" placeholder="e.g. 5" className="w-full px-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold text-slate-900" required />
+               </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+               <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Employment Type / Duration</label>
+                  <div className="relative">
+                     <FiClock className="absolute top-4 left-4 text-teal-600" />
+                     <input type="text" name="duration" value={form.duration} onChange={handleChange} placeholder="e.g. Permanent / 6 Months" className="w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold text-slate-900" required />
+                  </div>
+               </div>
+               <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Last Date to Apply</label>
+                  <input type="date" name="lastDate" value={form.lastDate} onChange={handleChange} min={new Date().toISOString().split('T')[0]} className="w-full px-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold text-slate-900" required />
+               </div>
+            </div>
+
             <div className="space-y-2">
-  <label className="block text-sm font-medium text-gray-400">Experience Level</label>
-  <select
-    name="experienceLevel"
-    value={form.experienceLevel}
-    onChange={handleChange}
-    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-    required
-  >
-    <option value="fresher">Fresher</option>
-    <option value="experienced">Experienced</option>
-    <option value="both">Both (Fresher & Experienced)</option>
-
-  </select>
-</div>
-
-            
-            <div className="flex justify-end pt-4">
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="cursor-pointer px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all"
-              >
-                Post Job
-              </motion.button>
+               <div className="flex justify-between items-center px-1">
+                  <label className="block text-xs font-black text-slate-400 uppercase tracking-widest">Compensation / Salary</label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                     <input type="checkbox" name="showAsRange" checked={form.showAsRange} onChange={handleChange} className="w-4 h-4 rounded-md border-slate-300 text-teal-600 focus:ring-teal-500" />
+                     <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Show Range</span>
+                  </label>
+               </div>
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                  <div className="relative">
+                     <FiDollarSign className="absolute top-4 left-4 text-teal-600" />
+                     <input type="number" name="minSalary" value={form.minSalary} onChange={handleChange} placeholder="e.g. 3.5" className="w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold text-slate-900" required />
+                     <span className="absolute right-4 top-4 text-[10px] font-black text-slate-300 uppercase">Min Cost</span>
+                  </div>
+                  {form.showAsRange && (
+                     <div className="relative">
+                        <FiDollarSign className="absolute top-4 left-4 text-teal-600" />
+                        <input type="number" name="maxSalary" value={form.maxSalary} onChange={handleChange} placeholder="e.g. 5.5" className="w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold text-slate-900" required />
+                        <span className="absolute right-4 top-4 text-[10px] font-black text-slate-300 uppercase">Max Cost</span>
+                     </div>
+                  )}
+                  <select name="salaryType" value={form.salaryType} onChange={handleChange} className="w-full px-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold text-slate-900 appearance-none cursor-pointer">
+                     <option value="LPA">LPA (Yearly)</option>
+                     <option value="monthly">Monthly</option>
+                  </select>
+               </div>
             </div>
+
+            <div className="space-y-4">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                     <label className="block text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Experience Level</label>
+                     <select name="experienceLevel" value={form.experienceLevel} onChange={handleChange} className="w-full px-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold text-slate-900 appearance-none cursor-pointer" required>
+                        <option value="fresher">Fresher Only</option>
+                        <option value="experienced">Experienced Only</option>
+                        <option value="both">Both (Fresher & Experienced)</option>
+                     </select>
+                  </div>
+                  <div className="space-y-2">
+                     <label className="block text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Application Link (Optional)</label>
+                     <div className="relative">
+                        <FiLink className="absolute top-4 left-4 text-teal-600" />
+                        <input type="url" name="applyLink" value={form.applyLink} onChange={handleChange} placeholder="https://..." className="w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold text-slate-900" />
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div className="space-y-2">
+               <label className="block text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Job Description & Responsibilities</label>
+               <textarea name="description" value={form.description} onChange={handleChange} placeholder="Detailed job requirement profile..." className="w-full px-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-medium text-slate-900" rows="6" required />
+            </div>
+
+            <motion.button
+              type="submit"
+              disabled={isSubmitting}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              className="w-full py-5 bg-slate-900 hover:bg-teal-600 text-white font-black rounded-[2rem] transition-all shadow-xl shadow-teal-900/10 flex items-center justify-center gap-3 text-lg"
+            >
+              {isSubmitting ? (
+                 <div className="animate-spin w-6 h-6 border-4 border-white border-t-transparent rounded-full" />
+              ) : (
+                <>
+                  Publish Job Opportunity
+                  <FiCheckCircle />
+                </>
+              )}
+            </motion.button>
           </form>
         </motion.div>
       </div>

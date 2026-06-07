@@ -104,7 +104,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full max-w-4xl niyati-card p-10 md:p-16 relative overflow-hidden text-center"
+          className="w-full niyati-card p-10 md:p-16 relative overflow-hidden text-center"
         >
           {/* Subtle logo in background */}
           <div className="absolute -right-20 -bottom-20 opacity-10 rotate-12">
@@ -124,8 +124,11 @@ const Home = () => {
              </div>
             
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Welcome to <br />
-              <span className="text-teal-300">Niyati</span> Group
+            
+          
+              <span className="text-white">Welcome to</span> <br />
+              <span className="text-teal-300">Niyati </span> 
+              <span className="text-white">Group</span> <br />
             </h1>
             
             <div className="w-20 h-1 bg-teal-300/30 mx-auto mb-8 rounded-full"></div>

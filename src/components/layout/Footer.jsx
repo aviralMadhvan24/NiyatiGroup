@@ -43,7 +43,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-gradient-to-br from-teal-900 via-teal-950 to-slate-950 text-gray-300 pt-16 pb-10 overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-teal-900 via-teal-950 to-slate-950 text-teal-100/80 pt-16 pb-10 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full">
@@ -73,8 +73,8 @@ const Footer = () => {
                 Niyati<span className="text-teal-400">Group</span>
               </span>
             </div>
-            <p className="mt-2 text-xs text-gray-400">
-              Offering <strong>Tax Consultancy</strong>, <strong>Loan Services</strong> &amp; <strong>Recruitment Solutions</strong>
+            <p className="mt-2 text-xs text-teal-100/60 leading-relaxed font-medium">
+              Offering <strong className="text-teal-300">Tax Consultancy</strong>, <strong className="text-teal-300">Loan Services</strong> &amp; <strong className="text-teal-300">Recruitment Solutions</strong>
             </p>
             <div className="flex space-x-3">
               {Object.entries(socialLinks).map(([social, url], index) => {
@@ -130,7 +130,7 @@ const Footer = () => {
                 >
                   <button 
                     onClick={() => handleNavigation(service.path)}
-                    className="cursor-pointer flex items-center text-sm text-gray-400 hover:text-teal-400 transition-colors group w-full text-left"
+                    className="cursor-pointer flex items-center text-sm text-teal-100/60 hover:text-teal-400 transition-colors group w-full text-left"
                   >
                     <svg 
                       xmlns="http://www.w3.org/2000/svg" 
@@ -178,7 +178,7 @@ const Footer = () => {
                 >
                   <button 
                     onClick={() => handleNavigation(link.path)}
-                    className="flex cursor-pointer items-center text-sm text-gray-400 hover:text-teal-400 transition-colors group w-full text-left"
+                    className="flex cursor-pointer items-center text-sm text-teal-100/60 hover:text-teal-400 transition-colors group w-full text-left"
                   >
                     <svg 
                       xmlns="http://www.w3.org/2000/svg" 
@@ -218,7 +218,7 @@ const Footer = () => {
                     <circle cx="12" cy="10" r="3"></circle>
                   </svg>
                 </div>
-                <p className="text-sm text-gray-400">Rajni Niwas, 616, Ganesh Nagar,<br />Bareilly, Uttar Pradesh, 243001</p>
+                <p className="text-sm text-teal-100/60">Rajni Niwas, 616, Ganesh Nagar,<br />Bareilly, Uttar Pradesh, 243001</p>
               </div>
               
               <div className="flex items-start">
@@ -228,7 +228,7 @@ const Footer = () => {
                     <polyline points="22,6 12,13 2,6"></polyline>
                   </svg>
                 </div>
-                <a href="mailto:niyatigroup1@gmail.com" className="text-sm text-gray-400 hover:text-teal-400 transition-colors">niyatigroup1@gmail.com</a>
+                <a href="mailto:niyatigroup1@gmail.com" className="text-sm text-teal-100/60 hover:text-teal-400 transition-colors">niyatigroup1@gmail.com</a>
               </div>
               
               <div className="flex items-start">
@@ -237,8 +237,8 @@ const Footer = () => {
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                   </svg>
                 </div>
-                <a href="tel:+919997070599" className="text-sm text-gray-400 hover:text-teal-400 transition-colors">+91 9997070599,   </a>
-                <a href="tel:+917060439854" className="text-sm text-gray-400 hover:text-teal-400 transition-colors">+91 7060439854 </a>
+                <a href="tel:+919997070599" className="text-sm text-teal-100/60 hover:text-teal-400 transition-colors">+91 9997070599,   </a>
+                <a href="tel:+917060439854" className="text-sm text-teal-100/60 hover:text-teal-400 transition-colors">+91 7060439854 </a>
               </div>
             </address>
 
@@ -267,7 +267,7 @@ const Footer = () => {
           transition={{ delay: 0.4 }}
         >
           <div className="border-t border-teal-800/50 pt-6 text-center">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-teal-100/40">
               © {currentYear} Niyati Group. All rights reserved.
             </p>
             
@@ -289,7 +289,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <p className="mt-4 text-xs text-gray-400 flex items-center justify-center space-x-1">
+          <p className="mt-4 text-xs text-teal-100/30 flex items-center justify-center space-x-1">
             <span>Made by</span>
             <a 
               href="https://www.click2biz.in" 
@@ -300,9 +300,9 @@ const Footer = () => {
               <img 
                 src="/logo.png" 
                 alt="Click2Biz Logo" 
-                className="h-4 w-auto inline-block mr-1" 
+                className="h-4 w-auto inline-block mr-1 brightness-200 grayscale" 
               />
-              <span>Team Click2Biz</span>
+              <span className="font-bold">Team Click2Biz</span>
             </a>
           </p>
         </motion.div>

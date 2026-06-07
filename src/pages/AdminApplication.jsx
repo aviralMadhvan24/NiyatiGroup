@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { db, auth } from '../firebase';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiBriefcase, FiFileText, FiTrash2, FiClock, FiExternalLink, FiLinkedin } from 'react-icons/fi';
 
 const ADMIN_EMAIL = "niyatigroup1@gmail.com";
 
@@ -49,125 +50,111 @@ const AdminApplications = () => {
 
   if (loading) {
     return (
-      <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-gray-300 min-h-screen overflow-hidden">
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-500"></div>
-        </div>
+      <div className="min-h-screen niyati-bg-pattern bg-[#e8f4f8] flex justify-center items-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-teal-500 border-t-transparent"></div>
       </div>
     );
   }
 
   return (
-    <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-gray-300 min-h-screen overflow-hidden">
-      {/* Background Grid Overlay */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">
-          <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-        </div>
-      </div>
+    <div className="relative min-h-screen niyati-bg-pattern bg-[#e8f4f8] pt-24 pb-20 px-4">
+      <div className="container mx-auto max-w-5xl relative z-10">
+        <header className="mb-12">
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+             <h1 className="text-4xl font-black text-slate-800 mb-2">Job <span className="text-teal-600">Applicants</span></h1>
+             <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
+                {applications.length} Candidates for Specific Roles
+             </p>
+          </motion.div>
+        </header>
 
-      {/* Main Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-gray-950 p-8 rounded-2xl border border-gray-800 shadow-2xl"
-        >
-          <motion.h2
-            className="text-3xl font-bold text-gray-100 mb-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.1 }}
-          >
-            Job Applications
-          </motion.h2>
-          <p className="text-gray-400 mb-6">
-            {applications.length} application{applications.length !== 1 ? 's' : ''} received
-          </p>
-
-          {applications.length === 0 ? (
-            <motion.div 
-              className="text-center py-12 text-gray-500"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              No applications found
-            </motion.div>
-          ) : (
-            <div className="space-y-6">
-              {applications.map((app, index) => (
+        <div className="grid grid-cols-1 gap-6">
+          <AnimatePresence mode="popLayout">
+            {applications.length === 0 ? (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="bg-white/50 border-2 border-dashed border-teal-100 rounded-[3rem] p-20 text-center"
+              >
+                <FiBriefcase className="text-5xl text-teal-200 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-800">No active applications</h3>
+              </motion.div>
+            ) : (
+              applications.map((app, idx) => (
                 <motion.div
                   key={app.id}
+                  layout
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 + index * 0.05 }}
-                  className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 shadow-xl"
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="bg-white p-8 md:p-10 rounded-[3rem] shadow-2xl shadow-teal-900/5 border border-teal-50 group hover:shadow-teal-900/10 transition-all"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  
-
-                    <div className="space-y-4">
-                      <div>
-                        <p className="text-sm text-gray-500">Applied For</p>
-                        <p className="text-white font-medium">{app.jobTitle}</p>
-                      </div>
-
-                      {app.linkedin && (
-                        <div>
-                          <p className="text-sm text-gray-500">LinkedIn</p>
-                          <a 
-                            href={app.linkedin} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-blue-400 hover:underline"
-                          >
-                            View Profile
-                          </a>
+                  <div className="flex flex-col lg:flex-row justify-between gap-10">
+                     <div className="flex-grow space-y-6">
+                        <div className="flex items-start justify-between">
+                           <div>
+                              <p className="text-[10px] font-black text-teal-600 uppercase tracking-widest mb-1 italic">Role Applied For</p>
+                              <h2 className="text-2xl font-black text-slate-800">{app.jobTitle || "Featured Position"}</h2>
+                           </div>
+                           <div className="bg-teal-50 px-4 py-2 rounded-2xl border border-teal-100 hidden sm:block">
+                              <FiBriefcase className="text-teal-600" />
+                           </div>
                         </div>
-                      )}
 
-                 
-
-                      {/* Display Resume PDF Link if available */}
-                      {app.cvUrl && (
-                        <div className="mt-4">
-                          <p className="text-sm text-gray-400 mb-1">Resume:</p>
-                          <a 
-                            href={app.cvUrl} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-blue-400 hover:underline"
-                          >
-                            View PDF Resume
-                          </a>
+                        <div className="flex flex-wrap gap-4 pt-4">
+                           {app.cvUrl && (
+                              <a 
+                                href={app.cvUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="px-6 py-3 bg-teal-600 text-white rounded-xl font-bold text-xs flex items-center gap-2 shadow-lg shadow-teal-900/10 hover:bg-teal-700 transition-all"
+                              >
+                                 <FiFileText />
+                                 View Resume PDF
+                                 <FiExternalLink />
+                              </a>
+                           )}
+                           {app.linkedin && (
+                              <a 
+                                href={app.linkedin} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="px-6 py-3 bg-[#0a66c2] text-white rounded-xl font-bold text-xs flex items-center gap-2 hover:bg-[#004182] transition-all"
+                              >
+                                 <FiLinkedin />
+                                 LinkedIn Profile
+                                 <FiExternalLink />
+                              </a>
+                           )}
                         </div>
-                      )}
+                     </div>
 
-                      {/* Delete Button - Admin only */}
-                      {auth.currentUser?.email === ADMIN_EMAIL && (
-                        <motion.button
-                          onClick={() => handleDelete(app.id)}
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.97 }}
-                          className="mt-6 w-full py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md transition-colors"
-                          type="button"
-                        >
-                          Delete Application
-                        </motion.button>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="mt-4 pt-4 border-t border-gray-800 text-right">
-                    <p className="text-xs text-gray-500">Applied on: {app.createdAt}</p>
+                     <div className="lg:w-48 flex flex-col justify-between items-end lg:border-l lg:border-teal-50 lg:pl-10">
+                        <div className="text-right hidden lg:block">
+                           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Status</p>
+                           <span className="inline-block px-3 py-1 bg-amber-50 text-amber-600 text-[10px] font-black rounded-full border border-amber-100 uppercase tracking-widest">Received</span>
+                        </div>
+                        
+                        <div className="w-full space-y-3">
+                           <motion.button
+                             onClick={() => handleDelete(app.id)}
+                             whileHover={{ backgroundColor: '#fee2e2', color: '#ef4444' }}
+                             className="w-full py-4 px-6 bg-slate-50 text-slate-400 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 border border-slate-100"
+                           >
+                             <FiTrash2 />
+                             Remove
+                           </motion.button>
+                           <p className="text-[10px] font-bold text-slate-300 text-center uppercase tracking-tighter">
+                             ID: {app.id.slice(0, 8)} • {app.createdAt}
+                           </p>
+                        </div>
+                     </div>
                   </div>
                 </motion.div>
-              ))}
-            </div>
-          )}
-        </motion.div>
+              ))
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
