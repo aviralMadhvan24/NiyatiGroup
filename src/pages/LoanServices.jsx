@@ -110,7 +110,7 @@ const LoanServices = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  className="bg-white rounded-2xl h-24 flex items-center justify-center p-4 shadow-xl shadow-teal-900/[0.03] border border-teal-50/50 grayscale hover:grayscale-0 transition-all cursor-pointer"
+                  className="bg-white rounded-2xl h-24 flex items-center justify-center p-4 shadow-xl shadow-teal-900/[0.03] border border-teal-50/50 transition-all cursor-pointer"
                 >
                   <img src={bank.logo} alt={bank.name} className="max-h-12 max-w-full object-contain" />
                 </motion.div>
