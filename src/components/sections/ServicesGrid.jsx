@@ -145,7 +145,7 @@ const ServicesGrid = () => {
               boxShadow: "0 8px 25px -5px rgba(239, 68, 68, 0.3)"
             }}
             whileTap={{ scale: 0.98 }}
-            className="px-8 py-4 bg-primary text-white rounded-lg font-medium shadow-lg hover:shadow-primary/30 transition-all duration-300"
+            className="px-8 py-4 bg-primary text-white rounded-lg font-medium shadow-xl hover:shadow-primary/30 transition-all duration-300"
           >
             Request Custom Solution
           </motion.button>

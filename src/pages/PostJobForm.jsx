@@ -94,10 +94,10 @@ const PostJobForm = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6 sm:p-8"
+          className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-xl p-6 sm:p-8"
         >
           <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-white">
-            Post a New <span className="text-sky-300">Job</span> Opportunity
+            Post a New <span className="text-blue-400">Job</span> Opportunity
           </h2>
           
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -139,7 +139,7 @@ const PostJobForm = () => {
                     placeholder={placeholder}
                     value={form[field]}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-sky-400 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     rows={5}
                     required={required}
                   />
@@ -150,7 +150,7 @@ const PostJobForm = () => {
                     placeholder={placeholder}
                     value={form[field]}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-sky-400 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     
                     
                     min={type === 'date' ? new Date().toISOString().split('T')[0] : min}
@@ -170,7 +170,7 @@ const PostJobForm = () => {
                     name="showAsRange"
                     checked={form.showAsRange}
                     onChange={handleChange}
-                    className="h-4 w-4 rounded border-gray-600 bg-gray-700 text-sky-300 focus:ring-sky-400"
+                    className="h-4 w-4 rounded border-gray-600 bg-gray-700 text-blue-400 focus:ring-blue-500"
                   />
                   <label htmlFor="showAsRange" className="ml-2 text-sm text-gray-400">
                     Show as range
@@ -188,7 +188,7 @@ const PostJobForm = () => {
                       placeholder="e.g. 50000"
                       value={form.minSalary}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-sky-400 focus:border-transparent"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       min={0}
                     />
                   </div>
@@ -200,7 +200,7 @@ const PostJobForm = () => {
                       placeholder="e.g. 80000"
                       value={form.maxSalary}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-sky-400 focus:border-transparent"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       min={form.minSalary || 0}
                     />
                   </div>
@@ -213,7 +213,7 @@ const PostJobForm = () => {
                     placeholder="e.g. 50000"
                     value={form.minSalary}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-sky-400 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                     min={0}
                   />
@@ -224,7 +224,7 @@ const PostJobForm = () => {
                 name="salaryType"
                 value={form.salaryType}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-sky-400 focus:border-transparent"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="LPA">LPA</option>
                 <option value="monthly">Monthly</option>
@@ -236,7 +236,7 @@ const PostJobForm = () => {
     name="experienceLevel"
     value={form.experienceLevel}
     onChange={handleChange}
-    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-sky-400 focus:border-transparent"
+    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
     required
   >
     <option value="fresher">Fresher</option>
@@ -252,7 +252,7 @@ const PostJobForm = () => {
                 type="submit"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="cursor-pointer px-8 py-3 bg-sky-500 hover:bg-sky-600 text-white font-medium rounded-lg transition-all"
+                className="cursor-pointer px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all"
               >
                 Post Job
               </motion.button>

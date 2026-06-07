@@ -1,18 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { FiDollarSign, FiUsers, FiTrendingUp, FiCheck, FiArrowRight } from 'react-icons/fi';
 
 const Services = () => {
   return (
-    <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-gray-300 min-h-screen overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900/50 to-gray-950">
-          <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-        </div>
-      </div>
-
-      <div className="relative z-10 pt-24 pb-20">
+    <div className="relative min-h-screen niyati-bg-pattern bg-[#e8f4f8] pt-24 pb-20">
+      
+      <div className="relative z-10">
         {/* Hero Section */}
         <section className="container mx-auto px-4 md:px-6 py-12">
           <motion.div
@@ -22,29 +17,29 @@ const Services = () => {
             className="text-center mb-16"
           >
             <motion.div
-              className="inline-flex items-center px-4 py-2 mb-6 font-medium rounded-full text-white bg-gray-800/80 border border-gray-700 backdrop-blur-sm"
+              className="inline-flex items-center px-4 py-2 mb-6 font-bold rounded-full text-teal-700 bg-teal-50 border border-teal-100 shadow-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
               <span className="relative flex h-3 w-3 mr-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
               </span>
               Trusted Business Solutions Since 2019
             </motion.div>
 
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-100 leading-tight mb-6"
+              className="text-4xl md:text-6xl font-bold text-slate-800 leading-tight mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              <span className="text-sky-300">Niyati</span> Group
+              <span className="text-teal-600">Niyati</span> Group Services
             </motion.h1>
 
             <motion.p 
-              className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
+              className="text-lg text-slate-500 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
@@ -54,53 +49,44 @@ const Services = () => {
           </motion.div>
 
           {/* Service Cards - Now 3 columns */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-20">
             {/* Tax Services Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 hover:border-sky-500/30 transition-all"
+              className="niyati-card p-8 group relative overflow-hidden"
             >
-              <div className="flex items-center mb-6">
-                <div className="bg-sky-500/10 p-3 rounded-xl mr-4 border border-sky-500/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400">
-                    <line x1="12" y1="1" x2="12" y2="23"></line>
-                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                  </svg>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-full transition-all group-hover:scale-110"></div>
+              
+              <div className="flex items-center mb-6 relative z-10">
+                <div className="bg-white/10 p-3 rounded-2xl mr-4 border border-white/20 backdrop-blur-sm">
+                  <FiDollarSign className="text-2xl text-teal-300" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-100">Niyati Tax Experts</h3>
+                <h3 className="text-2xl font-bold text-white">Niyati Tax Experts</h3>
               </div>
-              <p className="text-gray-400 mb-6">
-                Professional tax consultancy services for individuals and businesses. We help you navigate complex tax regulations with confidence and maximize your savings.
+              
+              <p className="text-teal-50/70 mb-8 relative z-10 text-sm leading-relaxed">
+                Professional tax consultancy services for individuals and businesses. We help you navigate complex tax regulations with confidence.
               </p>
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400 mr-2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span className="text-gray-300">Income Tax Filing</span>
-                </div>
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400 mr-2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span className="text-gray-300">GST Compliance</span>
-                </div>
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400 mr-2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span className="text-gray-300">Tax Planning</span>
-                </div>
+              
+              <div className="space-y-4 mb-10 relative z-10">
+                {['Income Tax Filing', 'GST Compliance', 'Tax Planning'].map((item) => (
+                  <div key={item} className="flex items-center text-teal-100 text-sm">
+                    <FiCheck className="text-teal-400 mr-3" />
+                    <span>{item}</span>
+                  </div>
+                ))}
               </div>
-              <Link to="/tax">
+              
+              <Link to="/tax" className="relative z-10 block">
                 <motion.button
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={{ scale: 1.03, backgroundColor: '#ffffff', color: '#0d9488' }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full px-6 py-3 bg-sky-500 hover:bg-sky-700 cursor-pointer rounded-lg text-white font-medium transition-colors"
+                  className="w-full px-6 py-4 bg-teal-500/20 hover:bg-white border border-white/30 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
                 >
                   Explore Tax Services
+                  <FiArrowRight />
                 </motion.button>
               </Link>
             </motion.div>
@@ -110,49 +96,38 @@ const Services = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9 }}
-              className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 hover:border-sky-400/30 transition-all"
+              className="niyati-card p-8 group relative overflow-hidden"
             >
-              <div className="flex items-center mb-6">
-                <div className="bg-sky-400/10 p-3 rounded-xl mr-4 border border-sky-400/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-300">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                  </svg>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-full transition-all group-hover:scale-110"></div>
+              
+              <div className="flex items-center mb-6 relative z-10">
+                <div className="bg-white/10 p-3 rounded-2xl mr-4 border border-white/20 backdrop-blur-sm">
+                  <FiUsers className="text-2xl text-teal-300" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-100">Niyati Recruitment</h3>
+                <h3 className="text-2xl font-bold text-white">Niyati Recruitment</h3>
               </div>
-              <p className="text-gray-400 mb-6">
-                Strategic talent solutions connecting top professionals with leading organizations across industries. We bridge the gap between talent and opportunity.
+              
+              <p className="text-teal-50/70 mb-8 relative z-10 text-sm leading-relaxed">
+                Strategic talent solutions connecting top professionals with leading organizations. We bridge the gap between talent and opportunity.
               </p>
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-300 mr-2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span className="text-gray-300">Executive Search</span>
-                </div>
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-300 mr-2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span className="text-gray-300">Permanent Staffing</span>
-                </div>
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-300 mr-2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span className="text-gray-300">Talent Acquisition</span>
-                </div>
+              
+              <div className="space-y-4 mb-10 relative z-10">
+                {['Executive Search', 'Permanent Staffing', 'Talent Acquisition'].map((item) => (
+                  <div key={item} className="flex items-center text-teal-100 text-sm">
+                    <FiCheck className="text-teal-400 mr-3" />
+                    <span>{item}</span>
+                  </div>
+                ))}
               </div>
-              <Link to="/recruitment">
+              
+              <Link to="/recruitment" className="relative z-10 block">
                 <motion.button
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={{ scale: 1.03, backgroundColor: '#ffffff', color: '#0d9488' }}
                   whileTap={{ scale: 0.98 }}
-                  className="cursor-pointer w-full px-6 py-3 bg-sky-500 hover:bg-sky-700 rounded-lg text-white font-medium transition-colors"
+                  className="w-full px-6 py-4 bg-teal-500/20 hover:bg-white border border-white/30 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
                 >
-                  Explore Recruitment Services
+                  Explore Recruitment
+                  <FiArrowRight />
                 </motion.button>
               </Link>
             </motion.div>
@@ -162,153 +137,128 @@ const Services = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
-              className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 hover:border-green-500/30 transition-all"
+              className="niyati-card p-8 group relative overflow-hidden"
             >
-              <div className="flex items-center mb-6">
-                <div className="bg-green-500/10 p-3 rounded-xl mr-4 border border-green-500/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-400">
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                  </svg>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-full transition-all group-hover:scale-110"></div>
+              
+              <div className="flex items-center mb-6 relative z-10">
+                <div className="bg-white/10 p-3 rounded-2xl mr-4 border border-white/20 backdrop-blur-sm">
+                  <FiTrendingUp className="text-2xl text-teal-300" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-100">Niyati Financial</h3>
+                <h3 className="text-2xl font-bold text-white">Niyati Financial</h3>
               </div>
-              <p className="text-gray-400 mb-6">
+              
+              <p className="text-teal-50/70 mb-8 relative z-10 text-sm leading-relaxed">
                 Tailored financial solutions to help businesses and individuals achieve their goals through strategic lending and investment services.
               </p>
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-400 mr-2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span className="text-gray-300">Business Loans</span>
-                </div>
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-400 mr-2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span className="text-gray-300">Personal Loans</span>
-                </div>
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-400 mr-2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span className="text-gray-300">Investment Advisory</span>
-                </div>
+              
+              <div className="space-y-4 mb-10 relative z-10">
+                {['Business Loans', 'Personal Loans', 'Investment Advisory'].map((item) => (
+                  <div key={item} className="flex items-center text-teal-100 text-sm">
+                    <FiCheck className="text-teal-400 mr-3" />
+                    <span>{item}</span>
+                  </div>
+                ))}
               </div>
-              <Link to="/loans">
+              
+              <Link to="/loans" className="relative z-10 block">
                 <motion.button
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={{ scale: 1.03, backgroundColor: '#ffffff', color: '#0d9488' }}
                   whileTap={{ scale: 0.98 }}
-                  className="cursor-pointer w-full px-6 py-3 bg-sky-500 hover:bg-sky-700 rounded-lg text-white font-medium transition-colors"
+                  className="w-full px-6 py-4 bg-teal-500/20 hover:bg-white border border-white/30 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
                 >
                   Explore Loan Services
+                  <FiArrowRight />
                 </motion.button>
               </Link>
             </motion.div>
           </div>
         </section>
 
-        {/* About Section */}
-        <section className="container mx-auto px-4 md:px-6 py-16">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 md:p-12"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl font-bold text-gray-100 mb-6">About Niyati Group</h2>
-                <p className="text-gray-400 mb-6">
-                  Founded in 2019, Niyati Group has grown to become a trusted name in professional services with three specialized divisions catering to distinct business needs.
-                </p>
-                <p className="text-gray-400 mb-6">
-                  Our mission is to deliver exceptional value through expertise, integrity, and personalized service across all our offerings.
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <div className="bg-sky-500/10 px-4 py-2 rounded-lg border border-sky-500/20">
-                    <p className="text-sky-400 font-medium">15+ Years Experience</p>
-                  </div>
-                  <div className="bg-sky-400/10 px-4 py-2 rounded-lg border border-sky-400/20">
-                    <p className="text-sky-300 font-medium">5000+ Clients Served</p>
-                  </div>
-                  <div className="bg-green-500/10 px-4 py-2 rounded-lg border border-green-500/20">
-                    <p className="text-green-400 font-medium">Financial Solutions</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 h-full">
-                <h3 className="text-xl font-bold text-gray-100 mb-4">Our Core Values</h3>
-                <div className="space-y-4">
-                  {[
-                    { 
-                      title: "Integrity", 
-                      description: "We maintain the highest ethical standards in all our dealings",
-                      icon: "M20 12H4M12 4v16"
-                    },
-                    { 
-                      title: "Expertise", 
-                      description: "Our team consists of certified professionals with deep domain knowledge",
-                      icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                    },
-                    { 
-                      title: "Client Focus", 
-                      description: "We tailor solutions to meet each client's unique requirements",
-                      icon: "M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                    }
-                  ].map((value, index) => (
-                    <div key={index} className="flex items-start">
-                      <div className="bg-sky-500/10 p-2 rounded-lg mr-4 border border-sky-500/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400">
-                          <path d={value.icon} />
-                        </svg>
+        {/* Values Section in a rounded container */}
+        <section className="container mx-auto px-4 md:px-6 py-10">
+           <div className="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl shadow-teal-900/5 border border-teal-50 relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-10 opacity-5 -mr-16 -mt-16 bg-teal-600 w-64 h-64 rounded-full"></div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
+                 <div>
+                    <h2 className="text-3xl font-bold text-slate-800 mb-6">About Niyati Group</h2>
+                    <p className="text-slate-500 mb-6 leading-relaxed">
+                      Founded in 2019, Niyati Group has grown to become a trusted name in professional services with three specialized divisions catering to distinct business needs.
+                    </p>
+                    <p className="text-slate-500 mb-10 leading-relaxed font-medium">
+                      Our mission is to deliver exceptional value through expertise, integrity, and personalized service across all our offerings.
+                    </p>
+                    <div className="flex flex-wrap gap-4">
+                      <div className="bg-teal-50 px-5 py-3 rounded-2xl border border-teal-100 shadow-sm">
+                        <p className="text-teal-700 font-bold text-sm">15+ Years Experience</p>
                       </div>
-                      <div>
-                        <h4 className="text-gray-100 font-medium">{value.title}</h4>
-                        <p className="text-gray-500">{value.description}</p>
+                      <div className="bg-sky-50 px-5 py-3 rounded-2xl border border-sky-100 shadow-sm">
+                        <p className="text-sky-700 font-bold text-sm">5000+ Clients Served</p>
                       </div>
                     </div>
-                  ))}
-                </div>
+                 </div>
+
+                 <div className="bg-teal-50 p-8 rounded-[2rem] border border-teal-100">
+                    <h3 className="text-xl font-bold text-slate-800 mb-8 text-center italic">"Excellence in every detail"</h3>
+                    <div className="space-y-6">
+                       {[
+                         { title: "Integrity", desc: "Highest ethical standards in all dealings" },
+                         { title: "Expertise", desc: "Certified professionals with deep knowledge" },
+                         { title: "Client Focus", desc: "Solutions tailored to unique requirements" }
+                       ].map((val) => (
+                         <div key={val.title} className="flex items-start gap-4 p-4 bg-white rounded-2xl shadow-sm border border-teal-100/50">
+                            <div className="w-10 h-10 bg-teal-600 rounded-full flex items-center justify-center shrink-0 shadow-lg shadow-teal-600/20">
+                               <FiCheck className="text-white" />
+                            </div>
+                            <div>
+                               <h4 className="font-bold text-slate-800">{val.title}</h4>
+                               <p className="text-sm text-slate-500">{val.desc}</p>
+                            </div>
+                         </div>
+                       ))}
+                    </div>
+                 </div>
               </div>
-            </div>
-          </motion.div>
+           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="container mx-auto px-4 md:px-6 py-16">
+        <section className="container mx-auto px-4 md:px-6 py-20">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-gradient-to-r from-sky-600/20 to-sky-500/20 border border-gray-800 rounded-2xl p-12 text-center"
+            className="niyati-card p-12 text-center rounded-[3rem] relative overflow-hidden"
           >
-            <h2 className="text-3xl font-bold text-gray-100 mb-6">Ready to Get Started?</h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
-              Whether you need tax expertise, recruitment solutions, or financial services, our team is ready to assist you.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-2">
-              <Link to="/contact">
-                <motion.button
-
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="cursor-pointer px-8 py-3.5 bg-sky-500 hover:bg-sky-700 text-white rounded-lg font-medium shadow-lg transition-colors"
-                >
-                  Contact Us
-                </motion.button>
-              </Link>
-              <a href="tel:+919997070599" target="_blank" rel="noopener noreferrer">
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="cursor-pointer px-8 py-3.5 bg-gray-900 hover:bg-gray-800 text-gray-100 border border-gray-700 rounded-lg font-medium transition-colors"
-                >
-                  Call Now
-                </motion.button>
-              </a>
+            <div className="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mt-32"></div>
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Get Started?</h2>
+              <p className="text-xl text-teal-50/70 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Whether you need tax expertise, recruitment solutions, or financial services, our team is ready to assist you.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <Link to="/contact">
+                  <motion.button
+                    whileHover={{ scale: 1.05, backgroundColor: '#ffffff', color: '#0d9488' }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-10 py-4 bg-white text-teal-700 rounded-xl font-bold shadow-2xl transition-all"
+                  >
+                    Contact Us Now
+                  </motion.button>
+                </Link>
+                <a href="tel:+919997070599">
+                  <motion.button
+                    whileHover={{ scale: 1.05, backgroundColor: '#0f172a' }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-10 py-4 bg-slate-900 text-white rounded-xl font-bold shadow-2xl border border-white/10 transition-all flex items-center justify-center gap-2"
+                  >
+                    <FiPhone />
+                    Call Our Experts
+                  </motion.button>
+                </a>
+              </div>
             </div>
           </motion.div>
         </section>

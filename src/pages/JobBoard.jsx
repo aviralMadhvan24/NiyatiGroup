@@ -3,6 +3,7 @@ import { db, auth } from '../firebase';
 import { collection, getDocs, query, orderBy, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { FiBriefcase, FiMapPin, FiClock, FiCalendar, FiDollarSign, FiTrash2, FiEdit3, FiArrowRight } from 'react-icons/fi';
 
 const JobBoard = () => {
   const [jobs, setJobs] = useState([]);
@@ -88,193 +89,187 @@ const JobBoard = () => {
 
   const getStatusBadge = (status) => {
     const statusStyles = {
-      active: 'bg-green-600/20 text-green-400 border-green-400/30',
-      expired: 'bg-yellow-600/20 text-yellow-400 border-yellow-400/30',
-      closed: 'bg-sky-600/20 text-sky-400 border-sky-400/30'
+      active: 'bg-emerald-50 text-emerald-600 border-emerald-100',
+      expired: 'bg-amber-50 text-amber-600 border-amber-100',
+      closed: 'bg-slate-50 text-slate-600 border-slate-100'
     };
     return (
-      <span className={`text-xs px-2 py-1 rounded-full border ${statusStyles[status]}`}>
-        {status.toUpperCase()}
+      <span className={`text-[10px] font-black px-3 py-1 rounded-full border uppercase tracking-wider ${statusStyles[status]}`}>
+        {status}
       </span>
     );
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-gray-900 to-gray-950 text-gray-300 py-12 px-4 sm:px-6">
-      {/* Background Grid */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto">
-        <motion.h2 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-3xl sm:text-4xl font-bold mb-8 text-white text-center"
-        >
-          Current <span className="text-sky-500">Job</span> Opportunities
-        </motion.h2>
+    <div className="relative min-h-screen niyati-bg-pattern bg-[#e8f4f8] py-24 px-4 sm:px-6">
+      
+      <div className="relative z-10 max-w-5xl mx-auto">
+        <header className="text-center mb-16">
+           <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+           >
+              <div className="inline-flex items-center px-4 py-2 mb-6 font-bold rounded-full text-teal-700 bg-teal-50 border border-teal-100 shadow-sm">
+                <FiBriefcase className="mr-2" />
+                Career Opportunities
+              </div>
+              <h1 className="text-4xl md:text-6xl font-bold text-slate-800 mb-6">
+                Join Our <span className="text-teal-600">Network</span>
+              </h1>
+              <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed">
+                Explore current job openings across our partner network. We help you find the right fit for your skills and career aspirations.
+              </p>
+           </motion.div>
+        </header>
 
         {jobs.length === 0 ? (
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-12"
+            className="text-center py-24 bg-white/50 rounded-[3rem] border border-teal-50 border-dashed"
           >
-            <p className="text-xl text-gray-400">No job openings at the moment. Please check back later.</p>
+            <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mb-6 mx-auto shadow-xl shadow-teal-900/5">
+               <FiBriefcase className="text-3xl text-teal-300" />
+            </div>
+            <p className="text-xl text-slate-400 font-bold">No active job openings at the moment.</p>
+            <p className="text-slate-400 text-sm mt-2">Check back later or submit your CV for future opportunities.</p>
           </motion.div>
         ) : (
-          <div className="grid gap-6">
+          <div className="grid gap-8">
             {jobs.map((job, index) => (
               <motion.div
                 key={job.id}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className={`bg-gray-800/50 backdrop-blur-sm border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all
-                ${job.status === 'expired' ? 'border-yellow-600/50 opacity-90' : 
-                  job.status === 'closed' ? 'border-sky-600/50 opacity-90' : 'border-gray-700'}`}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className={`bg-white rounded-[2.5rem] overflow-hidden shadow-2xl shadow-teal-900/[0.03] border transition-all duration-300 group hover:shadow-teal-900/10
+                ${job.status === 'expired' ? 'border-amber-100' : 
+                  job.status === 'closed' ? 'border-slate-100' : 'border-teal-50'}`}
               >
-                <div className="p-6 sm:p-8">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="p-8 md:p-10">
+                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8 pb-8 border-b border-slate-50">
                     <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-xl sm:text-2xl font-bold text-white">{job.title}</h3>
+                      <div className="flex items-center gap-3 mb-2">
                         {getStatusBadge(job.status)}
+                        <span className="text-xs font-bold text-slate-300 uppercase tracking-widest">{job.location}</span>
                       </div>
-                      <p className="text-sky-400 font-medium mt-1">{job.company}</p>
-                      <div className="flex flex-wrap items-center gap-4 mt-3 text-sm">
-                        {/* Location */}
-                        <div className="flex items-center text-gray-400">
-                          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
+                      <h3 className="text-2xl md:text-3xl font-black text-slate-800 leading-tight mb-2">{job.title}</h3>
+                      <p className="text-teal-600 font-bold text-lg">{job.company}</p>
+                      
+                      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mt-6 text-sm">
+                        <div className="flex items-center text-slate-500 font-bold">
+                          <FiMapPin className="mr-2 text-teal-500" />
                           <span>{job.location}</span>
                         </div>
-                        {/* Salary */}
                         {job.formattedSalary && (
-                          <div className="flex items-center text-gray-400">
-                            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                          <div className="flex items-center text-slate-500 font-bold">
+                            <FiDollarSign className="mr-2 text-teal-500" />
                             <span>{job.formattedSalary}{job.salaryType === 'monthly' ? "/month" : " LPA"}</span>
                           </div>
                         )}
-                        {/* Duration */}
                         {job.duration && (
-                          <div className="flex items-center text-gray-400">
-                            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
+                          <div className="flex items-center text-slate-500 font-bold">
+                            <FiClock className="mr-2 text-teal-500" />
                             <span>{job.duration}</span>
                           </div>
                         )}
-                        {/* Experience Level */}
-                        <div className="flex items-center text-gray-400">
-                          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 6V4a3 3 0 016 0v2M5 8h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8a2 2 0 012-2z" />
-                          </svg>
+                        <div className="flex items-center text-slate-500 font-bold">
+                          <FiCalendar className="mr-2 text-teal-500" />
                           <span>
-                            {job.experienceLevel === "fresher" && "Fresher"}
-                            {job.experienceLevel === "experienced" && "Experienced"}
-                            {job.experienceLevel === "both" && "Fresher & Experienced"}
-                            {!job.experienceLevel && "N/A"}
+                            {job.lastDate ? `Apply by: ${job.lastDate.toLocaleDateString("en-GB")}` : "Ongoing"}
                           </span>
                         </div>
-                        {/* Last date */}
-                        {job.lastDate && (
-                          <div className="flex items-center text-gray-400">
-                            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <span>
-                              Apply by: {job.lastDate.toLocaleDateString("en-GB")}
-                            </span>
-                          </div>
-                        )}
                       </div>
                     </div>
-                    {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-3">
+
+                    <div className="flex flex-col gap-3 shrink-0">
                       {job.status === 'active' && (
                         <motion.button
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.97 }}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
                           onClick={() => navigate(`/apply`,{ state: { jobId: job.id, jobTitle: job.title } })}
-                          className="cursor-pointer px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-all whitespace-nowrap"
+                          className="px-8 py-4 bg-teal-600 text-white font-bold rounded-2xl shadow-xl shadow-teal-900/10 transition-all flex items-center justify-center gap-2 whitespace-nowrap"
                         >
                           Apply Now
+                          <FiArrowRight />
                         </motion.button>
                       )}
                       {currentUser && currentUser.email === ADMIN_EMAIL && (
-                        <>
+                        <div className="flex gap-2">
                           <motion.button
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
+                            whileHover={{ scale: 1.05, backgroundColor: '#ef4444' }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={() => handleDelete(job.id)}
-                            className="cursor-pointer px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg transition-all"
+                            className="p-4 bg-red-50 text-red-500 border border-red-100 rounded-2xl transition-all"
+                            title="Delete Job"
                           >
-                            Delete
+                            <FiTrash2 />
                           </motion.button>
                           <motion.button
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={() => setEditingDateJobId(job.id)}
-                            className="cursor-pointer px-4 py-3 bg-sky-500 hover:bg-sky-600 text-white font-medium rounded-lg transition-all"
+                            className="p-4 bg-sky-50 text-sky-600 border border-sky-100 rounded-2xl transition-all"
+                            title="Extend Date"
                           >
-                            Extend Date
+                            <FiEdit3 />
                           </motion.button>
-                        </>
+                        </div>
                       )}
                     </div>
                   </div>
 
                   {/* Extend Date Picker */}
                   {editingDateJobId === job.id && (
-                    <div className="mt-3 flex gap-2 items-center">
+                    <motion.div 
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      className="mb-8 p-6 bg-sky-50 rounded-2xl border border-sky-100 flex flex-wrap gap-4 items-center"
+                    >
+                      <span className="text-sm font-bold text-sky-800">Set New Deadline:</span>
                       <input
                         type="date"
                         min={new Date().toISOString().split('T')[0]}
                         value={newDate}
                         onChange={(e) => setNewDate(e.target.value)}
-                        className="px-3 py-2 bg-gray-700 rounded border border-gray-600"
+                        className="px-4 py-2 bg-white rounded-xl border border-sky-200 outline-none focus:ring-2 focus:ring-sky-500 font-medium"
                       />
-                      <button
-                        onClick={() => handleDateUpdate(job.id)}
-                        className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded"
-                      >
-                        Save
-                      </button>
-                      <button
-                        onClick={() => {
-                          setEditingDateJobId(null);
-                          setNewDate("");
-                        }}
-                        className="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded"
-                      >
-                        Cancel
-                      </button>
-                    </div>
+                      <div className="flex gap-2 ml-auto">
+                         <button
+                           onClick={() => handleDateUpdate(job.id)}
+                           className="px-4 py-2 bg-sky-600 text-white rounded-xl font-bold text-xs"
+                         >
+                           Save Changes
+                         </button>
+                         <button
+                           onClick={() => {
+                             setEditingDateJobId(null);
+                             setNewDate("");
+                           }}
+                           className="px-4 py-2 bg-white text-slate-500 rounded-xl font-bold text-xs border border-slate-200"
+                         >
+                           Cancel
+                         </button>
+                      </div>
+                    </motion.div>
                   )}
 
-                  <div className="mt-6 pt-6 border-t border-gray-700">
-                    <h4 className="text-lg font-semibold text-white mb-2">Job Description</h4>
-                    <p className="text-gray-400 whitespace-pre-line">{job.description}</p>
+                  <div className="relative">
+                    <h4 className="text-xs font-black text-slate-300 uppercase tracking-[0.2em] mb-4">Job Description</h4>
+                    <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-line font-medium">{job.description}</p>
                   </div>
 
                   {job.applyLink && job.status === 'active' && (
-                    <div className="mt-4">
+                    <div className="mt-8 pt-8 border-t border-slate-50">
                       <a 
                         href={job.applyLink} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-sky-400 hover:text-sky-300 inline-flex items-center"
+                        className="text-teal-600 font-bold text-xs flex items-center gap-2 hover:underline tracking-tight"
                       >
-                        External Application Link
-                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
+                        EXTERNAL APPLICATION PORTAL
+                        <FiArrowRight size={10} className="-rotate-45" />
                       </a>
                     </div>
                   )}
@@ -282,16 +277,16 @@ const JobBoard = () => {
               </motion.div>
             ))}
             
-            {/* Generic Apply Section */}
-            <div className="mt-12 text-center">
-              <p className="text-gray-400 mb-4 text-lg">
-                Don’t see a suitable job for you?
+            {/* Generic Apply Section - Now in a card */}
+            <div className="mt-12 text-center p-12 bg-white/50 rounded-[3rem] border border-teal-50">
+              <p className="text-slate-500 mb-6 text-lg font-bold">
+                Don’t see a suitable role right now?
               </p>
               <Link 
                 to="/genericapply" 
-                className="inline-block px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-semibold transition-colors"
+                className="inline-block px-10 py-4 bg-slate-900 text-white rounded-2xl font-bold shadow-xl shadow-slate-900/10 transition-all hover:bg-slate-800"
               >
-                Submit Your Resume
+                Submit Your Resume for Future Roles
               </Link>
             </div>
           </div>

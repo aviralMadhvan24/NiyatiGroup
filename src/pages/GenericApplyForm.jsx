@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiUsers, FiMail, FiPhone, FiMapPin, FiBriefcase, FiUploadCloud, FiCreditCard, FiX, FiCheck, FiArrowRight } from "react-icons/fi";
 
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/djs7dznnh/auto/upload";
 const CLOUDINARY_PRESET = "niyatigroup";
@@ -18,7 +19,6 @@ const GenericApplyForm = () => {
 
   const [file, setFile] = useState(null);
   const [paymentFile, setPaymentFile] = useState(null);
-
   const [submitting, setSubmitting] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -112,157 +112,165 @@ const GenericApplyForm = () => {
   };
 
   return (
-    <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-gray-300 min-h-screen overflow-hidden">
-      <div className="relative mt-20 z-10 max-w-md mx-auto px-6 py-16">
-        <motion.div className="bg-gray-950 p-10 rounded-2xl border border-gray-800 shadow-2xl">
-          <h2 className="text-2xl font-bold text-white mb-8 text-center">
-            Submit Your Resume for Future Opportunities
-          </h2>
-
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <input type="text" name="name" value={formData.name}
-              onChange={handleChange} required placeholder="Full Name"
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-gray-100"
-            />
-            <input type="email" name="email" value={formData.email}
-              onChange={handleChange} required placeholder="Email Address"
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-gray-100"
-            />
-            <input type="tel" name="phone" value={formData.phone}
-              onChange={handleChange} required placeholder="Phone Number"
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-gray-100"
-            />
-            <input type="text" name="location" value={formData.location}
-              onChange={handleChange} required placeholder="City / State"
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-gray-100"
-            />
-            <select
-              name="experience"
-              value={formData.experience}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-gray-100"
-            >
-              <option value="" disabled>Select Experience Level</option>
-              <option value="Fresher">Fresher</option>
-              <option value="Experienced">Experienced</option>
-            </select>
-
-            {/* CV Upload */}
-            <div>
-              <label className="block mb-2 text-gray-400">CV/Resume (PDF only)</label>
-              <input
-                type="file"
-                accept="application/pdf"
-                onChange={handleFileChange}
-                required
-                className="w-full text-gray-100"
-              />
-            </div>
-
-            {/* Payment Screenshot Upload */}
-            {hasClickedPay && (
-              <div>
-                <label className="block mb-2 text-gray-400">Upload Payment Screenshot</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setPaymentFile(e.target.files[0])}
-                  required
-                  className="w-full text-gray-100"
-                />
+    <div className="relative min-h-screen niyati-bg-pattern bg-[#e8f4f8] pt-24 pb-20 px-4">
+      
+      <div className="max-w-4xl mx-auto relative z-10">
+        <header className="text-center mb-12">
+           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+              <div className="inline-flex items-center px-4 py-2 mb-6 font-bold rounded-full text-teal-700 bg-white border border-teal-100 shadow-sm">
+                <FiUsers className="mr-2" />
+                Talent Pool Submission
               </div>
-            )}
+              <h1 className="text-4xl md:text-5xl font-black text-slate-800 mb-6">
+                Connect for <span className="text-teal-600">Future</span> Roles
+              </h1>
+              <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed">
+                Submit your profile to our recruitment database. We'll reach out when a position matches your expertise.
+              </p>
+           </motion.div>
+        </header>
 
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full py-3 bg-sky-500 hover:bg-sky-600 text-white rounded-lg font-medium"
-            >
-              {hasClickedPay ? (submitting ? "Submitting..." : "Submit Application") : "Proceed to Pay ₹500"}
-            </button>
-          </form>
-        </motion.div>
+        <div className="bg-white rounded-[3rem] shadow-2xl shadow-teal-900/10 border border-teal-50 overflow-hidden flex flex-col md:flex-row">
+           {/* Left Side - Form */}
+           <div className="p-8 md:p-12 md:w-3/5">
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="relative">
+                    <FiUsers className="absolute top-4 left-4 text-teal-600" />
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Full Name" className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-medium" />
+                  </div>
+                  <div className="relative">
+                    <FiMail className="absolute top-4 left-4 text-teal-600" />
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="Email" className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-medium" />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="relative">
+                    <FiPhone className="absolute top-4 left-4 text-teal-600" />
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required placeholder="Phone" className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-medium" />
+                  </div>
+                  <div className="relative">
+                    <FiMapPin className="absolute top-4 left-4 text-teal-600" />
+                    <input type="text" name="location" value={formData.location} onChange={handleChange} required placeholder="City/State" className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-medium" />
+                  </div>
+                </div>
+
+                <div className="relative">
+                   <FiBriefcase className="absolute top-4 left-4 text-teal-600" />
+                   <select name="experience" value={formData.experience} onChange={handleChange} required className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-teal-500 font-bold appearance-none cursor-pointer">
+                      <option value="" disabled>Select Experience Level</option>
+                      <option value="Fresher">Fresher</option>
+                      <option value="Experienced">Experienced</option>
+                   </select>
+                </div>
+
+                <div className="p-6 border-2 border-dashed border-teal-100 rounded-2xl bg-teal-50/20 text-center relative group">
+                   <input type="file" accept="application/pdf" onChange={handleFileChange} required className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+                   <FiUploadCloud className="mx-auto text-2xl text-slate-300 mb-2 group-hover:text-teal-600 transition-colors" />
+                   <p className="text-xs font-bold text-slate-500">{file ? file.name : "Upload CV/Resume (PDF)"}</p>
+                </div>
+
+                {hasClickedPay && (
+                  <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="p-6 bg-emerald-50 rounded-2xl border border-emerald-100 text-center relative">
+                     <input type="file" accept="image/*" onChange={(e) => setPaymentFile(e.target.files[0])} required className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+                     <FiCreditCard className="mx-auto text-2xl text-emerald-600 mb-2" />
+                     <p className="text-xs font-bold text-emerald-800">{paymentFile ? paymentFile.name : "Upload Payment Screenshot"}</p>
+                  </motion.div>
+                )}
+
+                <motion.button type="submit" disabled={submitting} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full py-4 bg-teal-600 text-white rounded-2xl font-bold shadow-xl shadow-teal-900/10 transition-all flex items-center justify-center gap-2">
+                   {hasClickedPay ? (submitting ? "Submitting..." : "Submit Profile") : "Proceed to Registration Fee (₹500)"}
+                   <FiArrowRight />
+                </motion.button>
+              </form>
+           </div>
+
+           {/* Right Side - Info Box */}
+           <div className="niyati-card-dark p-8 md:p-12 md:w-2/5 text-white flex flex-col justify-center relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-10 opacity-5 -mr-16 -mt-16 bg-white w-48 h-48 rounded-full"></div>
+              <h3 className="text-xl font-black mb-6">Why Submit Your CV?</h3>
+              <ul className="space-y-6">
+                {[
+                  "Early access to unlisted jobs",
+                  "Direct contact with HR experts",
+                  "Personalized career matching",
+                  "Priority review for new roles"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                     <div className="w-5 h-5 bg-teal-400/20 rounded-full flex items-center justify-center border border-teal-400/30 shrink-0 mt-0.5">
+                        <FiCheck className="text-[10px] text-teal-300" />
+                     </div>
+                     <span className="text-sm font-medium text-teal-50/80">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              
+              <div className="mt-12 pt-8 border-t border-white/10 text-center">
+                 <p className="text-[10px] text-teal-100/40 font-black uppercase tracking-widest">Niyati Group Official HR Database</p>
+              </div>
+           </div>
+        </div>
       </div>
 
       {/* PAYMENT MODAL */}
-      {showPaymentModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-          <div className="bg-gray-900 p-8 rounded-xl text-center border border-gray-700 w-96">
+      <AnimatePresence>
+        {showPaymentModal && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="bg-white p-8 rounded-[2.5rem] shadow-2xl w-full max-w-sm text-center relative">
+              <button onClick={() => setShowPaymentModal(false)} className="absolute top-6 right-6 text-slate-400 hover:text-slate-800">
+                <FiX size={24} />
+              </button>
 
-            <h3 className="text-xl font-bold text-sky-300 mb-4">Pay ₹500 to Continue</h3>
+              <h3 className="text-xl font-bold text-slate-800 mb-6">Registration Fee</h3>
+              <div className="bg-teal-50 p-6 rounded-2xl border border-teal-100 mb-6">
+                 <p className="text-teal-600 font-black text-3xl font-poppins mb-1">₹500</p>
+                 <p className="text-[10px] text-teal-600/60 font-black uppercase tracking-[0.2em]">One-time Enrollment</p>
+              </div>
 
-            <p className="text-gray-300 mb-2">UPI ID:</p>
-            <p className="text-white font-semibold text-lg mb-4">
-              nitishsaxena8-2@okhsfcbank
-            </p>
+              <p className="text-slate-500 font-medium text-xs mb-6">Scan QR or use UPI ID to complete your registration in our talent database.</p>
 
-            {/* UPI Deep Link */}
-            <a
-              href="upi://pay?pa=nitishsaxena8-2@okhsfcbank&pn=NIYATI%20GROUP&am=500&cu=INR"
-              className="block w-full py-3 bg-sky-500 hover:bg-sky-600 text-white rounded-lg font-medium mb-3"
-            >
-              Pay ₹500
-            </a>
+              <div className="bg-slate-50 p-4 rounded-2xl mb-6 shadow-inner border border-slate-100 pointer-events-none">
+                 <img src="/qrniyati.jpg" alt="UPI QR" className="w-48 h-48 mx-auto rounded-lg" />
+              </div>
 
-            {/* QR Code */}
-            <img
-              src="/qrniyati.jpg"
-              alt="UPI QR Code"
-              className="w-48 h-48 mx-auto rounded-lg border border-gray-700 mb-4"
-            />
-
-            <button
-              onClick={() => setShowConfirmModal(true)}
-              className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium"
-            >
-              I Have Paid
-            </button>
-
-            <button
-              onClick={() => setShowPaymentModal(false)}
-              className="w-full py-2 mt-3 text-gray-400 hover:text-white"
-            >
-              Cancel
-            </button>
-
+              <div className="space-y-3">
+                 <a href="upi://pay?pa=nitishsaxena8-2@okhsfcbank&pn=NIYATI%20GROUP&am=500&cu=INR" className="flex items-center justify-center gap-2 w-full py-4 bg-teal-600 text-white rounded-2xl font-bold shadow-xl shadow-teal-900/10 transition-all hover:bg-teal-700">
+                    <FiCreditCard />
+                    Pay via UPI Phone App
+                 </a>
+                 <button onClick={() => setShowConfirmModal(true)} className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold shadow-xl transition-all">
+                    I Have Paid
+                 </button>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
 
       {/* CONFIRMATION MODAL */}
-      {showConfirmModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-          <div className="bg-gray-900 p-8 rounded-xl text-center border border-gray-700 w-96">
-
-            <h3 className="text-xl font-bold text-yellow-400 mb-4">Are you sure?</h3>
-
-            <p className="text-gray-300 mb-6">
-              You must upload the payment screenshot afterwards to continue.
-            </p>
-
-            <button
-              onClick={() => {
-                setHasClickedPay(true);
-                setShowConfirmModal(false);
-                setShowPaymentModal(false);
-              }}
-              className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium mb-3"
-            >
-              Yes, Continue
-            </button>
-
-            <button
-              onClick={() => setShowConfirmModal(false)}
-              className="w-full py-2 text-gray-400 hover:text-white"
-            >
-              Cancel
-            </button>
-
+      <AnimatePresence>
+        {showConfirmModal && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-[60] p-4">
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="bg-white p-8 rounded-[2.5rem] shadow-2xl w-full max-w-sm text-center">
+              <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-amber-100">
+                 <FiArrowRight className="text-3xl text-amber-500" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-800 mb-4">Payment Confirmation</h3>
+              <p className="text-slate-500 font-medium text-sm mb-8">You must upload a screenshot of the payment on the next screen to verify your registration.</p>
+              
+              <div className="space-y-3">
+                 <button onClick={() => { setHasClickedPay(true); setShowConfirmModal(false); setShowPaymentModal(false); }} className="w-full py-4 bg-teal-600 text-white rounded-2xl font-bold shadow-lg shadow-teal-900/10">
+                    Confirm & Proceed
+                 </button>
+                 <button onClick={() => setShowConfirmModal(false)} className="w-full py-4 bg-slate-100 text-slate-400 rounded-2xl font-bold">
+                    Go Back
+                 </button>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
-
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -22,7 +22,7 @@ const ServiceCard = ({ service, index }) => {
       <div className="p-8 h-full flex flex-col z-10 relative">
         {/* Icon Container */}
         <motion.div 
-          className="bg-gray-700 p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6 border border-gray-600"
+          className="bg-gray-700 p-4 rounded-2xl w-16 h-16 flex items-center justify-center mb-6 border border-gray-600"
           whileHover={{ 
               rotate: 5,
               backgroundColor: 'rgba(20, 184, 166, 0.08)',
@@ -51,7 +51,7 @@ const ServiceCard = ({ service, index }) => {
                 strokeWidth="2" 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
-                className="text-sky-400" // theme switched to teal
+                className="text-teal-400" // theme switched to teal
               >
                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
               </svg>
@@ -104,7 +104,7 @@ const ServiceCard = ({ service, index }) => {
       
       {/* Floating Decoration */}
       <motion.div 
-        className="absolute top-0 right-0 w-16 h-16 bg-sky-900/20 rounded-bl-2xl border-t border-r border-sky-800/30"
+        className="absolute top-0 right-0 w-16 h-16 bg-teal-900/20 rounded-bl-2xl border-t border-r border-teal-800/30"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -113,7 +113,7 @@ const ServiceCard = ({ service, index }) => {
 
       {/* Subtle Glow Effect */}
       <div className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-sky-900/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-900/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
       </div>
     </motion.div>
   );

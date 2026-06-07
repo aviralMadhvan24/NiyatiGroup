@@ -35,7 +35,7 @@ const FileUpload = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl shadow-md p-6"
+      className="bg-white rounded-2xl shadow-md p-6"
     >
       <h3 className="text-xl font-semibold text-gray-800 mb-4">Upload Documents Securely</h3>
       
@@ -49,7 +49,7 @@ const FileUpload = () => {
       >
         <div className="flex justify-center mb-4">
           <div className="bg-gray-100 p-3 rounded-full">
-            <div className="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12" />
+            <div className="bg-gray-200 border-2 border-dashed rounded-2xl w-12 h-12" />
           </div>
         </div>
         
@@ -85,12 +85,12 @@ const FileUpload = () => {
                 className="flex justify-between items-center bg-gray-50 p-3 rounded"
               >
                 <div className="flex items-center">
-                  <div className="bg-gray-200 border-2 border-dashed rounded-xl w-8 h-8 mr-3" />
+                  <div className="bg-gray-200 border-2 border-dashed rounded-2xl w-8 h-8 mr-3" />
                   <span className="text-sm text-gray-700 truncate max-w-xs">{file.name}</span>
                 </div>
                 <button 
                   onClick={() => removeFile(index)}
-                  className="text-sky-300 hover:text-sky-400"
+                  className="text-blue-400 hover:text-blue-500"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                     <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />

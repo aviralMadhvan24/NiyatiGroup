@@ -42,7 +42,7 @@ const Upload = () => {
             </motion.div>
             
             <motion.div 
-              className="mt-16 bg-gray-50 rounded-xl p-8"
+              className="mt-16 bg-gray-50 rounded-2xl p-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}

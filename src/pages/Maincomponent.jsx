@@ -52,7 +52,7 @@ const MainComponent = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="flex items-center justify-center px-4 py-2 w-64 h-14 mb-8 font-medium rounded-full text-white bg-gradient-to-r from-sky-500 to-sky-700 border border-sky-600/50 mx-auto shadow-lg"
+            className="flex items-center justify-center px-4 py-2 w-64 h-14 mb-8 font-medium rounded-full text-white bg-gradient-to-r from-blue-600 to-blue-800 border border-blue-700/50 mx-auto shadow-xl"
           >
             <span className="bg-white/10 px-3 py-1 rounded-full mr-2 text-xs">Trusted Since 2010</span>
             NiyatiGroup Services
@@ -75,7 +75,7 @@ const MainComponent = () => {
                   Strategic
                 </motion.span>{' '}
                 <motion.span 
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-sky-500 inline-block"
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 inline-block"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.45 }}
@@ -101,7 +101,7 @@ const MainComponent = () => {
               >
                 <Link 
                   to="/contact" 
-                  className="px-8 py-3 bg-gradient-to-r from-sky-500 to-sky-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-sky-600 hover:to-sky-800 flex items-center justify-center"
+                  className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-medium rounded-lg shadow-xl hover:shadow-xl transition-all duration-300 hover:from-blue-700 hover:to-blue-900 flex items-center justify-center"
                 >
                   Get Started
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
@@ -132,7 +132,7 @@ const MainComponent = () => {
                   className="group relative"
                 >
                   <Link to="/tax" className="block h-full">
-                    <div className="bg-gray-800/80 hover:bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-sky-400/50 transition-all duration-300 h-full overflow-hidden relative">
+                    <div className="bg-gray-800/80 hover:bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 h-full overflow-hidden relative">
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-0"></div>
                       {/* <img 
                         src={taxConsulting} 
@@ -140,14 +140,14 @@ const MainComponent = () => {
                         className="absolute inset-0 w-full h-full object-cover z-0 opacity-40 group-hover:opacity-30 transition-opacity duration-500"
                       /> */}
                       <div className="relative z-10">
-                        <div className="bg-sky-800/20 w-14 h-14 rounded-xl flex items-center justify-center mb-4 border border-sky-700/30 group-hover:bg-sky-800/30 group-hover:border-sky-700/50 transition-colors">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-300">
+                        <div className="bg-blue-900/20 w-14 h-14 rounded-2xl flex items-center justify-center mb-4 border border-blue-800/30 group-hover:bg-blue-900/30 group-hover:border-blue-800/50 transition-colors">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400">
                             <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                           </svg>
                         </div>
                         <h3 className="text-xl font-bold text-gray-100 mb-2">Tax Services</h3>
                         <p className="text-gray-300 mb-4">Expert tax consultancy to maximize your savings and ensure compliance</p>
-                        <div className="inline-flex items-center text-sky-300 font-medium text-sm">
+                        <div className="inline-flex items-center text-blue-400 font-medium text-sm">
                           Explore Services
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2 group-hover:translate-x-1 transition-transform">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -165,7 +165,7 @@ const MainComponent = () => {
                   className="group relative"
                 >
                   <Link to="/recruitment" className="block h-full">
-                    <div className="bg-gray-800/80 hover:bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-sky-400/50 transition-all duration-300 h-full overflow-hidden relative">
+                    <div className="bg-gray-800/80 hover:bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 h-full overflow-hidden relative">
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-0"></div>
                       {/* <img 
                         src={businessMeeting} 
@@ -173,15 +173,15 @@ const MainComponent = () => {
                         className="absolute inset-0 w-full h-full object-cover z-0 opacity-40 group-hover:opacity-30 transition-opacity duration-500"
                       /> */}
                       <div className="relative z-10">
-                        <div className="bg-sky-800/20 w-14 h-14 rounded-xl flex items-center justify-center mb-4 border border-sky-700/30 group-hover:bg-sky-800/30 group-hover:border-sky-700/50 transition-colors">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-300">
+                        <div className="bg-blue-900/20 w-14 h-14 rounded-2xl flex items-center justify-center mb-4 border border-blue-800/30 group-hover:bg-blue-900/30 group-hover:border-blue-800/50 transition-colors">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400">
                             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
                             <circle cx="12" cy="7" r="4"/>
                           </svg>
                         </div>
                         <h3 className="text-xl font-bold text-gray-100 mb-2">Talent Solutions</h3>
                         <p className="text-gray-300 mb-4">Comprehensive recruitment services for businesses and professionals</p>
-                        <div className="inline-flex items-center text-sky-300 font-medium text-sm">
+                        <div className="inline-flex items-center text-blue-400 font-medium text-sm">
                           Explore Services
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2 group-hover:translate-x-1 transition-transform">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -199,7 +199,7 @@ const MainComponent = () => {
       
       {/* Floating decorative elements */}
       <motion.div 
-        className="absolute bottom-20 left-10 w-32 h-32 rounded-full bg-sky-500/10 blur-3xl -z-0"
+        className="absolute bottom-20 left-10 w-32 h-32 rounded-full bg-blue-600/10 blur-3xl -z-0"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.1, 0.2, 0.1]
@@ -211,7 +211,7 @@ const MainComponent = () => {
         }}
       />
       <motion.div 
-        className="absolute top-20 right-10 w-40 h-40 rounded-full bg-sky-700/10 blur-3xl -z-0"
+        className="absolute top-20 right-10 w-40 h-40 rounded-full bg-blue-800/10 blur-3xl -z-0"
         animate={{
           scale: [1, 1.3, 1],
           opacity: [0.1, 0.15, 0.1]

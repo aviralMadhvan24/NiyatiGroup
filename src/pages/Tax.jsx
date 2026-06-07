@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { FiCalculator, FiPhone, FiCheckCircle, FiShield, FiArrowRight } from 'react-icons/fi';
 
 const Tax = () => {
-  const gradientBg = 'bg-gradient-to-br from-slate-900 via-slate-800 to-black';
   const services = [
     { 
       id: 1, 
@@ -35,170 +35,142 @@ const Tax = () => {
     { 
       title: 'Small Businesses', 
       description: 'Tailored tax solutions for startups and small enterprises.', 
-      icon: 'M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z' 
+      icon: <FiShield />
     },
     { 
       title: 'Salaried Individuals', 
       description: 'Optimized tax filing and investment planning for employees.', 
-      icon: 'M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z' 
+      icon: <FiCheckCircle />
     },
     { 
-      title: 'Freelancers & Professionals', 
+      title: 'Freelancers', 
       description: 'Specialized tax solutions for consultants and independent professionals.', 
-      icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z' 
+      icon: <FiCalculator />
     }
   ];
 
-  const processSteps = [
-    { step: '01', title: 'Consultation', description: 'Understanding your financial situation and tax obligations.' },
-    { step: '02', title: 'Document Collection', description: 'Gathering all necessary financial documents and records.' },
-    { step: '03', title: 'Tax Preparation', description: 'Meticulous preparation of your tax returns and filings.' },
-    { step: '04', title: 'Submission & Follow-up', description: 'Filing with authorities and handling any queries.' }
-  ];
-
-  const testimonials = [
-    { quote: 'NiyatiGroup saved me over ₹50,000 in taxes with their expert planning.', name: 'Vikram Singh', role: 'Small Business Owner', avatar: 'https://randomuser.me/api/portraits/men/42.jpg' },
-    { quote: 'Their GST services made compliance effortless for my startup.', name: 'Neha Gupta', role: 'Entrepreneur', avatar: 'https://randomuser.me/api/portraits/women/33.jpg' },
-    { quote: 'Professional, timely, and saved me from penalties.', name: 'Arun Mehta', role: 'CA Professional', avatar: 'https://randomuser.me/api/portraits/men/75.jpg' }
-  ];
-
   return (
-    <div className={`relative ${gradientBg} text-gray-100 min-h-screen overflow-hidden`}>
-      {/* Shared Background */}
-      <motion.div className="absolute inset-0 overflow-hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/50 to-gray-950">
-          <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-        </div>
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-primary/10"
-            initial={{ x: Math.random()*100, y: Math.random()*100, width: Math.random()*10+2, height: Math.random()*10+2 }}
-            animate={{ y: [null, Math.random()*50-25], x: [null, Math.random()*50-25] }}
-            transition={{ duration: Math.random()*10+10, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-          />
-        ))}
-      </motion.div>
-
+    <div className="relative min-h-screen niyati-bg-pattern bg-[#e8f4f8] pt-24 pb-20">
+      
       <div className="relative z-10">
-        {/* Hero */}
-        <section className="pt-32 pb-20 md:pt-40 md:pb-28 text-center">
+        {/* Hero Section */}
+        <section className="pt-20 pb-20 text-center">
           <div className="container mx-auto px-4 md:px-6">
-            <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.8 }} className="max-w-3xl mx-auto">
-              <motion.div className="inline-flex items-center px-4 py-2 mb-6 font-medium rounded-full bg-gray-800/80 border border-gray-700 backdrop-blur-sm text-white" initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2 }}>
-                <span className="relative flex h-3 w-3 mr-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span><span className="relative inline-flex rounded-full h-3 w-3 bg-sky-400"></span></span>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-3xl mx-auto">
+              <motion.div className="inline-flex items-center px-4 py-2 mb-6 font-bold rounded-full text-teal-700 bg-teal-50 border border-teal-100 shadow-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+                <span className="relative flex h-3 w-3 mr-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
+                </span>
                 Expert Tax Solutions
               </motion.div>
-              <motion.h1 className="text-5xl font-bold text-gray-100 mb-4" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.4 }}>Tax <span className="text-sky-300">Services</span></motion.h1>
-              <motion.p className="text-xl text-gray-400 mb-8" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.6 }}>
-                Comprehensive tax solutions for individuals and businesses.
-              </motion.p>
-              <motion.div className="flex flex-col sm:flex-row justify-center gap-4" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.8 }}>
-                <Link to="/calculator"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-sky-500 hover:bg-sky-700 rounded-lg text-white font-medium shadow-lg">Tax Calculator</motion.button></Link>
-                <Link to="/contact"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="cursor-pointer px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border border-gray-700 backdrop-blur-sm">Consult Our Experts</motion.button></Link>
-              </motion.div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold text-slate-800 mb-6">Tax <span className="text-teal-600">Services</span></h1>
+              <p className="text-lg text-slate-500 mb-10 leading-relaxed">
+                Comprehensive tax solutions for individuals and businesses, delivered with precision and deep expertise.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <Link to="/calculator">
+                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-8 py-4 bg-teal-600 text-white font-bold rounded-xl shadow-xl shadow-teal-900/10 transition-all flex items-center gap-2">
+                    <FiCalculator />
+                    Tax Calculator
+                  </motion.button>
+                </Link>
+                <Link to="/contact">
+                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-8 py-4 bg-white text-teal-700 font-bold rounded-xl shadow-lg border border-teal-100 transition-all">
+                    Consult Our Experts
+                  </motion.button>
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>
 
-        {/* Services */}
-        <section className="py-16 md:py-24">
+        {/* Services Grid */}
+        <section className="py-20">
           <div className="container mx-auto px-4 md:px-6">
-            <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className="text-4xl font-bold text-gray-100">Our Tax <span className="text-sky-300">Services</span></h2>
-              <p className="mt-4 text-gray-400">Complete tax solutions tailored to your needs.</p>
-            </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {services.map(s => (
-                <motion.div key={s.id} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700 flex flex-col hover:border-sky-400/30 transition" initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} whileHover={{ y:-5 }}>
-                  <h3 className="text-xl font-semibold text-gray-100 mb-2">{s.title}</h3>
-                  <p className="text-gray-400 flex-grow">{s.description}</p>
-                  <a href={s.whatsappLink} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center text-sky-300 hover:text-sky-400">Get Started on WhatsApp</a>
+                <motion.div 
+                  key={s.id} 
+                  initial={{ opacity: 0, y: 20 }} 
+                  whileInView={{ opacity: 1, y: 0 }} 
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                  className="niyati-card p-8 group relative overflow-hidden h-full flex flex-col shadow-2xl shadow-teal-900/20"
+                >
+                  <h3 className="text-xl font-bold text-white mb-4">{s.title}</h3>
+                  <p className="text-teal-50/70 text-sm mb-8 leading-relaxed flex-grow">{s.description}</p>
+                  <a 
+                    href={s.whatsappLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-teal-300 font-bold text-sm hover:text-white transition-colors flex items-center gap-2"
+                  >
+                    Get Started on WhatsApp
+                    <FiArrowRight />
+                  </a>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Specializations */}
-        <section className="py-16 md:py-24 bg-slate-950/50 border-t border-gray-800">
+        {/* Specializations Section */}
+        <section className="py-20 bg-white/40 backdrop-blur-sm border-y border-teal-50">
           <div className="container mx-auto px-4 md:px-6">
-            <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className="text-4xl font-bold text-gray-100">Our <span className="text-sky-300">Specializations</span></h2>
-              <p className="mt-4 text-gray-400">Tailored tax solutions for different needs.</p>
-            </motion.div>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-slate-800">Our <span className="text-teal-600">Specializations</span></h2>
+              <div className="w-16 h-1 bg-teal-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {specializations.map((sp, i) => (
-                <motion.div key={i} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700 hover:border-sky-400/30 transition" initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:i*0.1, duration:0.5 }} whileHover={{ y:-5 }}>
-                  <div className="bg-sky-400/10 p-3 rounded-lg mb-4 border border-sky-400/20 inline-block">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-sky-400"><path strokeLinecap="round" strokeLinejoin="round" d={sp.icon} /></svg>
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, y: 20 }} 
+                  whileInView={{ opacity: 1, y: 0 }} 
+                  viewport={{ once: true }} 
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-white p-8 rounded-[2rem] border border-teal-50 shadow-xl shadow-teal-900/5 hover:shadow-teal-900/10 transition-all text-center"
+                >
+                  <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl text-teal-600 shadow-inner">
+                    {sp.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-100 mb-2">{sp.title}</h3>
-                  <p className="text-gray-400">{sp.description}</p>
+                  <h3 className="text-xl font-bold text-slate-800 mb-4">{sp.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{sp.description}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Process */}
-        <section className="py-16 md:py-24 bg-slate-950/50 border-y border-gray-800">
+        {/* CTA Section */}
+        <section className="py-20">
           <div className="container mx-auto px-4 md:px-6">
-            <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className="text-4xl font-bold text-gray-100">Our Tax <span className="text-sky-300">Process</span></h2>
-              <p className="mt-4 text-gray-400">A streamlined approach for stress-free tax compliance.</p>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {processSteps.map((ps, i) => (
-                <motion.div key={i} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700 hover:border-sky-400/30 transition" initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:i*0.1, duration:0.5 }} whileHover={{ y:-5 }}>
-                  <div className="flex items-center mb-4">
-                    <div className="bg-sky-400/10 w-12 h-12 rounded-full flex items-center justify-center border border-sky-400/20 text-sky-400 font-bold">{ps.step}</div>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-100 mb-2">{ps.title}</h3>
-                  <p className="text-gray-400">{ps.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="py-16 md:py-24 bg-slate-950/50">
-          <div className="container mx-auto px-4 md:px-6">
-            <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className="text-4xl font-bold text-gray-100">Client <span className="text-sky-300">Success</span></h2>
-              <p className="mt-4 text-gray-400">Hear from satisfied clients about their tax experience.</p>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((t, i) => (
-                <motion.div key={i} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700 transition hover:border-sky-400/30" initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:i*0.1, duration:0.5 }}>
-                  <div className="flex items-center mb-4">
-                    {[...Array(5)].map((_, idx) => (
-                      <svg key={idx} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-yellow-400"><path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" /></svg>
-                    ))}
-                  </div>
-                  <p className="text-gray-300 italic mb-4">"{t.quote}"</p>
-                  <div className="flex items-center">
-                    <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full mr-3" />
-                    <div>
-                      <h4 className="text-gray-100 font-semibold">{t.name}</h4>
-                      <p className="text-gray-400 text-sm">{t.role}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="py-16 md:py-24 bg-gradient-to-br bg-slate-950/50 text-center">
-          <div className="container mx-auto px-4 md:px-6">
-            <motion.h2 initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }} className="text-4xl font-bold text-gray-100 mb-4">Ready to Optimize Your <span className="text-sky-300">Tax Strategy</span>?</motion.h2>
-            <motion.p initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.2, duration:0.5 }} className="text-gray-400 mb-8">Let our experts handle your tax needs with precision and care.</motion.p>
-            <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.4, duration:0.5 }} className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/contact"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-sky-500 hover:bg-sky-700 cursor-pointer rounded-lg text-white font-medium shadow-lg">Get Started</motion.button></Link>
-              <a href="tel:+919997070599"><motion.button whileHover={{ scale:1.03 }} whileTap={{ scale:0.98 }} className="px-8 py-3.5 bg-gray-900/80 hover:bg-gray-800 rounded-lg text-gray-100 font-medium border cursor-pointer border-gray-700 backdrop-blur-sm">Call Our Experts</motion.button></a>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.98 }} 
+              whileInView={{ opacity: 1, scale: 1 }} 
+              viewport={{ once: true }}
+              className="niyati-card p-12 text-center rounded-[3rem] relative overflow-hidden"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Optimize Your Tax Strategy?</h2>
+              <p className="text-xl text-teal-50/70 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">Let our experts handle your tax needs with precision and care.</p>
+              
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <Link to="/contact">
+                  <motion.button whileHover={{ scale: 1.05, bg: '#ffffff', color: '#0d9488' }} whileTap={{ scale: 0.95 }} className="px-10 py-4 bg-white text-teal-700 rounded-xl font-bold shadow-2xl transition-all">
+                    Get Started Now
+                  </motion.button>
+                </Link>
+                <a href="tel:+919997070599">
+                  <motion.button whileHover={{ scale: 1.05, bg: '#0f172a' }} whileTap={{ scale: 0.95 }} className="px-10 py-4 bg-slate-900 text-white rounded-xl font-bold shadow-2xl transition-all flex items-center justify-center gap-2">
+                    <FiPhone />
+                    Call Our Experts
+                  </motion.button>
+                </a>
+              </div>
             </motion.div>
           </div>
         </section>

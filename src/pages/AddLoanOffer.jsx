@@ -50,7 +50,7 @@ const AddLoanOffer = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-gray-900 rounded-lg shadow-lg">
+    <div className="max-w-2xl mx-auto p-6 bg-gray-900 rounded-lg shadow-xl">
       <h2 className="text-2xl font-bold text-white mb-6">Add New Loan Offer</h2>
       
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -148,7 +148,7 @@ const AddLoanOffer = () => {
           whileTap={{ scale: 0.98 }}
           type="submit"
           disabled={isSubmitting}
-          className="px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white font-medium rounded-md transition-colors w-full"
+          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors w-full"
         >
           {isSubmitting ? 'Submitting...' : 'Add Loan Offer'}
         </motion.button>

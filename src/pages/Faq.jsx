@@ -1,101 +1,105 @@
 import React from 'react';
-import Accordion from '../components/ui/Accordion';
-import faqsData from '../data/faqs';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import Accordion from '../components/ui/Accordion';
+import { FiMessageSquare, FiPhone } from 'react-icons/fi';
 
 const Faq = () => {
-  // Apply gradient background once at the root
-  const gradientBg = 'bg-gradient-to-br from-sky-700 via-sky-800 to-black/70';
+  const faqs = [
+    {
+      question: "What tax services do you offer?",
+      answer: "We offer comprehensive tax services including Income Tax Return (ITR) filing for individuals, businesses, and NRIs, GST registration and filing, Tax Audit, and Tax Planning."
+    },
+    {
+      question: "How long does it take to process a loan?",
+      answer: "Processing time varies by loan type and bank. Generally, personal loans take 3-5 working days, while business and home loans may take 10-15 working days after document submission."
+    },
+    {
+      question: "What industries do you recruit for?",
+      answer: "Our recruitment division specializes in Technology (IT), Finance, Healthcare, Manufacturing, and Retail sectors across various levels from entry-level to executive roles."
+    },
+    {
+      question: "What documents are required for GST registration?",
+      answer: "Key documents include PAN Card, Aadhaar Card, Address Proof of business, Bank Account details, and Photograph of the applicant/authorized signatory."
+    },
+    {
+      question: "How can I book an appointment?",
+      answer: "You can book an appointment through our Contact page, by calling us directly at +91 9997070599, or through WhatsApp."
+    }
+  ];
 
   return (
-    <div className={`relative ${gradientBg} text-gray-100 min-h-screen overflow-hidden`}>
-      {/* Shared Animated Background */}
-      <motion.div
-        className="absolute inset-0 overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/50 to-gray-950">
-          <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-        </div>
-        {[...Array(10)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-primary/10"
-            initial={{ x: Math.random()*100, y: Math.random()*100, width: Math.random()*8+2, height: Math.random()*8+2 }}
-            animate={{ y: [null, Math.random()*30-15], x: [null, Math.random()*30-15] }}
-            transition={{ duration: Math.random()*8+5, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-          />
-        ))}
-      </motion.div>
-
-      <div className="relative z-10">
-        {/* Page Header (Hero Style) */}
-        <section className="pt-32 pb-20">
-          <div className="container mx-auto px-4 md:px-6 max-w-3xl">
-            <motion.h1
-              className="text-4xl md:text-5xl font-bold text-gray-100"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              Frequently Asked <span className="text-sky-500">Questions</span>
-            </motion.h1>
-            <motion.p
-              className="mt-4 text-xl text-gray-300"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Find answers to common questions about our services and processes.
-            </motion.p>
-          </div>
+    <div className="relative min-h-screen niyati-bg-pattern bg-[#e8f4f8] pt-24 pb-20">
+      
+      <div className="relative z-10 container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <section className="pt-20 pb-16 text-center">
+           <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mx-auto"
+           >
+              <motion.div className="inline-flex items-center px-4 py-2 mb-6 font-bold rounded-full text-teal-700 bg-teal-50 border border-teal-100 shadow-sm">
+                <FiMessageSquare className="mr-2" />
+                Frequently Asked Questions
+              </motion.div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold text-slate-800 mb-6">
+                Got <span className="text-teal-600">Questions?</span> We have Answers
+              </h1>
+              <p className="text-lg text-slate-500 mb-10 leading-relaxed font-medium">
+                Find quick answers to common questions about our tax, loan, and recruitment services. If you can't find what you're looking for, feel free to reach out.
+              </p>
+           </motion.div>
         </section>
 
-        {/* FAQs List */}
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto px-4 md:px-6 max-w-3xl space-y-4">
-            {faqsData.map((faq, idx) => (
-              <Accordion
-                key={faq.id}
-                question={faq.question}
-                answer={faq.answer}
-                index={idx}
-              />
-            ))}
-          </div>
+        {/* FAQ Grid */}
+        <section className="mb-24 flex justify-center">
+           <div className="w-full max-w-4xl bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl shadow-teal-900/5 border border-teal-50">
+              <div className="space-y-2">
+                {faqs.map((faq, index) => (
+                  <Accordion 
+                    key={index} 
+                    question={faq.question} 
+                    answer={faq.answer} 
+                    index={index} 
+                  />
+                ))}
+              </div>
+           </div>
         </section>
 
-        {/* Additional Help */}
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto px-4 md:px-6 max-w-3xl">
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8">
-              <div className="flex flex-col md:flex-row items-center gap-6">
-                <div className="p-4 bg-sky-600/20 rounded-full">
-                  <div className="bg-sky-600 w-16 h-16 rounded-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-white">
-                      <path fillRule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-100 mb-2">Still have questions?</h3>
-                  <p className="text-gray-300 mb-4">
-                    Our experts are here to help with any queries you have.
-                  </p>
-                  <motion.a
-                    href="https://wa.me/+919997070599"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center px-6 py-3 bg-sky-600 text-white rounded-full font-medium"
-                  >
-                    Chat with Expert
-                  </motion.a>
+        {/* Support Section */}
+        <section className="max-w-6xl mx-auto">
+           <motion.div 
+             initial={{ opacity: 0, scale: 0.98 }}
+             whileInView={{ opacity: 1, scale: 1 }}
+             viewport={{ once: true }}
+             className="niyati-card p-12 text-center rounded-[3rem] relative overflow-hidden"
+           >
+              <div className="absolute top-0 right-0 p-10 opacity-5 -mr-16 -mt-16 bg-teal-300 w-64 h-64 rounded-full"></div>
+              
+              <div className="relative z-10">
+                <h2 className="text-3xl font-bold text-white mb-6">Still have questions?</h2>
+                <p className="text-lg text-teal-50/70 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+                  If you didn't find the answer to your question, please don't hesitate to contact us. Our team of experts is ready to assist you.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                  <Link to="/contact">
+                    <motion.button whileHover={{ scale: 1.05, bg: '#ffffff', color: '#0d9488' }} whileTap={{ scale: 0.95 }} className="px-10 py-4 bg-white text-teal-700 rounded-xl font-bold shadow-2xl transition-all">
+                      Contact Support
+                    </motion.button>
+                  </Link>
+                  <a href="https://wa.me/919997070599" target="_blank" rel="noopener noreferrer">
+                    <motion.button whileHover={{ scale: 1.05, bg: '#10b981' }} whileTap={{ scale: 0.95 }} className="px-10 py-4 bg-emerald-500 text-white rounded-xl font-bold shadow-2xl transition-all flex items-center justify-center gap-2">
+                       <FiPhone />
+                       WhatsApp Us
+                    </motion.button>
+                  </a>
                 </div>
               </div>
-            </div>
-          </div>
+           </motion.div>
         </section>
       </div>
     </div>

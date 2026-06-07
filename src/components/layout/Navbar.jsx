@@ -22,10 +22,8 @@ const Navbar = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Check admin privileges
   const isAdmin = user && user.email === ADMIN_EMAIL;
 
-  // Protected routes list
   const protectedRoutes = [
     '/tax', '/loans', '/recruitment', '/faq', '/contact', '/jobpost', '/addloan'
   ];
@@ -67,7 +65,6 @@ const Navbar = () => {
     return true;
   };
 
-  // Do NOT include Admin here
   const navLinks = [
     { name: 'Home', path: '/', icon: <FiHome /> },
     { name: 'About', path: '/about', icon: <FiUser /> },
@@ -85,7 +82,6 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact', icon: <FiPhone /> },
   ];
 
-  // Services Dropdown Handler
   const handleServicesClick = (e, path) => {
     e.preventDefault();
     if (handleNavigation(path)) {
@@ -97,8 +93,9 @@ const Navbar = () => {
   return (
     <>
       <nav className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-gradient-to-r from-slate-900/95 via-slate-900/95 to-black/95 shadow-lg py-2' : 
-        'bg-gradient-to-r from-slate-900 via-slate-900 to-black py-4'
+        scrolled 
+          ? 'bg-white/95 backdrop-blur-md shadow-lg shadow-teal-900/5 py-2' 
+          : 'bg-white/80 backdrop-blur-sm py-4'
       }`}>
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center">
@@ -109,18 +106,18 @@ const Navbar = () => {
               onClick={() => window.scrollTo(0, 0)}
             >
               <motion.div
-                className="bg-gray-900/50 border border-gray-800 w-10 h-10 rounded-lg flex items-center justify-center shadow-md"
+                className="bg-gradient-to-br from-teal-600 to-teal-700 w-10 h-10 rounded-full flex items-center justify-center shadow-md border-2 border-white"
                 whileHover={{ scale: 1.05 }}
               >
                 <img src="/logo3.png" alt="Logo" className="w-8 h-8" />
               </motion.div>
-              <span className="text-white font-bold text-lg">
-                Niyati<span className="text-gray-400">Group</span>
+              <span className="text-slate-800 font-bold text-lg">
+                Niyati<span className="text-teal-600">Group</span>
               </span>
             </NavLink>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-6">
+            <div className="hidden lg:flex items-center space-x-1">
               {navLinks.map((link) => (
                 <div key={link.name} className="relative" ref={link.subLinks ? dropdownRef : null}>
                   {link.subLinks ? (
@@ -129,8 +126,10 @@ const Navbar = () => {
                         to={link.path}
                         onClick={(e) => handleServicesClick(e, link.path)}
                         className={({ isActive }) => 
-                          `flex items-center px-3 py-2 text-sm font-medium ${
-                            isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                          `flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                            isActive 
+                              ? 'text-teal-700 bg-teal-50' 
+                              : 'text-slate-600 hover:text-teal-700 hover:bg-teal-50/50'
                           }`
                         }
                       >
@@ -139,7 +138,7 @@ const Navbar = () => {
                         {servicesOpen ? <FiChevronUp className="ml-1" /> : <FiChevronDown className="ml-1" />}
                       </NavLink>
                       {servicesOpen && (
-                        <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gradient-to-b from-slate-900 via-slate-900 to-black border border-slate-700 z-50">
+                        <div className="absolute left-0 mt-2 w-52 rounded-xl shadow-xl bg-white border border-teal-100 z-50 overflow-hidden">
                           <div className="py-1">
                             {link.subLinks.map((subLink) => (
                               <NavLink
@@ -150,7 +149,7 @@ const Navbar = () => {
                                     e.preventDefault();
                                   }
                                 }}
-                                className="block px-4 py-2 text-sm text-gray-300 hover:bg-sky-500 hover:text-white"
+                                className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-teal-50 hover:text-teal-700 transition-colors"
                               >
                                 {subLink.name}
                               </NavLink>
@@ -168,8 +167,10 @@ const Navbar = () => {
                         }
                       }}
                       className={({ isActive }) => 
-                        `px-3 py-2 text-sm font-medium flex items-center ${
-                          isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                        `px-4 py-2 text-sm font-medium flex items-center rounded-lg transition-all duration-200 ${
+                          isActive 
+                            ? 'text-teal-700 bg-teal-50' 
+                            : 'text-slate-600 hover:text-teal-700 hover:bg-teal-50/50'
                         }`
                       }
                     >
@@ -180,7 +181,6 @@ const Navbar = () => {
                 </div>
               ))}
 
-              {/* ADMIN LINK: only visible for admin. No dropdown, no caret. */}
               {isAdmin && (
                 <NavLink
                   to="/admin"
@@ -190,8 +190,10 @@ const Navbar = () => {
                     }
                   }}
                   className={({ isActive }) => 
-                    `flex items-center px-3 py-2 text-sm font-medium ${
-                      isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                    `flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                      isActive 
+                        ? 'text-teal-700 bg-teal-50' 
+                        : 'text-slate-600 hover:text-teal-700 hover:bg-teal-50/50'
                     }`
                   }
                 >
@@ -202,17 +204,17 @@ const Navbar = () => {
 
               {/* User/Auth Section */}
               {user ? (
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-3 ml-4">
                   {user.photoURL && (
                     <img
                       src={user.photoURL}
                       alt="User"
-                      className="w-8 h-8 rounded-full border-2 border-gray-400"
+                      className="w-8 h-8 rounded-full border-2 border-teal-200"
                     />
                   )}
                   <button
                     onClick={() => setShowLogoutModal(true)}
-                    className="cursor-pointer flex items-center px-3 py-2 text-sm font-medium text-gray-300 hover:text-white"
+                    className="cursor-pointer flex items-center px-3 py-2 text-sm font-medium text-slate-500 hover:text-red-500 transition-colors"
                   >
                     <FiLogOut className="mr-1" />
                     Logout
@@ -221,7 +223,7 @@ const Navbar = () => {
               ) : (
                 <NavLink
                   to="/login"
-                  className="cursor-pointer px-4 py-2 bg-green-700 text-white text-sm font-medium rounded-md hover:bg-green-800 transition-colors"
+                  className="cursor-pointer ml-4 px-5 py-2 bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-teal-700 transition-colors shadow-md shadow-teal-600/20"
                 >
                   Login
                 </NavLink>
@@ -230,7 +232,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-md text-gray-300 hover:text-white hover:bg-sky-500 transition-colors"
+              className="lg:hidden p-2 rounded-lg text-slate-600 hover:text-teal-700 hover:bg-teal-50 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -242,7 +244,7 @@ const Navbar = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="lg:hidden bg-gradient-to-b from-slate-900 via-slate-900 to-black shadow-lg overflow-hidden"
+              className="lg:hidden bg-white border-t border-teal-100 shadow-xl overflow-hidden"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
@@ -250,9 +252,9 @@ const Navbar = () => {
             >
               <div className="px-4 py-3">
                 {user && (
-                  <div className="mb-4 p-3 bg-slate-900/30 rounded-lg">
-                    <p className="font-medium text-white">{user.displayName || 'User'}</p>
-                    <p className="text-xs text-gray-300">{user.email}</p>
+                  <div className="mb-4 p-3 bg-teal-50 rounded-lg">
+                    <p className="font-medium text-slate-800">{user.displayName || 'User'}</p>
+                    <p className="text-xs text-slate-500">{user.email}</p>
                   </div>
                 )}
 
@@ -269,8 +271,8 @@ const Navbar = () => {
                                 handleNavigation(link.path);
                               }}
                               className={({ isActive }) => 
-                                `px-3 py-2 text-sm font-medium flex items-center ${
-                                  isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                                `px-3 py-2.5 text-sm font-medium flex items-center rounded-lg ${
+                                  isActive ? 'text-teal-700 bg-teal-50' : 'text-slate-600 hover:text-teal-700'
                                 }`
                               }
                             >
@@ -282,13 +284,13 @@ const Navbar = () => {
                                 e.stopPropagation();
                                 setServicesOpen(!servicesOpen);
                               }}
-                              className="p-1 text-gray-300 hover:text-white focus:outline-none ml-auto"
+                              className="p-1 text-slate-400 hover:text-teal-600 focus:outline-none ml-auto"
                             >
                               {servicesOpen ? <FiChevronUp className="w-4 h-4" /> : <FiChevronDown className="w-4 h-4" />}
                             </button>
                           </div>
                           {servicesOpen && (
-                            <div className="ml-4 mt-1 mb-2 rounded-md bg-slate-900/30 border border-slate-700">
+                            <div className="ml-4 mt-1 mb-2 rounded-lg bg-teal-50/50 border border-teal-100">
                               <div className="py-1">
                                 {link.subLinks.map((subLink) => (
                                   <NavLink
@@ -298,7 +300,7 @@ const Navbar = () => {
                                       setServicesOpen(false);
                                       handleNavigation(subLink.path, true);
                                     }}
-                                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-sky-500 hover:text-white"
+                                    className="block px-4 py-2 text-sm text-slate-600 hover:bg-teal-100 hover:text-teal-700 rounded-md"
                                   >
                                     {subLink.name}
                                   </NavLink>
@@ -312,8 +314,8 @@ const Navbar = () => {
                           to={link.path}
                           onClick={() => handleNavigation(link.path)}
                           className={({ isActive }) => 
-                            `px-3 py-2 text-sm font-medium flex items-center ${
-                              isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                            `px-3 py-2.5 text-sm font-medium flex items-center rounded-lg ${
+                              isActive ? 'text-teal-700 bg-teal-50' : 'text-slate-600 hover:text-teal-700'
                             }`
                           }
                         >
@@ -324,14 +326,13 @@ const Navbar = () => {
                     </div>
                   ))}
 
-                  {/* Admin MOBILE link: simple, no dropdown/caret, only visible for admin */}
                   {isAdmin && (
                     <NavLink
                       to="/admin"
                       onClick={() => handleNavigation('/admin')}
                       className={({ isActive }) =>
-                        `px-3 py-2 text-sm font-medium flex items-center ${
-                          isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                        `px-3 py-2.5 text-sm font-medium flex items-center rounded-lg ${
+                          isActive ? 'text-teal-700 bg-teal-50' : 'text-slate-600 hover:text-teal-700'
                         }`
                       }
                     >
@@ -340,11 +341,11 @@ const Navbar = () => {
                     </NavLink>
                   )}
                 </div>
-                <div className="mt-3 pt-3 border-t border-slate-700">
+                <div className="mt-3 pt-3 border-t border-teal-100">
                   {user ? (
                     <button
                       onClick={() => setShowLogoutModal(true)}
-                      className="cursor-pointer w-full flex items-center justify-center p-3 rounded-lg bg-sky-500 hover:bg-sky-600 text-white"
+                      className="cursor-pointer w-full flex items-center justify-center p-3 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 font-medium transition-colors"
                     >
                       <FiLogOut className="mr-2" />
                       Logout
@@ -352,7 +353,7 @@ const Navbar = () => {
                   ) : (
                     <NavLink
                       to="/login"
-                      className="cursor-pointer block w-full text-center p-3 rounded-lg bg-green-700 hover:bg-green-800 text-white"
+                      className="cursor-pointer block w-full text-center p-3 rounded-lg bg-teal-600 hover:bg-teal-700 text-white font-medium shadow-md"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Login
@@ -367,20 +368,20 @@ const Navbar = () => {
 
       {/* Logout Confirmation Modal */}
       {showLogoutModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-black rounded-lg p-6 max-w-sm w-full mx-4 border border-slate-700">
-            <h3 className="text-xl font-semibold text-white mb-4">Confirm Logout</h3>
-            <p className="text-gray-300 mb-6">Are you sure you want to log out?</p>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full mx-4 border border-teal-100 shadow-2xl">
+            <h3 className="text-xl font-semibold text-slate-800 mb-4">Confirm Logout</h3>
+            <p className="text-slate-500 mb-6">Are you sure you want to log out?</p>
             <div className="flex justify-end space-x-3">
               <button
                 onClick={() => setShowLogoutModal(false)}
-                className="cursor-pointer px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-700 text-white transition-colors"
+                className="cursor-pointer px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-slate-700 transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleLogout}
-                className="cursor-pointer px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white transition-colors"
+                className="cursor-pointer px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-colors"
               >
                 Logout
               </button>
@@ -390,14 +391,14 @@ const Navbar = () => {
       )}
       {/* Login Required Modal */}
       {showLoginModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-black rounded-lg p-6 max-w-sm w-full mx-4 border border-slate-700">
-            <h3 className="text-xl font-semibold text-white mb-4">Login Required</h3>
-            <p className="text-gray-300 mb-6">Please login to access this page.</p>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full mx-4 border border-teal-100 shadow-2xl">
+            <h3 className="text-xl font-semibold text-slate-800 mb-4">Login Required</h3>
+            <p className="text-slate-500 mb-6">Please login to access this page.</p>
             <div className="flex justify-end space-x-3">
               <button
                 onClick={() => setShowLoginModal(false)}
-                className="cursor-pointer px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-700 text-white transition-colors"
+                className="cursor-pointer px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-slate-700 transition-colors"
               >
                 Cancel
               </button>
@@ -406,7 +407,7 @@ const Navbar = () => {
                   setShowLoginModal(false);
                   navigate('/login', { state: { from: protectedRouteTarget } });
                 }}
-                className="cursor-pointer px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white transition-colors"
+                className="cursor-pointer px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-700 text-white transition-colors"
               >
                 Login
               </button>

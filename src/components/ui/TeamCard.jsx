@@ -12,11 +12,11 @@ const TeamCard = ({ member, index }) => {
         y: -5,
         boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
       }}
-      className="bg-white rounded-xl overflow-hidden shadow-md"
+      className="bg-white rounded-2xl overflow-hidden shadow-md"
     >
       <div className="p-6">
         <div className="flex justify-center">
-          <div className="bg-gray-200 border-2 border-dashed rounded-xl w-32 h-32" />
+          <div className="bg-gray-200 border-2 border-dashed rounded-2xl w-32 h-32" />
         </div>
         
         <div className="mt-4 text-center">
