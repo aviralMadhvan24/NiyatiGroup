@@ -1,22 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "tailwindcss";
+
+/* ─── NiyatiGroup Consistent Theme Tokens ─── */
+:root {
+  --niyati-bg: #e8f4f8;
+  --niyati-bg-alt: #dceef4;
+  --niyati-card-from: #0f766e;
+  --niyati-card-via: #0d9488;
+  --niyati-card-to: #115e59;
+  --niyati-primary: #0d9488;
+  --niyati-accent: #14b8a6;
+  --niyati-dark: #134e4a;
+  --niyati-navy: #0f172a;
+  --niyati-text: #1e293b;
+  --niyati-text-muted: #475569;
+}
+
 html {
   scroll-behavior: smooth;
-  font-size: 16px; /* Prevent zoom-like scaling */
+  font-size: 16px;
 }
+
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #000; /* or whatever dark shade you prefer */
+  background-color: var(--niyati-bg);
   min-height: 100vh;
 }
+
 #root {
   min-height: 100vh;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  @apply text-gray-700 bg-gray-50;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  color: var(--niyati-text);
+  background-color: var(--niyati-bg);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -24,6 +43,7 @@ h1, h2, h3, h4, h5, h6 {
   @apply font-bold;
 }
 
+/* ─── Page Transitions ─── */
 .page-enter {
   opacity: 0;
   transform: translateY(20px);
@@ -43,4 +63,33 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 300ms, transform 300ms;
+}
+
+/* ─── Consistent Card Styling ─── */
+.niyati-card {
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #115e59 100%);
+  border: 1px solid rgba(20, 184, 166, 0.2);
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 60px -12px rgba(13, 148, 136, 0.25);
+}
+
+.niyati-card-dark {
+  background: linear-gradient(135deg, #134e4a 0%, #0f766e 50%, #115e59 100%);
+  border: 1px solid rgba(20, 184, 166, 0.15);
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 60px -12px rgba(13, 148, 136, 0.2);
+}
+
+/* ─── Background Pattern ─── */
+.niyati-bg-pattern {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(14, 165, 150, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(14, 165, 150, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 60% 80%, rgba(14, 165, 150, 0.05) 0%, transparent 50%);
+}
+
+/* ─── Select dropdown fix for dark cards ─── */
+select option {
+  background: #134e4a;
+  color: white;
 }
