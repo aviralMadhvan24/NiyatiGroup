@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { db, auth } from '../firebase';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMail, FiPhone, FiMapPin, FiBriefcase, FiFileText, FiTrash2, FiClock, FiExternalLink, FiCreditCard } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiBriefcase, FiFileText, FiTrash2, FiClock, FiExternalLink, FiCreditCard ,FiUsers} from 'react-icons/fi';
 
 const ADMIN_EMAIL = "niyatigroup1@gmail.com";
 

@@ -145,7 +145,7 @@ const Home = () => {
                   className="flex items-center justify-center gap-2 px-8 py-4 bg-teal-500 text-white font-bold rounded-xl shadow-xl shadow-teal-900/20 transition-all group"
                 >
                   <FiBriefcase className="text-xl" />
-                  Explore Our Services
+                 <span className="text-black">Explore Our Services</span>
                   <FiChevronRight className="transition-transform group-hover:translate-x-1" />
                 </motion.button>
               </Link>
