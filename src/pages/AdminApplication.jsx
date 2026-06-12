@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { db, auth } from '../firebase';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiBriefcase, FiFileText, FiTrash2, FiClock, FiExternalLink, FiLinkedin } from 'react-icons/fi';
+import { FiBriefcase, FiFileText, FiTrash2, FiClock, FiExternalLink, FiLinkedin, FiCreditCard } from 'react-icons/fi';
 
 const ADMIN_EMAIL = "niyatigroup1@gmail.com";
 
@@ -123,6 +123,18 @@ const AdminApplications = () => {
                               >
                                  <FiLinkedin />
                                  LinkedIn Profile
+                                 <FiExternalLink />
+                              </a>
+                           )}
+                           {app.paymentScreenshot && (
+                              <a 
+                                href={app.paymentScreenshot} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="px-6 py-3 bg-emerald-50 text-emerald-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-emerald-100 hover:bg-emerald-600 hover:text-white transition-all shadow-sm"
+                              >
+                                 <FiCreditCard />
+                                 Payment Receipt
                                  <FiExternalLink />
                               </a>
                            )}

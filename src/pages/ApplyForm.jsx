@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { motion } from "framer-motion";
-import { FiBriefcase, FiUploadCloud, FiFileText, FiArrowRight } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiBriefcase, FiUploadCloud, FiFileText, FiArrowRight, FiCreditCard, FiX } from "react-icons/fi";
 
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/djs7dznnh/auto/upload";
 const CLOUDINARY_PRESET = "niyatigroup";
@@ -15,8 +15,12 @@ const ApplyForm = () => {
   const { jobId = "", jobTitle = "" } = location.state || {};
 
   const [file, setFile] = useState(null);
+  const [paymentFile, setPaymentFile] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [hasClickedPay, setHasClickedPay] = useState(false);
 
   const handleFileChange = e => {
     if (e.target.files[0] && e.target.files[0].type === "application/pdf") {
@@ -27,7 +31,16 @@ const ApplyForm = () => {
     }
   };
 
-  const uploadToCloudinary = (file) => {
+  const handlePaymentFileChange = e => {
+    if (e.target.files[0] && e.target.files[0].type.startsWith("image/")) {
+      setPaymentFile(e.target.files[0]);
+    } else {
+      alert("Please upload an image file.");
+      e.target.value = null;
+    }
+  };
+
+  const uploadToCloudinary = (file, trackProgress = false) => {
     return new Promise((resolve, reject) => {
       const data = new FormData();
       data.append("file", file);
@@ -36,7 +49,7 @@ const ApplyForm = () => {
       const xhr = new XMLHttpRequest();
       xhr.open("POST", CLOUDINARY_URL);
       xhr.upload.addEventListener("progress", (e) => {
-        if (e.lengthComputable) {
+        if (trackProgress && e.lengthComputable) {
           const progress = (e.loaded / e.total) * 100;
           setUploadProgress(progress.toFixed(0));
         }
@@ -53,18 +66,32 @@ const ApplyForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
+    if (!hasClickedPay) {
+      setShowPaymentModal(true);
+      return;
+    }
+
     if (!file) {
       alert("Please select a CV to upload.");
       return;
     }
 
+    if (!paymentFile) {
+      alert("Please upload the payment screenshot.");
+      return;
+    }
+
     setSubmitting(true);
     try {
-      const uploadResp = await uploadToCloudinary(file);
+      const uploadResp = await uploadToCloudinary(file, true);
       if (!uploadResp.secure_url) throw new Error("Upload failed");
+
+      const paymentUploadResp = await uploadToCloudinary(paymentFile);
+      if (!paymentUploadResp.secure_url) throw new Error("Payment screenshot upload failed");
 
       await addDoc(collection(db, "jobApplications"), {
         cvUrl: uploadResp.secure_url,
+        paymentScreenshot: paymentUploadResp.secure_url,
         jobId,
         jobTitle,
         createdAt: serverTimestamp(),
@@ -72,6 +99,8 @@ const ApplyForm = () => {
 
       alert("Application submitted successfully!");
       setFile(null);
+      setPaymentFile(null);
+      setHasClickedPay(false);
       setUploadProgress(0);
       e.target.reset();
 
@@ -142,6 +171,27 @@ const ApplyForm = () => {
               </div>
             )}
 
+            {hasClickedPay && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                className="p-6 bg-emerald-50 rounded-2xl border border-emerald-100 text-center relative"
+              >
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handlePaymentFileChange}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                  disabled={submitting}
+                  required
+                />
+                <FiCreditCard className="mx-auto text-2xl text-emerald-600 mb-2" />
+                <p className="text-xs font-bold text-emerald-800">
+                  {paymentFile ? paymentFile.name : "Upload Payment Screenshot"}
+                </p>
+              </motion.div>
+            )}
+
             <motion.button
               type="submit"
               disabled={submitting}
@@ -149,7 +199,7 @@ const ApplyForm = () => {
               whileTap={{ scale: 0.98 }}
               className="w-full py-4 bg-teal-600 text-white rounded-2xl font-bold shadow-xl shadow-teal-900/10 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
             >
-              {submitting ? "Processing Application..." : "Submit Application"}
+              {hasClickedPay ? (submitting ? "Processing Application..." : "Submit Application") : "Proceed to Registration Fee (Rs. 500)"}
               <FiArrowRight />
             </motion.button>
             
@@ -168,6 +218,73 @@ const ApplyForm = () => {
            </button>
         </div>
       </div>
+
+      <AnimatePresence>
+        {showPaymentModal && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white p-8 rounded-[2.5rem] shadow-2xl w-full max-w-sm text-center relative"
+            >
+              <button onClick={() => setShowPaymentModal(false)} className="absolute top-6 right-6 text-slate-400 hover:text-slate-800">
+                <FiX size={24} />
+              </button>
+
+              <h3 className="text-xl font-bold text-slate-800 mb-6">Registration Fee</h3>
+              <div className="bg-teal-50 p-6 rounded-2xl border border-teal-100 mb-6">
+                <p className="text-teal-600 font-black text-3xl font-poppins mb-1">Rs. 500</p>
+                <p className="text-[10px] text-teal-600/60 font-black uppercase tracking-[0.2em]">One-time Enrollment</p>
+              </div>
+
+              <p className="text-slate-500 font-medium text-xs mb-6">Scan QR or use UPI ID to complete your job application registration.</p>
+
+              <div className="bg-slate-50 p-4 rounded-2xl mb-6 shadow-inner border border-slate-100 pointer-events-none">
+                <img src="/qrniyati.jpg" alt="UPI QR" className="w-48 h-48 mx-auto rounded-lg" />
+              </div>
+
+              <div className="space-y-3">
+                <a href="upi://pay?pa=nitishsaxena8-2@okhsfcbank&pn=NIYATI%20GROUP&am=500&cu=INR" className="flex items-center justify-center gap-2 w-full py-4 bg-teal-600 text-white rounded-2xl font-bold shadow-xl shadow-teal-900/10 transition-all hover:bg-teal-700">
+                  <FiCreditCard />
+                  Pay via UPI Phone App
+                </a>
+                <button onClick={() => setShowConfirmModal(true)} className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold shadow-xl transition-all">
+                  I Have Paid
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showConfirmModal && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-[60] p-4">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white p-8 rounded-[2.5rem] shadow-2xl w-full max-w-sm text-center"
+            >
+              <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-amber-100">
+                <FiArrowRight className="text-3xl text-amber-500" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-800 mb-4">Payment Confirmation</h3>
+              <p className="text-slate-500 font-medium text-sm mb-8">You must upload a screenshot of the payment on the next screen to verify your registration.</p>
+
+              <div className="space-y-3">
+                <button onClick={() => { setHasClickedPay(true); setShowConfirmModal(false); setShowPaymentModal(false); }} className="w-full py-4 bg-teal-600 text-white rounded-2xl font-bold shadow-lg shadow-teal-900/10">
+                  Confirm & Proceed
+                </button>
+                <button onClick={() => setShowConfirmModal(false)} className="w-full py-4 bg-slate-100 text-slate-400 rounded-2xl font-bold">
+                  Go Back
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
